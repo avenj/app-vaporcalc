@@ -1,4 +1,5 @@
 package App::vaporcalc::Role::Calc;
+
 use Defaults::Modern;
 
 use App::vaporcalc::Result;

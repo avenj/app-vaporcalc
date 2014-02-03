@@ -1,4 +1,5 @@
 package App::vaporcalc;
+
 use Defaults::Modern;
 
 use App::vaporcalc::Recipe;

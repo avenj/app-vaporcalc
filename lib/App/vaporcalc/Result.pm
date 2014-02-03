@@ -1,4 +1,5 @@
 package App::vaporcalc::Result;
+
 use Defaults::Modern;
 
 use Moo; use MooX::late;

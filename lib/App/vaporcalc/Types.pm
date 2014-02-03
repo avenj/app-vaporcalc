@@ -1,4 +1,5 @@
 package App::vaporcalc::Types;
+
 use strict; use warnings FATAL => 'all';
 
 use Type::Library   -base;
