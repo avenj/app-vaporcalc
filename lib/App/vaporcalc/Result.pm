@@ -6,31 +6,31 @@ use Moo; use MooX::late;
 has vg => (
   required => 1,
   is       => 'ro',
-  isa      => Int,
+  isa      => Num,
 );
 
 has pg => (
   required => 1,
   is       => 'ro',
-  isa      => Int,
+  isa      => Num,
 );
 
 has nic => (
   required => 1,
   is       => 'ro',
-  isa      => Int,
+  isa      => Num,
 );
 
 has flavor => (
   required => 1,
   is       => 'ro',
-  isa      => Int,
+  isa      => Num,
 );
 
 has total => (
   required => 1,
   is       => 'ro',
-  isa      => Int,
+  isa      => Num,
 );
 
 

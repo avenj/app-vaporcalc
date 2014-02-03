@@ -1,6 +1,7 @@
 package App::vaporcalc;
 use Defaults::Modern;
 
+use App::vaporcalc::Recipe;
 
 # Want to plug in:
 #   - base nic         (default 100mg/ml)
@@ -19,6 +20,18 @@ use Defaults::Modern;
 # Feature list:
 #   - recipe creation / storage
 #
+
+use parent 'Exporter::Tiny';
+our @EXPORT = our @EXPORT_OK = 'vcalc';
+
+sub vcalc {
+  my $recipe = App::vaporcalc::Recipe->new(@_);
+  my $result = $recipe->calc;
+  hash(
+    recipe => $recipe,
+    result => $result
+  )->inflate
+}
 
 
 1;

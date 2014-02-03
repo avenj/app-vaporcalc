@@ -18,7 +18,7 @@ has base_nic_per_ml   => (
 has base_nic_type     => (
   is      => 'ro',
   isa     => Str,
-  coerce  => sub { uc $_ },
+  coerce  => sub { uc $_[0] },
   builder => sub { 'PG' },
 );
 
@@ -49,7 +49,7 @@ has flavor_percentage => (
 has flavor_type       => (
   is      => 'ro',
   isa     => Str,
-  coerce  => sub { uc $_ },
+  coerce  => sub { uc $_[0] },
   builder => sub { 'PG' },
 );
 
