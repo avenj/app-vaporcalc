@@ -55,12 +55,6 @@ method calc {
     default: { confess "Unknown flavor_type ", $self->flavor_type }
   }
 
-  # Sanity check:
-  unless 
-    ($vg_ml + $pg_ml + $flavor_ml + $nic_base_ml == $self->target_quantity) {
-      confess "BUG; totals do not add up!"
-  }
-
   App::vaporcalc::Result->new(
     vg  => $vg_ml,
     pg  => $pg_ml,
