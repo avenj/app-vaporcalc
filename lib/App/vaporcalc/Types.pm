@@ -14,4 +14,14 @@ coerce VaporLiquid =>
   from Str(),
   via { uc $_ };
 
+declare Percentage =>
+  as Num(),
+  where { $_ <= 100 };
+
+declare RecipeObject =>
+  as InstanceOf['App::vaporcalc::Recipe'];
+
+declare ResultObject =>
+  as InstanceOf['App::vaporcalc::Result'];
+
 1;

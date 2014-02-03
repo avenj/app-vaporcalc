@@ -44,15 +44,15 @@ method calc {
 
   # Subtract our nic base total from the appropriate PG or VG total:
   sswitch ($self->base_nic_type) {
-    case 'PG': { $pg_ml = $pg_ml - $nic_base_ml }
-    case 'VG': { $vg_ml = $vg_ml - $nic_base_ml }
+    case 'PG': { $pg_ml ? $pg_ml = $pg_ml - $nic_base_ml : () }
+    case 'VG': { $vg_ml ? $vg_ml = $vg_ml - $nic_base_ml : () }
     default: { confess "Unknown base_nic_type", $self->base_nic_type }
   }
 
   # Same for flavor:
   sswitch ($self->flavor_type) {
-    case 'PG': { $pg_ml = $pg_ml - $flavor_ml }
-    case 'VG': { $vg_ml = $vg_ml - $flavor_ml }
+    case 'PG': { $pg_ml ? $pg_ml = $pg_ml - $flavor_ml : () }
+    case 'VG': { $vg_ml ? $vg_ml = $vg_ml - $flavor_ml : () }
     default: { confess "Unknown flavor_type ", $self->flavor_type }
   }
 

@@ -34,19 +34,19 @@ has target_nic_per_ml => (
 
 has target_pg         => (
   is      => 'ro',
-  isa     => Int,
+  isa     => Percentage,
   builder => sub { 60 },
 );
 
 has target_vg         => (
   is      => 'ro',
-  isa     => Int,
+  isa     => Percentage,
   builder => sub { 40 },
 );
 
 has flavor_percentage => (
   is      => 'ro',
-  isa     => Int,
+  isa     => Percentage,
   builder => sub { 15 },
 );
 
