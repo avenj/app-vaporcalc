@@ -8,15 +8,15 @@ use Defaults::Modern
 use Moo; use MooX::late;
 
 has target_quantity   => (
-  is      => 'ro',
-  isa     => Int,
-  builder => sub { 10 },
+  required => 1,
+  is       => 'ro',
+  isa      => Int,
 );
 
 has base_nic_per_ml   => (
-  is      => 'ro',
-  isa     => Int,
-  builder => sub { 100 },
+  required => 1,
+  is       => 'ro',
+  isa      => Int,
 );
 
 has base_nic_type     => (
@@ -27,27 +27,27 @@ has base_nic_type     => (
 );
 
 has target_nic_per_ml => (
-  is      => 'ro',
-  isa     => Int,
-  builder => sub { 16 },
+  required => 1,
+  is       => 'ro',
+  isa      => Int,
 );
 
 has target_pg         => (
-  is      => 'ro',
-  isa     => Percentage,
-  builder => sub { 60 },
+  required => 1,
+  is       => 'ro',
+  isa      => Percentage,
 );
 
 has target_vg         => (
-  is      => 'ro',
-  isa     => Percentage,
-  builder => sub { 40 },
+  required => 1,
+  is       => 'ro',
+  isa      => Percentage,
 );
 
 has flavor_percentage => (
-  is      => 'ro',
-  isa     => Percentage,
-  builder => sub { 15 },
+  required => 1,
+  is       => 'ro',
+  isa      => Percentage,
 );
 
 has flavor_type       => (
