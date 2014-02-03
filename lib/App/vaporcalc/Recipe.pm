@@ -1,5 +1,8 @@
 package App::vaporcalc::Recipe;
-use Defaults::Modern;
+use Defaults::Modern
+  -with_types => [
+    'App::vaporcalc::Types',
+  ];
 
 use Moo; use MooX::late;
 
@@ -17,8 +20,8 @@ has base_nic_per_ml   => (
 
 has base_nic_type     => (
   is      => 'ro',
-  isa     => Str,
-  coerce  => sub { uc $_[0] },
+  isa     => VaporLiquid,
+  coerce  => 1,
   builder => sub { 'PG' },
 );
 
@@ -48,8 +51,8 @@ has flavor_percentage => (
 
 has flavor_type       => (
   is      => 'ro',
-  isa     => Str,
-  coerce  => sub { uc $_[0] },
+  isa     => VaporLiquid,
+  coerce  => 1,
   builder => sub { 'PG' },
 );
 
@@ -58,15 +61,6 @@ method BUILD {
     confess "Expected target_vg + target_pg == 100\n",
       "  target_vg ", $self->target_vg, "\n",
       "  target_pg ", $self->target_pg
-  }
-
-  unless ($self->flavor_type |M| [qw/PG VG/]) {
-    confess "Expected flavor_type to be PG or VG, got ", $self->flavor_type
-  }
-
-  unless ($self->base_nic_type |M| [qw/PG VG/]) {
-    confess 
-      "Expected base_nic_type to be PG or VG, got ", $self->base_nic_type
   }
 }
 
