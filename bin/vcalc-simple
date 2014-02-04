@@ -1,0 +1,54 @@
+#!perl
+
+use Defaults::Modern;
+use App::vaporcalc 'vcalc';
+
+fun one_line { scalar readline STDIN }
+
+STDOUT->autoflush(1);
+
+my @params;
+
+print "Target quantity (ml): ";
+push @params, 
+  target_quantity => one_line;
+
+print "Base nic (mg/ml): ";
+push @params,
+  base_nic_per_ml => one_line;
+
+print "Nic type (PG/VG): ";
+push @params,
+  base_nic_type => one_line;
+
+print "Target nic (mg/ml): ";
+push @params,
+  target_nic_per_ml => one_line;
+
+print "Target PG %: ";
+push @params,
+  target_pg => one_line;
+
+print "Target VG %: ";
+push @params,
+  target_vg => one_line;
+
+print "Flavor %: ";
+push @params,
+  flavor_percentage => one_line;
+
+print "Flavor type (PG/VG): ";
+push @params,
+  flavor_type => one_line;
+
+chomp @params;
+
+my $order  = vcalc(@params);
+my $result = $order->result;
+
+print
+  "  => ", $result->total, " ml =>\n",
+  "  PG: ", $result->pg, " ml\n",
+  "  VG: ", $result->vg, " ml\n",
+  "  NIC: ", $result->nic, " ml\n",
+  "  FLAVOR: ", $result->flavor, " ml\n" ;
