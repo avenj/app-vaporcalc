@@ -48,4 +48,16 @@ method BUILD {
   }
 }
 
+method TO_JSON {
+  +{
+    map {; $_ => $self->$_ } qw/
+      vg
+      pg
+      nic
+      flavor
+      total
+    /
+  }
+}
+
 1;

@@ -57,11 +57,35 @@ has flavor_type       => (
   builder => sub { 'PG' },
 );
 
+has notes             => (
+  lazy    => 1,
+  is      => 'ro',
+  isa     => TypedArray[Str],
+  coerce  => 1,
+  builder => sub { array_of Str },
+);
+
 method BUILD {
   unless ($self->target_vg + $self->target_pg == 100) {
     confess "Expected target_vg + target_pg == 100\n",
       "  target_vg ", $self->target_vg, "\n",
       "  target_pg ", $self->target_pg
+  }
+}
+
+method TO_JSON {
+  +{
+    map {; $_ => $self->$_ } qw/
+      target_quantity
+      base_nic_per_ml
+      base_nic_type
+      target_nic_per_ml
+      target_pg
+      target_vg
+      flavor_percentage
+      flavor_type
+      notes
+    /
   }
 }
 
