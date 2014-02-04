@@ -20,7 +20,8 @@ requires qw/
 method _normalized_base { 100 / ($self->base_nic_per_ml || return 1) }
 
 method _calc_base_nic_qty {
-  my $rate = ($self->target_nic_per_ml || return 0) / 100;
+  return 0 unless $self->target_nic_per_ml;
+  my $rate = $self->target_nic_per_ml / 100;
   my $base_amt_ml = $self->target_quantity * $rate; 
   $base_amt_ml * $self->_normalized_base
 }
