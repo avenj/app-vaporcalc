@@ -13,6 +13,7 @@ my $ret = vcalc(
 );
 
 my $result = $ret->result;
+my $recipe = $ret->recipe;
 # FIXME test ->recipe
 
 # Intentionally 'eq':
