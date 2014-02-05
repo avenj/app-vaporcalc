@@ -16,7 +16,7 @@ coerce VaporLiquid =>
 
 declare Percentage =>
   as Int(),
-  where { $_ <= 100 };
+  where { $_ > -1 && $_ <= 100 };
 
 
 declare RecipeObject =>
