@@ -1,6 +1,7 @@
 package App::vaporcalc::Result;
 
-use Defaults::Modern;
+use Defaults::Modern
+  -with_types => [ 'App::vaporcalc::Types' ];
 
 use Moo; use MooX::late;
 
@@ -56,8 +57,10 @@ method TO_JSON {
       nic
       flavor
       total
-    /
+    /,
   }
 }
+
+with 'App::vaporcalc::Role::Store';
 
 1;

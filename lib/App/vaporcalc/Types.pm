@@ -15,13 +15,15 @@ coerce VaporLiquid =>
   via { uc $_ };
 
 declare Percentage =>
-  as Num(),
+  as Int(),
   where { $_ <= 100 };
+
 
 declare RecipeObject =>
   as InstanceOf['App::vaporcalc::Recipe'];
 
 declare ResultObject =>
   as InstanceOf['App::vaporcalc::Result'];
+
 
 1;

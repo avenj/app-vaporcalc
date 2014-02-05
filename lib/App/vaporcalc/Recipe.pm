@@ -89,6 +89,8 @@ method TO_JSON {
   }
 }
 
-with 'App::vaporcalc::Role::Calc';
+with 'App::vaporcalc::Role::Calc',
+     'App::vaporcalc::Role::Store',
+;
 
 1;

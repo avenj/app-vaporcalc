@@ -1,7 +1,8 @@
 package App::vaporcalc::Role::Store;
 use Defaults::Modern;
 
-use JSON::Tiny;
+use JSON::MaybeXS ();
+
 use Role::Tiny;
 
 method save ( (Str | Path) $path ) {
@@ -9,7 +10,11 @@ method save ( (Str | Path) $path ) {
     confess "No TO_JSON method found for ".blessed $self
   }
 
-  my $jseng = JSON::Tiny->new;
+  my $jseng = JSON::MaybeXS->new(
+    utf8   => 1,
+    pretty => 1,
+  );
+
   my $json  = $jseng->encode($self);
   unless ($json) {
     confess "Could not encode JSON: ".$jseng->error
@@ -20,7 +25,7 @@ method save ( (Str | Path) $path ) {
 
 method load ( (Str | Path) $path ) {
   my $json  = path($path)->slurp_utf8;
-  my $jseng = JSON::Tiny->new;
+  my $jseng = JSON::MaybeXS->new(utf8 => 1);
   my $data  = $jseng->decode($json);
   unless ($data) {
     confess "Could not decode JSON: ".$jseng->error
