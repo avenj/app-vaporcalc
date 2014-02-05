@@ -34,7 +34,7 @@ $result = vcalc(
 
 cmp_ok $result->total,  'eq', 30,  '30ml total';
 cmp_ok $result->flavor, 'eq', 6,   '6ml flavor';
-cmp_ok $result->pg,  'eq', '3.5',  '19.5ml PG';
+cmp_ok $result->pg,  'eq', '3.5',  '3.5ml PG';
 cmp_ok $result->vg,  'eq', '10.5', '10.5ml VG';
 cmp_ok $result->nic, 'eq', 10,     '10ml nic';
 
