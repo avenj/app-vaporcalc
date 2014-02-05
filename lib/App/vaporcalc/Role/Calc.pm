@@ -17,13 +17,13 @@ requires qw/
   flavor_type
 /;
 
-method _normalized_base { 100 / ($self->base_nic_per_ml || return 1) }
+method _base_multiplier { 100 / ($self->base_nic_per_ml || return 1) }
 
 method _calc_base_nic_qty {
   return 0 unless $self->target_nic_per_ml;
   my $rate = $self->target_nic_per_ml / 100;
   my $base_amt_ml = $self->target_quantity * $rate; 
-  $base_amt_ml * $self->_normalized_base
+  $base_amt_ml * $self->_base_multiplier
 }
 
 method _calc_total_vg_qty {
@@ -49,15 +49,15 @@ method calc {
 
   # Subtract our nic base total from the appropriate PG or VG total:
   sswitch ($self->base_nic_type) {
-    case 'PG': { $pg_ml ? $pg_ml = $pg_ml - $nic_base_ml : () }
-    case 'VG': { $vg_ml ? $vg_ml = $vg_ml - $nic_base_ml : () }
+    case 'PG': { $pg_ml -= $nic_base_ml if $pg_ml }
+    case 'VG': { $vg_ml -= $nic_base_ml if $vg_ml }
     default: { confess "Unknown base_nic_type", $self->base_nic_type }
   }
 
   # Same for flavor:
   sswitch ($self->flavor_type) {
-    case 'PG': { $pg_ml ? $pg_ml = $pg_ml - $flavor_ml : () }
-    case 'VG': { $vg_ml ? $vg_ml = $vg_ml - $flavor_ml : () }
+    case 'PG': { $pg_ml -= $flavor_ml if $pg_ml }
+    case 'VG': { $vg_ml -= $flavor_ml if $vg_ml }
     default: { confess "Unknown flavor_type ", $self->flavor_type }
   }
 
