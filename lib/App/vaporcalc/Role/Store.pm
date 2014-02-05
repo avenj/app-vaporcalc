@@ -13,6 +13,8 @@ method save ( (Str | Path) $path ) {
   my $jseng = JSON::MaybeXS->new(
     utf8   => 1,
     pretty => 1,
+    allow_blessed   => 1,
+    convert_blessed => 1,
   );
 
   my $json  = $jseng->encode($self);
