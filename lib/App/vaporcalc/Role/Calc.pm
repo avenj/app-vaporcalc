@@ -62,10 +62,10 @@ method calc {
   }
 
   App::vaporcalc::Result->new(
-    vg  => $vg_ml,
-    pg  => $pg_ml,
-    nic => $nic_base_ml,
-    flavor => $flavor_ml,
+    vg  => sprintf('%.1f', $vg_ml),
+    pg  => sprintf('%.1f', $pg_ml),
+    nic => sprintf('%.1f', $nic_base_ml),
+    flavor => sprintf('%.1f', $flavor_ml),
     total  => $self->target_quantity,
   )
 }
