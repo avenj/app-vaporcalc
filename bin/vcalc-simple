@@ -19,15 +19,17 @@ EOT
 
 my $Opts = +{
   help => sub {
-
-  },
-
-  version => sub {
-
+    print
+      "vcalc-simple -- App::vaporcalc\n",
+      "Usage:\n",
+      "   --read=FILE   Read a saved JSON RecipeResultSet\n",
+      "   --write=FILE  Create a new RecipeResultSet\n",
+    ; exit 0
   },
 };
 use Getopt::Long;
 GetOptions( $Opts,
+  'help',
   'read=s',
   'write=s',
 );
