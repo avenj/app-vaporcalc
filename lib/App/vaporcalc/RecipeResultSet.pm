@@ -1,4 +1,5 @@
 package App::vaporcalc::RecipeResultSet;
+
 use Defaults::Modern
   -with_types => [ 'App::vaporcalc::Types' ];
 

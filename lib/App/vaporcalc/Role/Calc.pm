@@ -72,3 +72,44 @@ method calc {
 
 1;
 
+=pod
+
+=head1 NAME
+
+App::vaporcalc::Role::Calc - Calculate measurements for an e-liquid recipe
+
+=head1 SYNOPSIS
+
+  # See App::vaporcalc::Recipe, App::vaporcalc::RecipeResultSet
+  use Moo;
+  with 'App::vaporcalc::Role::Calc';
+
+=head1 DESCRIPTION
+
+This role provides a L</calc> method that produces an
+L<App::vaporcalc::Result> object.
+
+See L<App::vaporcalc::Recipe>, L<App::vaporcalc::RecipeResultSet>.
+
+Consumers need to implement the following methods:
+
+  # Method           Returning
+  target_quantity    (ml)
+  base_nic_per_ml    (mg/ml)
+  base_nic_type      ('PG' or 'VG')
+  target_nic_per_ml  (mg/ml)
+  target_pg          (percentage)
+  target_vg          (percentage)
+  flavor_type        ('PG' or 'VG')
+  flavor_percentage  (percentage)
+
+=head2 calc
+
+Performs the calculation & returns an L<App::vaporcalc::Result> object.
+
+=head1 AUTHOR
+
+Jon Portnoy <avenj@cobaltirc.org>
+
+=cut
+
