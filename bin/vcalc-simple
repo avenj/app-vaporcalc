@@ -47,8 +47,8 @@ fun format_resultset (RecipeResultSet $rset) {
   my $formatted = format_str( $tmpl =>
     notes => sub {
       $recipe->notes->has_any ?
-        "\n" . $recipe->notes->map(sub { '  '.$_ })->join("\n") 
-        : ''
+        "\n" . $recipe->notes->map(sub { ' - '.$_ })->join("\n") 
+        : 'none'
     },
     (map {; $_ => $recipe->$_ } qw/
       target_quantity target_nic_per_ml
@@ -101,6 +101,15 @@ fun get_params {
   push @params,
     flavor_type => uc(one_line);
 
+  my @notes;
+  print "You can add notes as-needed, blank line ends:\n";
+  my $in = readline STDIN; chomp $in;
+  while ($in) {
+    push @notes, $in;
+    $in = readline STDIN; chomp $in;
+  }
+  push @params, notes => \@notes;
+
   +{ @params }
 }
 
@@ -112,16 +121,27 @@ if (my $fname = getopts->get('read')) {
 }
 
 if (my $fname = getopts->get('write')) {
+  if ( -e $fname ) {
+    say "Path '$fname' already exists! Enter to continue, ctrl+C to quit:";
+    readline STDIN;
+  }
+
   my $rset = App::vaporcalc::RecipeResultSet->new(
     recipe => get_params,
   ); 
+
   print format_resultset($rset);
+
   say "\nWrite to '$fname'? Enter to continue, ctrl+C to quit:";
-  readline(STDIN);
+  readline STDIN;
   $rset->save($fname);
+
+  say "Success!";
   exit 0
 }
 
 say "No file to --write specified.\nPress enter to continue anyway.";
 my $rset = App::vaporcalc::RecipeResultSet->new(recipe => get_params);
 print format_resultset($rset);
+
+exit 0
