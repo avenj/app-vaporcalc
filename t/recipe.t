@@ -19,6 +19,9 @@ my $recipe = App::vaporcalc::Recipe->new(%defaults);
 ok $recipe->flavor_type eq 'PG', 'flavor_type default ok';
 ok $recipe->notes->count == 0,   'notes default ok';
 
+## TO_JSON
+## FIXME
+
 ## Role::Store
 {
   # save
