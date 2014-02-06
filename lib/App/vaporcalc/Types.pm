@@ -13,6 +13,7 @@ declare Percentage =>
   as Int(),
   where { $_ > -1 && $_ <= 100 };
 
+
 declare RoundedResult =>
   as StrictNum(),
   where { "$_" =~ /^[0-9]+(\.[0-9])?\z/ };
@@ -23,6 +24,16 @@ coerce RoundedResult =>
 
 
 # Objects
+declare AppException =>
+  as InstanceOf['App::vaporcalc::Exception'];
+
+coerce AppException =>
+  from Str(),
+  via {
+    require App::vaporcalc::Exception;
+    App::vaporcalc::Exception->new(message => $_)
+  };
+
 
 declare RecipeObject =>
   as InstanceOf['App::vaporcalc::Recipe'];
@@ -34,6 +45,7 @@ coerce RecipeObject =>
     App::vaporcalc::Recipe->new(%$_)
   };
 
+
 declare ResultObject =>
   as InstanceOf['App::vaporcalc::Result'];
 
@@ -43,6 +55,7 @@ coerce ResultObject =>
     require App::vaporcalc::Result;
     App::vaporcalc::Result->new(%$_)
   };
+
 
 declare RecipeResultSet =>
   as InstanceOf['App::vaporcalc::RecipeResultSet'];
@@ -87,6 +100,12 @@ A number formatted to one decimal point (C<'%.1f'>).
 Can be coerced from a C<StrictNum>.
 
 =head2 Object types
+
+=head3 AppException
+
+An L<App::vaporcalc::Exception> instance.
+
+Can be coerced from a C<Str>.
 
 =head3 RecipeObject
 
