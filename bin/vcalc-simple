@@ -1,54 +1,127 @@
 #!perl
 
-use Defaults::Modern;
-use App::vaporcalc 'vcalc';
+use Defaults::Modern
+  -with_types => [ 'App::vaporcalc::Types' ];
 
-fun one_line { scalar readline STDIN }
+use App::vaporcalc::FormatString;
+use App::vaporcalc::RecipeResultSet;
 
-STDOUT->autoflush(1);
+my $tmpl = <<'EOT';
+ ->
+  target qty: [%target_quantity ml]  target nic: [%target_nic_per_ml ml]
+  base nic: [%base_nic_per_ml mg/ml -- %base_nic_type%]
+  overall ratio: PG: [%target_pg%]  total VG: [%target_vg%]
+  flavor percentage: [%flavor_percentage% -- %flavor_type%]
+  notes: %notes
+ =>
+  vg: [%vg ml]  pg: [%pg ml]  nic base: [%nic ml]  flavor: [%flavor ml]
+  total: %total ml
+EOT
 
-my @params;
+my $Opts = +{
+  help => sub {
 
-print "Target quantity (ml): ";
-push @params, 
-  target_quantity => one_line;
+  },
 
-print "Base nic (mg/ml): ";
-push @params,
-  base_nic_per_ml => one_line;
+  version => sub {
 
-print "Nic type (PG/VG): ";
-push @params,
-  base_nic_type => one_line;
+  },
+};
+use Getopt::Long;
+GetOptions( $Opts,
+  'read=s',
+  'write=s',
+);
+if (exists $Opts->{read} && exists $Opts->{write}) {
+  die "Did you mean to type 'cp' ?\n"
+}
 
-print "Target nic (mg/ml): ";
-push @params,
-  target_nic_per_ml => one_line;
+fun getopts { state $argv = hash(%$Opts) }
 
-print "Target PG %: ";
-push @params,
-  target_pg => one_line;
+fun one_line { my $in = readline STDIN; chomp $in; $in }
 
-print "Target VG %: ";
-push @params,
-  target_vg => one_line;
+fun format_resultset (RecipeResultSet $rset) {
+  my $recipe = $rset->recipe;
+  my $result = $rset->result;
 
-print "Flavor %: ";
-push @params,
-  flavor_percentage => one_line;
+  my $formatted = format_str( $tmpl =>
+    notes => sub {
+      $recipe->notes->has_any ?
+        "\n" . $recipe->notes->map(sub { '  '.$_ })->join("\n") 
+        : ''
+    },
+    (map {; $_ => $recipe->$_ } qw/
+      target_quantity target_nic_per_ml
+      base_nic_per_ml base_nic_type
+      target_pg target_vg
+      flavor_percentage flavor_type
+    /),
+    (map {; $_ => $result->$_ } qw/
+      vg pg nic flavor total
+    /),
+  ); 
 
-print "Flavor type (PG/VG): ";
-push @params,
-  flavor_type => one_line;
+  $formatted
+}
 
-chomp @params;
+fun get_params {
+  STDOUT->autoflush(1);
 
-my $order  = vcalc(@params);
-my $result = $order->result;
+  my @params;
 
-print
-  "  => ", $result->total, " ml =>\n",
-  "  PG: ", $result->pg, " ml\n",
-  "  VG: ", $result->vg, " ml\n",
-  "  NIC: ", $result->nic, " ml\n",
-  "  FLAVOR: ", $result->flavor, " ml\n" ;
+  print "Target quantity (ml): ";
+  push @params,
+    target_quantity => one_line;
+
+  print "Base nic (mg/ml): ";
+  push @params,
+    base_nic_per_ml => one_line;
+
+  print "Base nic type (PG/VG): ";
+  push @params,
+    base_nic_type => uc(one_line);
+
+  print "Target nic (mg/ml): ";
+  push @params,
+    target_nic_per_ml => one_line;
+
+  print "Target PG %: ";
+  push @params,
+    target_pg => one_line;
+
+  print "Target VG %: ";
+  push @params,
+    target_vg => one_line;
+
+  print "Flavor %: ";
+  push @params,
+    flavor_percentage => one_line;
+
+  print "Flavor type (PG/VG): ";
+  push @params,
+    flavor_type => uc(one_line);
+
+  +{ @params }
+}
+
+
+if (my $fname = getopts->get('read')) {
+  my $rset = App::vaporcalc::RecipeResultSet->load($fname);
+  print format_resultset($rset);
+  exit 0
+}
+
+if (my $fname = getopts->get('write')) {
+  my $rset = App::vaporcalc::RecipeResultSet->new(
+    recipe => get_params,
+  ); 
+  print format_resultset($rset);
+  say "\nWrite to '$fname'? Enter to continue, ctrl+C to quit:";
+  readline(STDIN);
+  $rset->save($fname);
+  exit 0
+}
+
+say "No file to --write specified.\nPress enter to continue anyway.";
+my $rset = App::vaporcalc::RecipeResultSet->new(recipe => get_params);
+print format_resultset($rset);
