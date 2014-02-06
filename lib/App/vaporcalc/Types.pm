@@ -18,6 +18,13 @@ declare Percentage =>
   as Int(),
   where { $_ > -1 && $_ <= 100 };
 
+declare RoundedResult =>
+  as StrictNum(),
+  where { "$_" =~ /^[0-9]+(\.[0-9])?\z/ };
+
+coerce RoundedResult =>
+  from StrictNum(),
+  via { sprintf '%.1f', $_ };
 
 declare RecipeObject =>
   as InstanceOf['App::vaporcalc::Recipe'];
