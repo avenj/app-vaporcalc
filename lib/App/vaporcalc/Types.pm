@@ -26,11 +26,26 @@ coerce RoundedResult =>
   from StrictNum(),
   via { sprintf '%.1f', $_ };
 
+
 declare RecipeObject =>
   as InstanceOf['App::vaporcalc::Recipe'];
 
+coerce RecipeObject =>
+  from HashRef(),
+  via {
+    require App::vaporcalc::Recipe;
+    App::vaporcalc::Recipe->new(%$_)
+  };
+
 declare ResultObject =>
   as InstanceOf['App::vaporcalc::Result'];
+
+coerce ResultObject =>
+  from HashRef(),
+  via {
+    require App::vaporcalc::Result;
+    App::vaporcalc::Result->new(%$_)
+  };
 
 
 1;

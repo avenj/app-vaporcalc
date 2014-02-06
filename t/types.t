@@ -28,11 +28,26 @@ my $foo = [];
 bless $foo, 'App::vaporcalc::Recipe';
 should_pass $foo, RecipeObject;
 should_fail [], RecipeObject;
+my %settings = (
+  target_quantity   => 10, base_nic_per_ml => 100,
+  target_nic_per_ml => 12, target_pg => 65, target_vg => 35,
+  flavor_percentage => 20
+);
+my $recipe = RecipeObject->coerce(\%settings);
+ok $recipe->target_quantity == 10, 'RecipeObject coerced ok';
+ok $recipe->flavor_percentage == 20;
 
 # ResultObject
 bless $foo, 'App::vaporcalc::Result';
 should_pass $foo, ResultObject;
 should_fail [], ResultObject;
+%settings = (
+  pg => 2, vg => 2, flavor => 2, nic => 2
+);
+my $result = ResultObject->coerce(\%settings);
+ok $result->pg == 2, 'ResultObject coerced ok';
+ok $result->vg == 2;
+ok $result->flavor == 2;
 
 
 done_testing
