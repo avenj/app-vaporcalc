@@ -7,11 +7,10 @@ use App::vaporcalc::FormatString;
 use App::vaporcalc::RecipeResultSet;
 
 my $tmpl = <<'EOT';
- ->
-  target qty: [%target_quantity ml]  target nic: [%target_nic_per_ml ml]
-  base nic: [%base_nic_per_ml mg/ml -- %base_nic_type%]
-  overall ratio: PG: [%target_pg%]  total VG: [%target_vg%]
-  flavor percentage: [%flavor_percentage% -- %flavor_type%]
+ --> %target_quantity ml  (%target_pg%/%target_vg% PG/VG) 
+  base nic: %base_nic_per_ml mg/ml -- %base_nic_type%
+  target nic: %target_nic_per_ml mg/ml
+  flavor percentage: %flavor_percentage -- %flavor_type
   notes: %notes
  =>
   vg: [%vg ml]  pg: [%pg ml]  nic base: [%nic ml]  flavor: [%flavor ml]

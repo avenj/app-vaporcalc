@@ -1,0 +1,44 @@
+#!perl
+use Defaults::Modern;
+use Module::Runtime 'use_module';
+
+use App::vaporcalc::RecipeResultSet;
+
+use Term::UI;
+use Term::ReadLine;
+my $termpkg = 
+  $ENV{PERL_RL} 
+  || try { use_module('Term::ReadLine::Perl5') }
+  || try { use_module('Term::ReadLine::Perl')  }
+  || 'Term::ReadLine';
+my $term  = $termpkg->new('vcalc'); 
+my $outfh = $term->OUT || \*STDOUT;
+$outfh->autoflush(1);
+
+$outfh->say('Welcome to App::vaporcalc!');
+
+my $cmdeng = App::vaporcalc::Cmd->new;
+
+my $orig_prompt = 'vcalc> ';
+my ($routing, $prompt);
+PROMPT: while ( ($routing // '') ne 'exit') {
+  $prompt //= $orig_prompt;
+
+  my $input = $term->get_reply(
+    prompt  => $prompt,
+    default => 'help'
+  );
+
+  if ($input) {
+    $term->addhistory($input);
+    my $res = try {
+      $cmdeng->parse_cmd
+    } catch {
+      # FIXME handle exceptions
+    };
+    # FIXME attempt to dispatch
+  }
+}
+
+
+say "Bye!"; exit 0
