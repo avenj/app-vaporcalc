@@ -13,14 +13,18 @@ has recipe => (
 );
 
 has result => (
-  lazy     => 1
+  init_arg => undef,
+  lazy     => 1,
   is       => 'ro',
   isa      => ResultObject,
   coerce   => 1,
   writer   => '_set_result',
-  builder  => sub { $self->recipe->calc },
+  builder  => sub { $_[0]->recipe->calc },
 );
 
+method TO_JSON {
+  +{ recipe => $self->recipe, result => $self->result }
+}
 
 with 'App::vaporcalc::Role::Store';
 
