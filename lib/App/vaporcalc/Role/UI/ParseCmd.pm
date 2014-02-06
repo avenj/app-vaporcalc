@@ -28,15 +28,27 @@ method parse_cmd (Str $str) {
       $str =~ s/\s+\z//;
       $str =~ s/ {2}/ /g;
     } else {
-      # FIXME
-      # if we have a default_verb and $cmd is length 0, use that (eg. view)
+      if ($self->can('default_verb') && my $default = $self->default_verb) {
+        $str = $default
+      } else {
+        App::vaporcalc::Exception->throw(
+          message => "No verb found and no default_verb available",
+        );
+      }
     }
     my @pieces = split ' ', $str;
     $verb = shift @pieces;
     $params = array(@pieces);
   }
-  unless ($subj && $verb) {
-    # FIXME Throwable exceptions?
+  unless ($subj) {
+    App::vaporcalc::Exception->throw(
+      message => "No subject to operate on",
+    )
+  }
+  unless ($verb) {
+    App::vaporcalc::Exception->throw(
+      message => "No action to perform"
+    )
   }
 
   hash(
