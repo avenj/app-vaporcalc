@@ -24,7 +24,7 @@ has result => (
 );
 
 method TO_JSON {
-  +{ recipe => $self->recipe, result => $self->result }
+  +{ recipe => $self->recipe }
 }
 
 with 'App::vaporcalc::Role::Store';
