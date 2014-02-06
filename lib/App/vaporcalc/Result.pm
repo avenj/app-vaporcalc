@@ -9,32 +9,34 @@ use Moo; use MooX::late;
 has vg => (
   required => 1,
   is       => 'ro',
-  isa      => StrictNum,
+  isa      => RoundedResult,
+  coerce   => 1,
 );
 
 has pg => (
   required => 1,
   is       => 'ro',
-  isa      => StrictNum,
+  isa      => RoundedResult,
+  coerce   => 1,
 );
 
 has nic => (
   required => 1,
   is       => 'ro',
-  isa      => StrictNum,
+  isa      => RoundedResult,
+  coerce   => 1,
 );
 
 has flavor => (
   required => 1,
   is       => 'ro',
-  isa      => StrictNum,
+  isa      => RoundedResult,
+  coerce   => 1,
 );
 
-has total => (
-  required => 1,
-  is       => 'ro',
-  isa      => StrictNum,
-);
+method total {
+  $self->vg + $self->pg + $self->nic + $self->flavor
+}
 
 method TO_JSON {
   +{
@@ -43,7 +45,6 @@ method TO_JSON {
       pg
       nic
       flavor
-      total
     /,
   }
 }
