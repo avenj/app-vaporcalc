@@ -23,9 +23,12 @@ method _action_set {
     message => "set requires a parameter"
   ) unless defined $new_pg;
 
+  my $new_vg = 100 - $new_pg;
+
   $self->munge_recipe(
     $self->recipe,
-    pg => $new_pg
+    target_pg => $new_pg,
+    target_vg => $new_vg
   )
 }
 
