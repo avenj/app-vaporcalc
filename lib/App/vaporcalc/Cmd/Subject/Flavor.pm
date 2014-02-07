@@ -1,36 +1,30 @@
-package App::vaporcalc::Cmd::Subject::PG;
+package App::vaporcalc::Cmd::Subject::Flavor;
 
 use Defaults::Modern;
 
 use Moo; use MooX::late;
 with 'App::vaporcalc::Role::UI::Cmd';
 
-
 has '+verb' => (
   builder => sub { 'show' },
 );
 
-
 method _action_show { $self->_action_view }
 method _action_view {
-  my $pg = $self->recipe->target_pg;
-  " -> PG: $pg %"
+  my $flv = $self->recipe->flavor_percentage;
+  " -> Flavor total: $flv %"
 }
 
 method _action_set {
-  my $new_pg = $self->params->get(0);
+  my $newflv = $self->params->get(0);
   $self->throw_exception(
-    message => "set requires a parameter"
-  ) unless defined $new_pg;
-
-  my $new_vg = 100 - $new_pg;
+    message => 'set requires a parameter'
+  ) unless defined $newflv;
 
   $self->munge_recipe(
     $self->recipe,
-    target_pg => $new_pg,
-    target_vg => $new_vg
+    flavor_percentage => $newflv
   )
 }
-
 
 1;

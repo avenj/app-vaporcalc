@@ -1,36 +1,30 @@
-package App::vaporcalc::Cmd::Subject::PG;
+package App::vaporcalc::Cmd::Subject::NicBase;
 
 use Defaults::Modern;
 
 use Moo; use MooX::late;
 with 'App::vaporcalc::Role::UI::Cmd';
 
-
 has '+verb' => (
   builder => sub { 'show' },
 );
 
-
 method _action_show { $self->_action_view }
 method _action_view {
-  my $pg = $self->recipe->target_pg;
-  " -> PG: $pg %"
+  my $nbase = $self->recipe->base_nic_per_ml;
+  " -> Nic base: $nbase mg/ml"
 }
 
 method _action_set {
-  my $new_pg = $self->params->get(0);
+  my $newbase = $self->params->get(0);
   $self->throw_exception(
-    message => "set requires a parameter"
-  ) unless defined $new_pg;
-
-  my $new_vg = 100 - $new_pg;
+    message => 'set requires a parameter'
+  ) unless defined $newbase;
 
   $self->munge_recipe(
     $self->recipe,
-    target_pg => $new_pg,
-    target_vg => $new_vg
+    base_nic_per_ml => $newbase
   )
 }
-
 
 1;

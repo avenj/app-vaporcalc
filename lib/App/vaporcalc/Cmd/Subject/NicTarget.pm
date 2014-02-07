@@ -1,34 +1,29 @@
-package App::vaporcalc::Cmd::Subject::VG;
+package App::vaporcalc::Cmd::Subject::NicTarget;
 
 use Defaults::Modern;
 
 use Moo; use MooX::late;
 with 'App::vaporcalc::Role::UI::Cmd';
 
-
 has '+verb' => (
-  builder => sub { 'show' },
+  builder => sub { 'view' },
 );
-
 
 method _action_show { $self->_action_view }
 method _action_view {
-  my $vg = $self->recipe->target_vg;
-  " -> VG: $vg %"
+  my $ntarget = $self->recipe->target_nic_per_ml;
+  " -> Target nicotine: $ntarget mg/ml"
 }
 
 method _action_set {
-  my $new_vg = $self->params->get(0);
+  my $newnic = $self->params->get(0);
   $self->throw_exception(
     message => 'set requires a parameter'
-  ) unless defined $new_vg;
-
-  my $new_pg = 100 - $new_vg;
+  ) unless defined $newnic;
 
   $self->munge_recipe(
     $self->recipe,
-    target_vg => $new_vg,
-    target_pg => $new_pg
+    target_nic_per_ml => $newnic,
   )
 }
 
