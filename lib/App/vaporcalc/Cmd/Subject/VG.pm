@@ -1,13 +1,10 @@
 package App::vaporcalc::Cmd::Subject::VG;
 
-use Defaults::Modern
-  -with_types => [ 'App::vaporcalc::Types' ];
-
-use App::vaporcalc::Exception;
-use App::vaporcalc::Recipe;
+use Defaults::Modern;
 
 use Moo; use MooX::late;
 with 'App::vaporcalc::Role::UI::Cmd';
+
 
 has '+verb' => (
   builder => sub { 'show' },
