@@ -3,9 +3,8 @@
 use Defaults::Modern
   -with_types => [ 'App::vaporcalc::Types' ];
 
-use Module::Runtime 'use_module';
-
-use App::vaporcalc::RecipeResultSet;
+use App::vaporcalc::CmdEngine;
+use App::vaporcalc::Recipe;
 
 use Term::UI;
 use Term::ReadLine;
@@ -20,10 +19,11 @@ $outfh->autoflush(1);
 
 $outfh->say('Welcome to App::vaporcalc!');
 
-my $cmdeng = App::vaporcalc::Cmd->new;
+my $cmdeng = App::vaporcalc::CmdEngine->new;
 
 my $orig_prompt = 'vcalc> ';
-my ($prompt, $recipe);
+my $prompt;
+my $recipe; # FIXME init a baseline recipe to tweak
 PROMPT: while (1) {
   $prompt //= $orig_prompt;
 
@@ -32,53 +32,51 @@ PROMPT: while (1) {
     default => 'help'
   );
 
-  if ($input) {
-    $term->addhistory($input);
-    my $res = try {
-      $cmdeng->parse_cmd
-    } catch {
-      $outfh->say( ">> Parser err: ".$_->message );
-      next PROMPT
-    };
-    
-    # convert subjects to CamelCase:
-    my $subj = join '', map {; ucfirst } split ' ', lc $res->subject;
-    if ($subj eq 'Quit' || $subj eq 'Exit') {
-      say ">> Bye!"; 
-      exit 0
-    }
+  next PROMPT unless $input;
 
-    my $subj_obj = try {
-      use_module("App::vaporcalc::Cmd::Subject::$subj")->new
-    } catch {
-      $outfh->say( ">> Cannot load subject: ".$res->subject.": $_" );
-      next PROMPT
-    };
+  $term->addhistory($input);
 
-    my $verb = $res->verb;
-    my $meth = 'action_'.lc($verb);
-    unless ($subj_obj->can($meth)) {
-      $outfh->say( ">> Cannot find method $meth in pkg $subj" );
-      next PROMPT
-    }
+  if ($input =~ /^(?:exit|quit)/i) {
+    last PROMPT
+  }
 
-    my $verb_result = try {
-      $subj_obj->$meth( $recipe, $res->params )
-    } catch {
-      $outfh->say( ">> Runtime err: $verb: $_" );
-      next PROMPT
-    };
+  my $parsed = try {
+    $cmdeng->parse_cmd($input)
+  } catch {
+    $outfh->say( ">> Parser err: $_" );
+    next PROMPT
+  };
 
-    if (is_RecipeObject $verb_result) {
-      $recipe = $verb_result
-    }
+  my $cmd_result = try {
+    $cmdeng->prepare_cmd(
+      subject => $parsed->subject,
+      verb    => $parsed->verb,
+      params  => $parsed->params,
+      recipe  => $recipe,
+    )->execute
+  } catch {
+    $outfh->say( ">> Cmd err: $_" );
+    next PROMPT
+  };
 
-    if (is_RecipeResultSet $verb_result) {
-      $recipe = $verb_result->recipe
-      # FIXME automagically print formatted when we get a resultset back?
-      # FIXME abstract out template from -simple ?
-    }
-  } 
+  # FIXME clean this up w/ CmdResult objects:
+  if (is_RecipeObject $cmd_result) {
+    $recipe = $cmd_result
+  } elsif (is_RecipeResultSet $cmd_result) {
+    $recipe = $cmd_result->recipe;
+    # FIXME automagically print formatted when we get resultset?
+    #  abstract out template from -simple ?
+  } elsif (is_Str $cmd_result) {
+    # String came back, print it:
+    $outfh->say($cmd_result);
+  } elsif ( is_ArrayObj($cmd_result) || is_ArrayRef($cmd_result) ) {
+    # Feeding back an ARRAY controls the input loop:
+    last PROMPT if $cmd_result->[0] eq 'exit' or $cmd_result->[0] eq 'quit';
+    next PROMPT if $cmd_result->[0] eq 'next';
+  }
+
+  ### FIXME kill default_verb bits in ParseCmd / Cmd.pm
+  ###   let subject classes handle missing verb by overriding 'has verb'
 }
 
 

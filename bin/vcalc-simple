@@ -141,7 +141,8 @@ if (my $fname = getopts->get('write')) {
   exit 0
 }
 
-say "No file to --write specified.\nPress enter to continue anyway.";
+say "No file to --write specified!";
+say "Press enter to continue anyway, ctrl+C to quit.";
 my $rset = App::vaporcalc::RecipeResultSet->new(recipe => get_params);
 print format_resultset($rset);
 
