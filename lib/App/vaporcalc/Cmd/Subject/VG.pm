@@ -1,4 +1,4 @@
-package App::vaporcalc::Cmd::Subject::PG;
+package App::vaporcalc::Cmd::Subject::VG;
 
 use Defaults::Modern
   -with_types => [ 'App::vaporcalc::Types' ];
@@ -16,21 +16,20 @@ has '+verb' => (
 
 method _action_show { $self->_action_view }
 method _action_view {
-  my $pg = $self->recipe->pg;
-  " -> PG: $pg %"
+  my $vg = $self->recipe->vg;
+  " -> VG: $vg %"
 }
 
 method _action_set {
-  my $new_pg = $self->params->get(0);
-  App::vaporcalc::Exception->throw(
-    message => "set requires a parameter"
-  ) unless defined $new_pg;
+  my $new_vg = $self->params->get(0);
+  $self->throw_exception(
+    message => 'set requires a parameter'
+  ) unless defined $new_vg;
 
-  my $data = $self->recipe->TO_JSON;
-  $data->{pg} = $new_pg;
-
-  App::vaporcalc::Recipe->new(%$data);
+  $self->munge_recipe(
+    $self->recipe,
+    vg => $new_vg
+  )
 }
-
 
 1;

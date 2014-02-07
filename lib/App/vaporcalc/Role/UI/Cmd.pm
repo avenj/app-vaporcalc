@@ -3,6 +3,8 @@ package App::vaporcalc::Role::UI::Cmd;
 use Defaults::Modern
   -with_types => [ 'App::vaporcalc::Types' ];
 
+use App::vaporcalc::Exception;
+use App::vaporcalc::Recipe;
 
 use Moo::Role;
 
@@ -28,6 +30,30 @@ has recipe => (
   writer    => '_set_recipe',
 );
 
-requires 'execute';
+method execute {
+  App::vaporcalc::Exception->throw(
+    message => 'Missing verb; no action to perform!'
+  ) unless $self->verb;
+
+  my $meth = '_action_'.lc $self->verb; 
+  if ($self->can($meth)) {
+    return $self->$meth
+  }
+
+  App::vaporcalc::Exception->throw(
+    message => 'Unknown action: '.$self->verb
+  )
+}
+
+method throw_exception (@params) {
+  App::vaporcalc::Exception->throw(@params)
+}
+
+method munge_recipe (RecipeObject $recipe, %params) {
+  my $data = $recipe->TO_JSON;
+  $data{$_} = $params{$_} for keys %params;
+
+  App::vaporcalc::Recipe->new(%$data)
+}
 
 1;
