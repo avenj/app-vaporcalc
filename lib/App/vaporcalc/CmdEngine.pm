@@ -11,6 +11,7 @@ has subject_list => (
   coerce    => 1,
   builder   => sub {
     array(
+      'recipe',
       'target amount',
       'flavor',
       'flavor type',
