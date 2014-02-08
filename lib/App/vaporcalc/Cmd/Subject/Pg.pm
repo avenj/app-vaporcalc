@@ -1,4 +1,4 @@
-package App::vaporcalc::Cmd::Subject::VG;
+package App::vaporcalc::Cmd::Subject::Pg;
 
 use Defaults::Modern;
 
@@ -13,23 +13,24 @@ has '+verb' => (
 
 method _action_show { $self->_action_view }
 method _action_view {
-  my $vg = $self->recipe->target_vg;
-  " -> VG: $vg %"
+  my $pg = $self->recipe->target_pg;
+  " -> PG: $pg %"
 }
 
 method _action_set {
-  my $new_vg = $self->params->get(0);
+  my $new_pg = $self->params->get(0);
   $self->throw_exception(
-    message => 'set requires a parameter'
-  ) unless defined $new_vg;
+    message => "set requires a parameter"
+  ) unless defined $new_pg;
 
-  my $new_pg = 100 - $new_vg;
+  my $new_vg = 100 - $new_pg;
 
   $self->munge_recipe(
     $self->recipe,
-    target_vg => $new_vg,
-    target_pg => $new_pg
+    target_pg => $new_pg,
+    target_vg => $new_vg
   )
 }
+
 
 1;

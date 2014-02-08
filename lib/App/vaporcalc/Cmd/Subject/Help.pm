@@ -26,7 +26,7 @@ method _action_show {
       " nic target <view/set [mg/ml]>", 
       " nic type <view/set [PG/VG]>",
       " pg <view/set [% of total]>",
-      " vg <view/set> [% of total]",
+      " vg <view/set [% of total]>",
       " notes <view/clear/add [STR]/del [IDX]>"
   }
 
