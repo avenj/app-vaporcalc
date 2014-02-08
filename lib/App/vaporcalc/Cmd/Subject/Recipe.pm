@@ -18,11 +18,24 @@ method _action_view {
 }
 
 method _action_save {
-  # FIXME require a path, save RecipeResultSet to specified path
+  my $dest = $self->params->get(0);
+  unless ($dest) {
+    $self->throw_exception(
+      message => 'save requires a path'
+    )
+  }
+  App::vaporcalc::RecipeResultSet->new(recipe => $self->recipe)->save($dest);
+  "Saved: $dest"
 }
 
 method _action_load {
-  # FIXME attempt to load a RecipeResultSet and extract recipe
+  my $src = $self->params->get(0);
+  unless ($src) {
+    $self->throw_exception(
+      message => 'load requires a path'
+    )
+  }
+  App::vaporcalc::RecipeResultSet->load($src)->recipe
 }
 
 1;
