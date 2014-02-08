@@ -62,6 +62,19 @@ is_deeply
   [ 100 ],
   'params ok (1 word subj with trailing verb)';
 
-## FIXME test exceptions
+$res = $cmdeng->parse_cmd('flavor');
+cmp_ok $res->subject, 'eq', 'flavor',
+  '1 word subj with no verb or params ok';
+ok ! defined $res->verb, 'no verb defined ok';
+ok $res->params->is_empty, 'params empty ok (no verb)';
+
+$res = $cmdeng->parse_cmd('nic base');
+cmp_ok $res->subject, 'eq', 'nic base',
+  '2 word subj with no verb or params ok';
+ok ! defined $res->verb, 'no verb defined ok';
+ok $res->params->is_empty, 'params empty ok (no verb)';
+
+eval {; $cmdeng->parse_cmd('bar') };
+like $@, qr/No subject/, 'no subject dies ok';
 
 done_testing;
