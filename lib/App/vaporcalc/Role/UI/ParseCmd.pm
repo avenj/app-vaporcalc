@@ -18,19 +18,20 @@ method parse_cmd (Str $str) {
   SUBJ: for my $maybe (@{ $self->subject_list }) {
     my $idx = index $str, $maybe;
     next SUBJ if $idx == -1;
-    # Found a subject:
-    $subj = $maybe;
-    substr $str, $idx, length($maybe), '';
-    # ' VERB PARAMS' or 'VERB  PARAMS'
-    # trim leading, trailing, double whitespace
-    if (length $str) {
-      $str =~ s/^\s+//;
-      $str =~ s/\s+\z//;
-      $str =~ s/ {2}/ /g;
-      my @pieces = split ' ', $str;
-      $verb = shift @pieces;
-      $params = array(@pieces);
+    no warnings 'substr';
+    if ($idx > 0) {
+      my $prevchar = substr $str, ($idx - 1), 1;
+      next SUBJ unless $prevchar eq ' ';
     }
+    if ( (my $pos = $idx + length($maybe)) < length $str ) {
+      my $nextchar = substr $str, $pos, 1;
+      next SUBJ unless $nextchar eq ' ';
+    }
+    $subj = $maybe;
+    substr $str, $idx, length($maybe), ' ';
+    my $pieces = array( split ' ', $str );
+    $verb = $pieces->shift;
+    $params = $pieces;
     last SUBJ
   }
 

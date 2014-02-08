@@ -77,4 +77,10 @@ ok $res->params->is_empty, 'params empty ok (no verb)';
 eval {; $cmdeng->parse_cmd('bar') };
 like $@, qr/No subject/, 'no subject dies ok';
 
+eval {; $cmdeng->parse_cmd('.nic base ') };
+like $@, qr/No subject/, 'leading garbage dies ok';
+
+eval {; $cmdeng->parse_cmd('nic base.') };
+like $@, qr/No subject/, 'trailing garbage dies ok';
+
 done_testing;
