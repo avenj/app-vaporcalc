@@ -6,7 +6,7 @@ use Defaults::Modern
 use App::vaporcalc::Exception;
 use App::vaporcalc::Recipe;
 
-use Moo::Role;
+use Moo::Role; use MooX::late;
 
 has verb => (
   is       => 'ro',
@@ -50,7 +50,7 @@ method throw_exception (@params) {
 
 method munge_recipe (RecipeObject $recipe, %params) {
   my $data = $recipe->TO_JSON;
-  $data{$_} = $params{$_} for keys %params;
+  $data->{$_} = $params{$_} for keys %params;
 
   App::vaporcalc::Recipe->new(%$data)
 }

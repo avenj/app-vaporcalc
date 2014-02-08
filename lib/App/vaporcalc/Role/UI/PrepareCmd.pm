@@ -8,10 +8,10 @@ use Module::Runtime 'use_module';
 use Role::Tiny;
 
 method prepare_cmd (
-  Str          :$subject,
-  Str          :$verb,
-  ArrayObj     :$params,
-  RecipeObject :$recipe,
+  Str           :$subject,
+  (Str | Undef) :$verb,
+  ArrayObj      :$params,
+  RecipeObject  :$recipe,
 ) {
   
   # 'nic base' -> NicBase, etc
@@ -19,9 +19,9 @@ method prepare_cmd (
   my $mod = 'App::vaporcalc::Cmd::Subject::'.$fmt_subj;
 
   use_module($mod)->new(
-    verb   => $verb,
-    params => $params,
-    recipe => $recipe,
+    maybe verb   => $verb,
+          params => $params,
+          recipe => $recipe,
   )
 }
 
