@@ -123,7 +123,7 @@ PROMPT: while (1) {
   my $parsed = try {
     $cmdeng->parse_cmd($input)
   } catch {
-    $outfh->say( ">> Parser err: $_" );
+    $outfh->say( colorify red => ">> Parser err: $_" );
     undef
   } or next PROMPT;
 
@@ -135,7 +135,7 @@ PROMPT: while (1) {
       recipe  => $recipe,
     )->execute
   } catch {
-    $outfh->say( ">> Cmd err: $_" );
+    $outfh->say( colorify red => ">> Cmd err: $_" );
     undef
   } or next PROMPT;
 
@@ -146,7 +146,7 @@ PROMPT: while (1) {
     print format_resultset($cmd_result)
   } elsif (is_Str $cmd_result) {
     # String came back, print it:
-    $outfh->say($cmd_result);
+    $outfh->say( colorify yellow => $cmd_result );
   } elsif ( is_ArrayObj($cmd_result) || is_ArrayRef($cmd_result) ) {
     # Feeding back an ARRAY controls the input loop:
     last PROMPT if $cmd_result->[0] eq 'exit' or $cmd_result->[0] eq 'quit';
