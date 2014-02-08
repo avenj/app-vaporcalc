@@ -16,7 +16,7 @@ method _action_view {
     $self->recipe->notes->has_any ?
       $self->recipe
         ->notes
-        ->mapval(sub { $n++ ." - ". $_ })
+        ->map(sub { $n++ ." - ". $_ })
         ->join("\n")
       : ''
 }
@@ -29,10 +29,10 @@ method _action_clear {
 }
 
 method _action_add {
-  my $newnote = $self->params->get(0);
   $self->throw_exception(
     message => 'add requires a parameter'
-  ) unless defined $newnote;
+  ) unless $self->params->has_any;
+  my $newnote = $self->params->join(' ');
 
   $self->throw_exception(
     message => 'new note is zero length'
