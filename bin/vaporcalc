@@ -111,8 +111,8 @@ PROMPT: while (1) {
     $cmdeng->parse_cmd($input)
   } catch {
     $outfh->say( ">> Parser err: $_" );
-    next PROMPT
-  };
+    undef
+  } or next PROMPT;
 
   my $cmd_result = try {
     $cmdeng->prepare_cmd(
@@ -123,12 +123,13 @@ PROMPT: while (1) {
     )->execute
   } catch {
     $outfh->say( ">> Cmd err: $_" );
-    next PROMPT
-  };
+    undef
+  } or next PROMPT;
 
   if (is_RecipeObject $cmd_result) {
     $recipe = $cmd_result
   } elsif (is_RecipeResultSet $cmd_result) {
+    # RecipeResultSet came back, format and display it:
     print format_resultset($cmd_result)
   } elsif (is_Str $cmd_result) {
     # String came back, print it:
