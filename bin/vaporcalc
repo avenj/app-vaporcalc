@@ -4,7 +4,66 @@ use Defaults::Modern
   -with_types => [ 'App::vaporcalc::Types' ];
 
 use App::vaporcalc::CmdEngine;
+use App::vaporcalc::FormatString;
 use App::vaporcalc::Recipe;
+use App::vaporcalc::RecipeResultSet;
+
+use Getopt::Long;
+my $Opts = +{
+  help => sub {
+    # FIXME
+    exit 0
+  },
+
+  version => sub {
+    # FIXME
+    exit 0
+  },
+};
+
+GetOptions( $Opts,
+  'help',
+  'version',
+);
+
+fun getopts { state $argv = hash(%$Opts)->inflate }
+
+
+fun format_resultset (RecipeResultSet $rset) {
+  state $tmpl = <<'EOT';
+ --> %target_quantity ml  (%target_pg%/%target_vg% PG/VG)
+  base nic: %base_nic_per_ml mg/ml -- %base_nic_type%
+  target nic: %target_nic_per_ml mg/ml
+  flavor percentage: %flavor_percentage -- %flavor_type
+  notes: %notes
+ =>
+  vg: [%vg ml]  pg: [%pg ml]  nic base: [%nic ml]  flavor: [%flavor ml]
+  total: %total ml
+EOT
+
+  my $recipe = $rset->recipe;
+  my $result = $rset->result;
+
+  format_str( $tmpl =>
+    notes => sub {
+      $recipe->notes->has_any ?
+        "\n" . $recipe->notes->map(sub { ' - '.$_ })->join("\n")
+        : 'none'
+    },
+
+    (map {; $_ => $recipe->$_ } qw/
+      target_quantity target_nic_per_ml
+      base_nic_per_ml base_nic_type
+      target_pg target_vg
+      flavor_percentage flavor_type
+    /),
+
+    (map {; $_ => $result->$_ } qw/
+      vg pg nic flavor total
+    /),
+  )
+}
+
 
 use Term::UI;
 use Term::ReadLine;
@@ -17,13 +76,21 @@ my $term  = $termpkg->new('vcalc');
 my $outfh = $term->OUT || \*STDOUT;
 $outfh->autoflush(1);
 
+
 $outfh->say('Welcome to App::vaporcalc!');
 
 my $cmdeng = App::vaporcalc::CmdEngine->new;
+my $recipe = App::vaporcalc::Recipe->new(
+  target_quantity   => 10,
+  base_nic_per_ml   => 100,
+  target_nic_per_ml => 16,
+  target_pg         => 65,
+  target_vg         => 35,
+  flavor_percentage => 20,
+);
 
 my $orig_prompt = 'vcalc> ';
 my $prompt;
-my $recipe; # FIXME init a baseline recipe to tweak
 PROMPT: while (1) {
   $prompt //= $orig_prompt;
 
@@ -59,13 +126,10 @@ PROMPT: while (1) {
     next PROMPT
   };
 
-  # FIXME clean this up w/ CmdResult objects:
   if (is_RecipeObject $cmd_result) {
     $recipe = $cmd_result
   } elsif (is_RecipeResultSet $cmd_result) {
-    $recipe = $cmd_result->recipe;
-    # FIXME automagically print formatted when we get resultset?
-    #  abstract out template from -simple ?
+    print format_resultset($cmd_result)
   } elsif (is_Str $cmd_result) {
     # String came back, print it:
     $outfh->say($cmd_result);
@@ -74,9 +138,6 @@ PROMPT: while (1) {
     last PROMPT if $cmd_result->[0] eq 'exit' or $cmd_result->[0] eq 'quit';
     next PROMPT if $cmd_result->[0] eq 'next';
   }
-
-  ### FIXME kill default_verb bits in ParseCmd / Cmd.pm
-  ###   let subject classes handle missing verb by overriding 'has verb'
 }
 
 
