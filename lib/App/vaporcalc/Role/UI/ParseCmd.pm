@@ -3,17 +3,15 @@ package App::vaporcalc::Role::UI::ParseCmd;
 use Defaults::Modern;
 
 use Role::Tiny;
-requires qw/
-  subject_list
-  verb_list
-/;
+requires 'subject_list';
 
 
 method parse_cmd (Str $str) {
   # e.g.:
   #   set nic base 100
-  #   nic base set 100
-  my ($subj, $verb, $params);
+  #   nic base set 100  
+  my ($subj, $verb);
+  my $params = array;
 
   SUBJ: for my $maybe (@{ $self->subject_list }) {
     my $idx = index $str, $maybe;
@@ -27,18 +25,10 @@ method parse_cmd (Str $str) {
       $str =~ s/^\s+//;
       $str =~ s/\s+\z//;
       $str =~ s/ {2}/ /g;
-    } else {
-      if ($self->can('default_verb') && my $default = $self->default_verb) {
-        $str = $default
-      } else {
-        App::vaporcalc::Exception->throw(
-          message => "No verb found and no default_verb available",
-        );
-      }
+      my @pieces = split ' ', $str;
+      $verb = shift @pieces;
+      $params = array(@pieces);
     }
-    my @pieces = split ' ', $str;
-    $verb = shift @pieces;
-    $params = array(@pieces);
   }
   unless ($subj) {
     App::vaporcalc::Exception->throw(
