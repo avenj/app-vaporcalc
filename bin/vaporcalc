@@ -11,19 +11,28 @@ use App::vaporcalc::RecipeResultSet;
 use Getopt::Long;
 my $Opts = +{
   help => sub {
-    # FIXME
+    say $_ for (
+      "vaporcalc - App::vaporcalc\n",
+      "  --nocolor     Disable ANSI colors\n",
+      "  --help",
+      "  --version",
+    );
     exit 0
   },
 
   version => sub {
-    # FIXME
+    my $vers = $App::vaporcalc::Recipe::VERSION || '[git]';
+    say "vaporcalc (App::vaporcalc $vers)";
     exit 0
   },
+
+  nocolor => 0,
 };
 
 GetOptions( $Opts,
   'help',
   'version',
+  'nocolor',
 );
 
 fun getopts { state $argv = hash(%$Opts)->inflate }
@@ -51,19 +60,23 @@ EOT
         : 'none'
     },
 
-    (map {; $_ => $recipe->$_ } qw/
+    (map {; $_ => colorify('bold red', $recipe->$_) } qw/
       target_quantity target_nic_per_ml
       base_nic_per_ml base_nic_type
       target_pg target_vg
       flavor_percentage flavor_type
     /),
 
-    (map {; $_ => $result->$_ } qw/
+    (map {; $_ => colorify('bold yellow', $result->$_) } qw/
       vg pg nic flavor total
     /),
   )
 }
 
+use Term::ANSIColor ();
+fun colorify (Str $color, Str $text) {
+  getopts->nocolor ? $text : Term::ANSIColor::colored($text, $color)
+}
 
 use Term::UI;
 use Term::ReadLine;
