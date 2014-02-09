@@ -1,9 +1,13 @@
 Revision history for Perl module App-vaporcalc
 
+0.001003 2014-02-09
+
+  - Explicitly depend on JSON::MaybeXS-1.001+
+
 0.001002 2014-02-09
 
-   - Fix some Windows test failures relating to temp files
+  - Fix some Windows test failures relating to temp files
 
 0.001001 2014-02-09
 
-   - Initial release
+  - Initial release
