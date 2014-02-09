@@ -6,7 +6,7 @@ use Moo; use MooX::late;
 with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+verb' => (
-  builder => sub { 'view' },
+  builder => sub { 'show' },
 );
 
 method _action_show { $self->_action_view }

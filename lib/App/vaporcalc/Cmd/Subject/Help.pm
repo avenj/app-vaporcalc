@@ -5,8 +5,12 @@ use Defaults::Modern;
 use Moo; use MooX::late;
 with 'App::vaporcalc::Role::UI::Cmd';
 
+has '+recipe' => (
+  isa     => Any,
+);
+
 has '+verb' => (
-  builder => sub { 'view' },
+  builder => sub { 'show' },
 );
 
 method _action_view { $self->_action_show }
