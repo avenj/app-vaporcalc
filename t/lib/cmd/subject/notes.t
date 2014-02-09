@@ -21,6 +21,7 @@ ok $cmd->does('App::vaporcalc::Role::UI::Cmd'),
   'does Role::UI::Cmd';
 
 ok $cmd->verb eq 'show', 'default verb ok';
+ok length $cmd->execute, 'default verb returned str ok';
 
 $cmd = App::vaporcalc::Cmd::Subject::Notes->new(
   recipe => $recipe,
