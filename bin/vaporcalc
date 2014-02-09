@@ -102,7 +102,7 @@ my $recipe = App::vaporcalc::Recipe->new(
   flavor_percentage => 20,
 );
 
-my $orig_prompt = 'vcalc> ';
+my $orig_prompt = colorify green => 'vcalc> ';
 my $prompt;
 PROMPT: while (1) {
   $prompt //= $orig_prompt;
