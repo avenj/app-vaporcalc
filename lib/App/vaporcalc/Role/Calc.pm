@@ -91,6 +91,8 @@ L<App::vaporcalc::Result> object.
 
 See L<App::vaporcalc::Recipe>, L<App::vaporcalc::RecipeResultSet>.
 
+=head2 REQUIRES
+
 Consumers need to implement the following methods:
 
   # Method           Returning
@@ -103,7 +105,9 @@ Consumers need to implement the following methods:
   flavor_type        ('PG' or 'VG')
   flavor_percentage  (percentage)
 
-=head2 calc
+=head2 METHODS
+
+=head3 calc
 
 Performs the calculation & returns an L<App::vaporcalc::Result> object.
 

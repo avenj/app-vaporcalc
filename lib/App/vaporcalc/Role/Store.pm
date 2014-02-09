@@ -6,11 +6,9 @@ use JSON::MaybeXS ();
 
 use Role::Tiny;
 
-method save ( (Str | Path) $path ) {
-  unless ($self->can('TO_JSON')) {
-    confess "No TO_JSON method found for ".blessed $self
-  }
+requires 'TO_JSON';
 
+method save ( (Str | Path) $path ) {
   my $jseng = JSON::MaybeXS->new(
     utf8   => 1,
     pretty => 1,
@@ -57,6 +55,13 @@ This role provides L</save> and L</load> methods that attempt to serialize or
 retrieve objects via L<JSON::MaybeXS>; this is used by
 L<App::vaporcalc::Recipe> & L<App::vaporcalc::RecipeResultSet> to preserve
 e-liquid recipes.
+
+=head2 REQUIRES
+
+=head3 TO_JSON
+
+Consumers are expected to implement a C<TO_JSON> method that returns a plain
+C<HASH> for storage.
 
 =head2 METHODS
 

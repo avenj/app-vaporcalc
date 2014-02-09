@@ -58,6 +58,9 @@ calculated L<App::vaporcalc::Result>.
 
 The L<App::vaporcalc::Recipe> we are calculating.
 
+Can be coerced from a C<HASH> of L<App::vaporcalc::Recipe> constructor
+options.
+
 =head3 result
 
 Automatically created from the current L</recipe> object.

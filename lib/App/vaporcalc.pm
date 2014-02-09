@@ -51,7 +51,8 @@ format.
 From a shell, the B<vaporcalc> frontend starts with a base recipe outline and
 provides a command line interface to tweaking, saving, and loading recipes.
 
-If you'd like to manage recipes from perl, see L</vcalc>, below.
+If you'd like to manage recipes from perl, see L</vcalc>, below (or use
+L<App::vaporcalc::Recipe> directly).
 
 =head1 EXPORTED
 
