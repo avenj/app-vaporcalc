@@ -17,13 +17,13 @@ has cmd_class_prefix => (
 method prepare_cmd (
   Str           :$subject,
   (Str | Undef) :$verb = undef,
-  ArrayObj      :$params,
+  ArrayObj      :$params = array,
   RecipeObject  :$recipe,
 ) {
   
   # 'nic base' -> NicBase, etc
   my $fmt_subj = join '', map {; ucfirst } split ' ', lc $subject;
-  my $mod = 'App::vaporcalc::Cmd::Subject::'.$fmt_subj;
+  my $mod = $self->cmd_class_prefix . $fmt_subj;
 
   use_module($mod)->new(
     maybe verb   => $verb,
@@ -33,3 +33,55 @@ method prepare_cmd (
 }
 
 1;
+
+=pod
+
+=head1 NAME
+
+App::vaporcalc::Role::UI::PrepareCmd
+
+=head1 SYNOPSIS
+
+  package MyCmdEngine;
+  use Moo;
+  with 'App::vaporcalc::Role::UI::PrepareCmd';
+
+  package main;
+  use List::Objects::WithUtils 'array';
+  use App::vaporcalc::Recipe;
+  my $recipe = App::vaporcalc::Recipe->new(
+    # See App::vaporcalc::Recipe
+  );
+  my $cmdeng = MyCmdEngine->new;
+  my $cmd = $cmdeng->prepare_cmd(
+    recipe  => $recipe,
+    verb    => 'set',
+    subject => 'nic base',
+    params  => array('36'),
+  );
+
+=head1 DESCRIPTION
+
+A L<Moo::Role> for producing L<vaporcalc> command objects.
+
+=head2 ATTRIBUTES
+
+=head3 cmd_class_prefix
+
+The prefix to use when constructing command object class names.
+
+Defaults to C<App::vaporcalc::Cmd::Subject::>
+
+=head2 METHODS
+
+=head3 prepare_cmd
+
+Takes a L<App::vaporcalc::Recipe>, an optional verb (action to perform), a
+subject (used to find/build command objects), and an optional set of
+parameters (as an ARRAY or ARRAY-type object). See L</SYNOPSIS>.
+
+=head1 AUTHOR
+
+Jon Portnoy <avenj@cobaltirc.org>
+
+=cut

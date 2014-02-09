@@ -30,3 +30,23 @@ method TO_JSON {
 with 'App::vaporcalc::Role::Store';
 
 1;
+
+=pod
+
+=head1 NAME
+
+App::vaporcalc::RecipeResultSet - An e-liquid recipe and result pair
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head2 ATTRIBUTES
+
+=head2 CONSUMES
+
+=head1 AUTHOR
+
+Jon Portnoy <avenj@cobaltirc.org>
+
+=cut

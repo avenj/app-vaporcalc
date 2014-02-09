@@ -94,3 +94,25 @@ with 'App::vaporcalc::Role::Calc',
 ;
 
 1;
+
+=pod
+
+=for Pod::Coverage BUILD TO_JSON
+
+=head1 NAME
+
+App::vaporcalc::Recipe - An e-liquid recipe
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head2 ATTRIBUTES
+
+=head2 CONSUMES
+
+=head1 AUTHOR
+
+Jon Portnoy <avenj@cobaltirc.org>
+
+=cut

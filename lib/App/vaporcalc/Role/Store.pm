@@ -58,7 +58,9 @@ retrieve objects via L<JSON::MaybeXS>; this is used by
 L<App::vaporcalc::Recipe> & L<App::vaporcalc::RecipeResultSet> to preserve
 e-liquid recipes.
 
-=head2 save
+=head2 METHODS
+
+=head3 save
 
 Takes a path (as a string or a L<Path::Tiny> object) and attempts to serialize
 the C<$self> object to the given path.
@@ -66,7 +68,7 @@ the C<$self> object to the given path.
 Objects are expected to provide their own C<TO_JSON> method; if it is not
 available, an exception is thrown.
 
-=head2 load
+=head3 load
 
 Takes a path (as a string or a L<Path::Tiny> object) and attempts to create a
 new object by calling C<new()>.
