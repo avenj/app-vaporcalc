@@ -20,7 +20,21 @@ ok $recipe->flavor_type eq 'PG', 'flavor_type default ok';
 ok $recipe->notes->count == 0,   'notes default ok';
 
 ## TO_JSON
-## FIXME
+my $hash = $recipe->TO_JSON;
+is_deeply 
+  $hash,
+  +{
+    target_quantity   => 30,
+    base_nic_per_ml   => 36,
+    base_nic_type     => 'PG',
+    target_nic_per_ml => 12,
+    target_pg         => 65,
+    target_vg         => 35,
+    flavor_percentage => 20,
+    flavor_type       => 'PG',
+    notes             => [],
+  },
+  'TO_JSON ok';
 
 ## Role::Store
 {
@@ -52,7 +66,5 @@ $badratio{target_pg} = 30; $badratio{target_vg} = 40;
 eval {; App::vaporcalc::Recipe->new(%badratio) };
 like $@, qr/target_vg/, 'bad PG-VG ratio dies';
 
-#FIXME
-# missing required attribs
 
 done_testing
