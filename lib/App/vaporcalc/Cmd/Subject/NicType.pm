@@ -22,7 +22,6 @@ method _action_set {
   ) unless defined $new_nic;
 
   $self->munge_recipe(
-    $self->recipe,
     base_nic_type => $new_nic
   )
 }

@@ -48,7 +48,8 @@ method throw_exception (@params) {
   App::vaporcalc::Exception->throw(@params)
 }
 
-method munge_recipe (RecipeObject $recipe, %params) {
+method munge_recipe (%params) {
+  my $recipe = $self->recipe;
   my $data = $recipe->TO_JSON;
   $data->{$_} = $params{$_} for keys %params;
 
@@ -113,12 +114,11 @@ Calls L<App::vaporcalc::Exception/"throw">.
 =head3 munge_recipe
 
   my $new_recipe = $self->munge_recipe( 
-    $recipe, 
     target_vg => 50, 
     target_pg => 50 
   );
 
-Calls C<TO_JSON> on the given L<App::vaporcalc::Recipe> object, merges in the
+Calls C<TO_JSON> on the current L</recipe> object, merges in the
 given key/value pairs, and returns a new L<App::vaporcalc::Recipe> with the
 appropriate values.
 

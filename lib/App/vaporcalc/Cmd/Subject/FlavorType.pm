@@ -22,7 +22,6 @@ method _action_set {
   ) unless defined $newflv;
 
   $self->munge_recipe(
-    $self->recipe,
     flavor_type => $newflv
   )
 }

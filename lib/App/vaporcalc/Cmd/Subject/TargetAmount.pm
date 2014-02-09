@@ -23,7 +23,6 @@ method _action_set {
   ) unless defined $new_tgt;
 
   $self->munge_recipe(
-    $self->recipe,
     target_quantity => $new_tgt
   )
 }

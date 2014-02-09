@@ -26,7 +26,6 @@ method _action_set {
   my $new_vg = 100 - $new_pg;
 
   $self->munge_recipe(
-    $self->recipe,
     target_pg => $new_pg,
     target_vg => $new_vg
   )

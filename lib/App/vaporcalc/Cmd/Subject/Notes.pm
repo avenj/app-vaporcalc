@@ -23,7 +23,6 @@ method _action_view {
 
 method _action_clear {
   $self->munge_recipe(
-    $self->recipe,
     notes => array(),
   )
 }
@@ -39,7 +38,6 @@ method _action_add {
   ) unless length $newnote;
 
   $self->munge_recipe(
-    $self->recipe,
     notes => array( $self->recipe->notes->all, $newnote ),
   )
 }
@@ -55,7 +53,6 @@ method _action_del {
   $cloned->delete($delidx) if $cloned->has_any;
 
   $self->munge_recipe(
-    $self->recipe,
     notes => $cloned
   )
 }

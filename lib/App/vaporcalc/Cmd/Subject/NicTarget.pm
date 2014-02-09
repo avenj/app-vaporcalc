@@ -22,7 +22,6 @@ method _action_set {
   ) unless defined $newnic;
 
   $self->munge_recipe(
-    $self->recipe,
     target_nic_per_ml => $newnic,
   )
 }

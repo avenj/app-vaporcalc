@@ -22,7 +22,6 @@ method _action_set {
   ) unless defined $newbase;
 
   $self->munge_recipe(
-    $self->recipe,
     base_nic_per_ml => $newbase
   )
 }
