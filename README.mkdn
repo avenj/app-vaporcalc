@@ -30,7 +30,8 @@ format.
 From a shell, the __vaporcalc__ frontend starts with a base recipe outline and
 provides a command line interface to tweaking, saving, and loading recipes.
 
-If you'd like to manage recipes from perl, see ["vcalc"](#vcalc), below.
+If you'd like to manage recipes from perl, see ["vcalc"](#vcalc), below (or use
+[App::vaporcalc::Recipe](http://search.cpan.org/perldoc?App::vaporcalc::Recipe) directly).
 
 # EXPORTED
 
