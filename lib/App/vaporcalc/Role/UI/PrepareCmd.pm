@@ -5,11 +5,18 @@ use Defaults::Modern
 
 use Module::Runtime 'use_module';
 
-use Role::Tiny;
+use Moo::Role;
+
+has cmd_class_prefix => (
+  lazy    => 1,
+  is      => 'ro',
+  isa     => Str,
+  builder => sub { 'App::vaporcalc::Cmd::Subject::' },
+);
 
 method prepare_cmd (
   Str           :$subject,
-  (Str | Undef) :$verb,
+  (Str | Undef) :$verb = undef,
   ArrayObj      :$params,
   RecipeObject  :$recipe,
 ) {
