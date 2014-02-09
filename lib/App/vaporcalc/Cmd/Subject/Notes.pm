@@ -14,7 +14,9 @@ method _action_view {
   my $n = 0;
   my $str = " -> notes:\n";
   if ($self->recipe->notes->has_any) {
-     $str .= $self->recipe->notes->map(sub { $n++ .' - '. $_ })->join("\n")
+    $str .= $self->recipe->notes->map(sub { $n++ .' - '. $_ })->join("\n")
+  } else {
+    $str .= 'none'
   }
   $str
 }
