@@ -12,13 +12,11 @@ has '+verb' => (
 method _action_show { $self->_action_view }
 method _action_view {
   my $n = 0;
-  " -> notes:\n".
-    $self->recipe->notes->has_any ?
-      $self->recipe
-        ->notes
-        ->map(sub { $n++ ." - ". $_ })
-        ->join("\n")
-      : ''
+  my $str = " -> notes:\n";
+  if ($self->recipe->notes->has_any) {
+     $str .= $self->recipe->notes->map(sub { $n++ .' - '. $_ })->join("\n")
+  }
+  $str
 }
 
 method _action_clear {
