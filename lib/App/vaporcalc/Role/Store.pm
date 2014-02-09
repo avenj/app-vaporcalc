@@ -2,7 +2,7 @@ package App::vaporcalc::Role::Store;
 
 use Defaults::Modern;
 
-use JSON::MaybeXS ();
+use JSON::MaybeXS 1.001 ();
 
 use Role::Tiny;
 
