@@ -24,8 +24,11 @@ ok $result->pg     == 2.9, '2.9ml PG';
 ok $result->vg     == 3.5, '3.5ml VG';
 ok $result->nic    == 1.6, '1.6ml nic';
 
-{
-  use File::Temp ();
+use File::Temp ();
+subtest 'storage' => sub {
+  if ($^O eq 'MSWin32') {
+    plan skip_all => 'Temp files fail on some Windows platforms'
+  }
   my $fh    = File::Temp->new(UNLINK => 1);
   my $fname = $fh->filename;
   ok $rset->save($fname), 'save ok';
@@ -33,7 +36,7 @@ ok $result->nic    == 1.6, '1.6ml nic';
   isa_ok $loaded, 'App::vaporcalc::RecipeResultSet';
   ok $loaded->recipe->target_nic_per_ml == 16, 'loaded recipe looks ok';
   ok $loaded->result->nic == 1.6, 'loaded result looks ok';
-}
+};
 
 
 done_testing

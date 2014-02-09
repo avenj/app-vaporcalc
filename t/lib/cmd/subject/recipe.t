@@ -25,7 +25,10 @@ isa_ok $cmd->execute, 'App::vaporcalc::RecipeResultSet',
   'show returns RecipeResultSet';
 
 use File::Temp ();
-{
+subtest 'storage' => sub {
+  if ($^O eq 'MSWin32') {
+    plan skip_all => 'Temp files fail on some Windows platforms'
+  }
   my $fh = File::Temp->new(UNLINK => 1);
   my $fname = $fh->filename;
 
@@ -43,6 +46,6 @@ use File::Temp ();
   my $new = $cmd->execute;
   isa_ok $new, 'App::vaporcalc::Recipe';
   ok $new->target_pg == 65, 'loaded recipe looks ok';
-}
+};
 
 done_testing

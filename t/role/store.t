@@ -15,6 +15,8 @@ use strict; use warnings FATAL => 'all';
 my $obj = MyStorableObj->new;
 
 {
+  skip 'Temp file fails on some Windows platforms' => 3 
+    if $^O eq 'MSWin32';
   use File::Temp ();
   my $fh = File::Temp->new(UNLINK => 1);
   my $fname = $fh->filename;

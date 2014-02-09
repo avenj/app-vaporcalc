@@ -37,7 +37,10 @@ is_deeply
   'TO_JSON ok';
 
 ## Role::Store
-{
+subtest 'storage' => sub {
+  if ($^O eq 'MSWin32') {
+    plan skip_all => 'Temp files fail on some Windows platforms';
+  }
   # save
   my $fh = File::Temp->new( UNLINK => 1 );
   my $fname = $fh->filename;
@@ -48,7 +51,7 @@ is_deeply
   for my $key (keys %defaults) {
     ok $loaded->$key eq $defaults{$key}, "$key loaded ok"
   }
-}
+};
 
 ## Role::Calc
 # calc
