@@ -3,7 +3,7 @@ package App::vaporcalc::Role::UI::PrepareCmd;
 use Defaults::Modern
   -with_types => [ 'App::vaporcalc::Types' ];
 
-use Module::Runtime 'use_module';
+use Module::Runtime 'use_package_optimistically';
 
 use Moo::Role;
 
@@ -17,7 +17,7 @@ has cmd_class_prefix => (
 method prepare_cmd (
   Str           :$subject,
   (Str | Undef) :$verb = undef,
-  ArrayObj      :$params = array,
+  ArrayObj      :$params = array(),
   RecipeObject  :$recipe,
 ) {
   
@@ -25,7 +25,7 @@ method prepare_cmd (
   my $fmt_subj = join '', map {; ucfirst } split ' ', lc $subject;
   my $mod = $self->cmd_class_prefix . $fmt_subj;
 
-  use_module($mod)->new(
+  use_package_optimistically($mod)->new(
     maybe verb   => $verb,
           params => $params,
           recipe => $recipe,

@@ -25,11 +25,10 @@ my $recipe = App::vaporcalc::Recipe->new(
 
 my $help = $cmdengine->prepare_cmd(
   subject => 'help',
-  params  => array,
   recipe  => $recipe,
 );
 
 isa_ok $help, 'App::vaporcalc::Cmd::Subject::Help';
 ok $help->execute, 'prepare_cmd returned executable command';
 
-done_testing
+done_testing;
