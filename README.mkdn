@@ -27,7 +27,7 @@ This is a set of simple utilities, roles, and objects for managing e-cig
 liquid recipes and calculating `ml` quantities based on a simple recipe
 format.
 
-From a shell, the [vaporcalc](http://search.cpan.org/perldoc?vaporcalc) frontend starts with a base recipe outline and
+From a shell, the __vaporcalc__ frontend starts with a base recipe outline and
 provides a command line interface to tweaking, saving, and loading recipes.
 
 If you'd like to manage recipes from perl, see ["vcalc"](#vcalc), below.

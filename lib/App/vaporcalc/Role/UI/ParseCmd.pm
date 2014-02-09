@@ -64,10 +64,7 @@ App::vaporcalc::Role::UI::ParseCmd
   has subject_list => (
     is      => 'ro',
     builder => sub {
-      qw/
-        'nic base',
-        'flavor',
-      /,
+      [ 'nic base', 'flavor' ]
     },
   );
   with 'App::vaporcalc::Role::UI::ParseCmd';
@@ -99,7 +96,7 @@ containing a list of valid subjects.
 Given a string, returns an inflated L<List::Objects::WithUtils::Hash>
 with C<subject>, C<verb>, and C<params> accessors (see SYNOPSIS).
 
-Used by L<App::vaporcalc::CmdEngine> to parse L<vaporcalc> commands.
+Used by L<App::vaporcalc::CmdEngine> to parse B<vaporcalc> commands.
 
 =head1 AUTHOR
 

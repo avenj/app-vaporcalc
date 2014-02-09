@@ -164,7 +164,7 @@ PROMPT: while (1) {
 
 
 say "Bye!"; exit 0
-
+__END__
 
 =pod
 

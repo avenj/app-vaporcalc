@@ -49,8 +49,12 @@ App::vaporcalc::FormatString - Templated string formatter
 
 A tiny string formatter.
 
-Exports a single function called B<format_str> which takes a string and a 
-hash (or hash reference) mapping template variables to replacement strings.
+Exports a single function: L</format_str>
+
+=head2 format_str
+
+Takes a string and a hash (or hash reference) mapping template variables to
+replacement strings.
 
 The replacement variables can be coderefs returning a string:
 

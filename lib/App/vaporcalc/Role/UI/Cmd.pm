@@ -109,7 +109,7 @@ a method named C<< _action_$verb >>  to call.
     message => 'failed!'
   );
 
-Calls L<App::vaporcalc::Exception/"throw">.
+Throw an exception object.
 
 =head3 munge_recipe
 

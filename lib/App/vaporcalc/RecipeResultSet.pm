@@ -33,15 +33,34 @@ with 'App::vaporcalc::Role::Store';
 
 =pod
 
+=for Pod::Coverage TO_JSON
+
 =head1 NAME
 
 App::vaporcalc::RecipeResultSet - An e-liquid recipe and result pair
 
 =head1 SYNOPSIS
 
+  my $rset = App::vaporcalc::RecipeResultSet->new(
+    recipe => +{
+      # See App::vaporcalc::Recipe
+    },
+  );
+
 =head1 DESCRIPTION
 
+An instance of this class couples an L<App::vaporcalc::Recipe> with its
+calculated L<App::vaporcalc::Result>.
+
 =head2 ATTRIBUTES
+
+=head3 recipe
+
+The L<App::vaporcalc::Recipe> we are calculating.
+
+=head3 result
+
+Automatically created from the current L</recipe> object.
 
 =head2 CONSUMES
 

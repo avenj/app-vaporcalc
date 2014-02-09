@@ -48,7 +48,7 @@ This is a set of simple utilities, roles, and objects for managing e-cig
 liquid recipes and calculating C<ml> quantities based on a simple recipe
 format.
 
-From a shell, the L<vaporcalc> frontend starts with a base recipe outline and
+From a shell, the B<vaporcalc> frontend starts with a base recipe outline and
 provides a command line interface to tweaking, saving, and loading recipes.
 
 If you'd like to manage recipes from perl, see L</vcalc>, below.

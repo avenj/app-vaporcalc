@@ -49,13 +49,13 @@ App::vaporcalc::CmdEngine
 =head1 DESCRIPTION
 
 A class containing a valid L</subject_list> for use with
-L<vaporcalc> command handler roles; see L</CONSUMES>.
+B<vaporcalc> command handler roles; see L</CONSUMES>.
 
 =head2 ATTRIBUTES
 
 =head3 subject_list
 
-The list of valid L<vaporcalc> subjects (as an
+The list of valid B<vaporcalc> subjects (as an
 L<List::Objects::WithUtils::Array>).
 
 =head2 CONSUMES

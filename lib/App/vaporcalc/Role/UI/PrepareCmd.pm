@@ -62,7 +62,7 @@ App::vaporcalc::Role::UI::PrepareCmd
 
 =head1 DESCRIPTION
 
-A L<Moo::Role> for producing L<vaporcalc> command objects.
+A L<Moo::Role> for producing B<vaporcalc> command objects.
 
 =head2 ATTRIBUTES
 

@@ -105,11 +105,88 @@ App::vaporcalc::Recipe - An e-liquid recipe
 
 =head1 SYNOPSIS
 
+  use App::vaporcalc::Recipe;
+
+  my $recipe = App::vaporcalc::Recipe->new(
+    target_quantity   => 30,   # ml
+
+    base_nic_type     => 'PG', # nicotine base type (VG/PG, default PG)
+    base_nic_per_ml   => 100,  # mg/ml (base nicotine concentration)
+    target_nic_per_ml => 12,   # mg/ml (target nicotine concentration)
+
+    target_pg         => 65,   # target PG percentage
+    target_vg         => 35,   # target VG percentage
+
+    flavor_percentage => 15,   # target flavor percentage
+    flavor_type       => 'PG', # flavor base type (VG/PG, default PG)
+
+    notes   => [
+      'My recipe',
+      '13% flavor',
+      '2% ethyl maltol'
+    ],
+  );
+
+  my $result = $recipe->calc;
+  # See App::vaporcalc::Result
+
 =head1 DESCRIPTION
+
+An instance of this class represents an e-liquid recipe that can be calculated
+to produce per-ingredient C<ml> quantities via L<App::vaporcalc::Role::Calc>.
+
+See L<App::vaporcalc>, especially L<App::vaporcalc/"WARNING">.
 
 =head2 ATTRIBUTES
 
+=head3 target_quantity
+
+The total target quantity, in C<ml>.
+
+=head3 base_nic_type
+
+The base liquid type of the nicotine solution ('VG' or 'PG').
+
+Defaults to 'PG'.
+
+=head3 base_nic_per_ml
+
+The concentration of the base nicotine solution, in mg/ml.
+
+=head3 target_nic_per_ml
+
+The target nicotine concentration, in mg/ml.
+
+=head3 target_pg
+
+The total percentage of PG.
+
+=head3 target_vg
+
+The total percentage of VG.
+
+=head3 flavor_percentage
+
+The total percentage of flavor extract.
+
+=head3 flavor_type
+
+The base liquid type of the flavor extract ('VG' or 'PG').
+
+Defaults to 'PG'.
+
+=head3 notes
+
+A L<List::Objects::WithUtils::Array> containing an arbitrary number of notes
+attached to the recipe.
+
+Can be coerced from a plain C<ARRAY>.
+
 =head2 CONSUMES
+
+L<App::vaporcalc::Role::Calc>
+
+L<App::vaporcalc::Role::Store>
 
 =head1 AUTHOR
 
