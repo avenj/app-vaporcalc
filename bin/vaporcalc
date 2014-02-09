@@ -164,3 +164,50 @@ PROMPT: while (1) {
 
 
 say "Bye!"; exit 0
+
+
+=pod
+
+=head1 NAME
+
+vaporcalc - Terminal-based e-liquid recipe calculator
+
+=head1 SYNOPSIS
+
+  vaporcalc [OPTIONS]...
+
+=head1 OPTIONS
+
+  --nocolor     Disable ANSI colors
+
+  --version
+  --help
+  
+=head1 DESCRIPTION
+
+A terminal-based calculator for manging DIY e-liquid recipes.
+
+See L<App::vaporcalc>, and especially L<App::vaporcalc/"WARNING">.
+
+=head1 COMMANDS
+
+Commands can be issued in a reasonably natural manner; a command has a
+subject, possibly a verb (action the subject should perform), and possibly
+some parameters. For example, these are equally valid commands:
+
+  vcalc> show nic base
+  vcalc> nic base show
+  vcalc> set nic base 36
+  vcalc> nic base set 36
+
+The complete list of available subjects and their usage is available via the
+command C<help>.
+
+There are a few commands not represented via subjects: C<calc> is an alias for
+C<show recipe>. C<quit> and C<exit> will quit immediately.
+
+=head1 AUTHOR
+
+Jon Portnoy <avenj@cobaltirc.org>
+
+=cut
