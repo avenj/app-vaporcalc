@@ -78,6 +78,15 @@ fun colorify (Str $color, Str $text) {
   getopts->nocolor ? $text : Term::ANSIColor::colored($text, $color)
 }
 
+fun format_error ($err) {
+  # Colorify first line only:
+  return '' unless $err;
+  my @lines = split "\n", "$err";
+  $lines[0] = colorify red => $lines[0];
+  join "\n", @lines
+}
+
+
 use Term::UI;
 use Term::ReadLine;
 my $termpkg = 
@@ -116,14 +125,13 @@ PROMPT: while (1) {
 
   $term->addhistory($input);
 
-  if ($input =~ /^(?:exit|quit)/i) {
-    last PROMPT
-  }
+  $input = 'show recipe' if $input eq 'calc';
+  last PROMPT            if $input =~ /^(?:exit|quit)/i;
 
   my $parsed = try {
     $cmdeng->parse_cmd($input)
   } catch {
-    $outfh->say( colorify red => ">> Parser err: $_" );
+    $outfh->say( format_error(">> Parser err: $_") );
     undef
   } or next PROMPT;
 
@@ -135,7 +143,7 @@ PROMPT: while (1) {
       recipe  => $recipe,
     )->execute
   } catch {
-    $outfh->say( colorify red => ">> Cmd err: $_" );
+    $outfh->say( format_error(">> Cmd err: $_") );
     undef
   } or next PROMPT;
 
