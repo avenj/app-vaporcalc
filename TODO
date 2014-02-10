@@ -1,9 +1,0 @@
-## Multi-flavor support
-   # Total flavor %
-     # per-flavor % (adding up to total)
-   # interface / serialization support
-   # must be able to vivify when inflating JSON
-
-## vaporcalc
-   # --load=$recipe opt
-   # kill vcalc-simple
