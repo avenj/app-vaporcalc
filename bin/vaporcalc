@@ -151,18 +151,26 @@ PROMPT: while (1) {
 
   RESULT: {
     if (is_RecipeObject $cmd_result) {
-      $recipe = $cmd_result
-    } elsif (is_RecipeResultSet $cmd_result) {
-      # RecipeResultSet came back, format and display it:
-      print format_resultset($cmd_result)
-    } elsif (is_Str $cmd_result) {
-      # String came back, print it:
+      $recipe = $cmd_result;
+      last RESULT
+    }
+    
+    if (is_RecipeResultSet $cmd_result) {
+      print format_resultset($cmd_result);
+      last RESULT
+    }
+    
+    if (is_Str $cmd_result) {
       $outfh->say( colorify yellow => $cmd_result );
-    } elsif ( is_ArrayObj($cmd_result) || is_ArrayRef($cmd_result) ) {
+      last RESULT
+    } 
+    
+    if ( is_ArrayObj($cmd_result) || is_ArrayRef($cmd_result) ) {
       # Feeding back an ARRAY controls the input loop:
       last PROMPT 
         if $cmd_result->[0] eq 'exit' 
         or $cmd_result->[0] eq 'quit';
+
       next PROMPT 
         if $cmd_result->[0] eq 'next';
 
@@ -185,10 +193,10 @@ PROMPT: while (1) {
         $cmd_result = $cmd_result->[2]->($reply);
         redo RESULT
       }
-    } else {
-      confess "BUG; unknown cmd return value $cmd_result"
+
     }
 
+    confess "BUG; unable to handle cmd retval $cmd_result"
   } # RESULT
 }
 
