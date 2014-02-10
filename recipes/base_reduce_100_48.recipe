@@ -7,7 +7,8 @@
       "target_nic_per_ml" : "48",
       "target_vg" : "0",
       "notes" : [
-        "Reduce 100mg/ml nicotine in PG -> 48mg/ml"
+        "Reduce 100mg/ml nicotine in PG -> 48mg/ml",
+        "This is useful for creating a somewhat safer working set."
       ],
       "flavor_type" : "PG",
       "flavor_percentage" : "0"
