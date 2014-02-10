@@ -40,10 +40,11 @@ fun getopts { state $argv = hash(%$Opts)->inflate }
 
 fun format_resultset (RecipeResultSet $rset) {
   state $tmpl = <<'EOT';
- --> %target_quantity ml  (%target_pg%/%target_vg% PG/VG)
-  base nic: %base_nic_per_ml mg/ml -- %base_nic_type%
-  target nic: %target_nic_per_ml mg/ml
-  flavor percentage: %flavor_percentage -- %flavor_type
+ --> target amount: %target_quantity ml
+  pg: %target_pg %  vg: %target_vg %
+  nic base: %base_nic_per_ml mg/ml  nic type: %base_nic_type%
+  nic target: %target_nic_per_ml mg/ml
+  flavor: %flavor_percentage %  flavor type: %flavor_type
   notes: %notes
  =>
   vg: [%vg ml]  pg: [%pg ml]  nic base: [%nic ml]  flavor: [%flavor ml]
@@ -100,6 +101,7 @@ $outfh->autoflush(1);
 
 
 $outfh->say('Welcome to App::vaporcalc!');
+$outfh->say("Try '@{[ colorify yellow => 'help' ]}' for usage details.");
 
 my $cmdeng = App::vaporcalc::CmdEngine->new;
 my $recipe = App::vaporcalc::Recipe->new(
@@ -118,7 +120,7 @@ PROMPT: while (1) {
 
   my $input = $term->get_reply(
     prompt  => $prompt,
-    default => 'help'
+    default => 'calc'
   );
 
   next PROMPT unless $input;
