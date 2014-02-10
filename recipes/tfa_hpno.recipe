@@ -3,7 +3,7 @@
       "target_pg" : "60",
       "base_nic_per_ml" : "100",
       "base_nic_type" : "PG",
-      "target_quantity" : "10",
+      "target_quantity" : "30",
       "target_nic_per_ml" : "12",
       "target_vg" : "40",
       "notes" : [
