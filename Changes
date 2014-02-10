@@ -1,5 +1,10 @@
 Revision history for Perl module App-vaporcalc
 
+0.001004 2014-02-10
+
+  - vaporcalc interface improvements;
+    default to calling 'calc', improve recipe/result output template
+
 0.001003 2014-02-09
 
   - Explicitly depend on JSON::MaybeXS-1.001+
