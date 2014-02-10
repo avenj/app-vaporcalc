@@ -137,19 +137,19 @@ PROMPT: while (1) {
     undef
   } or next PROMPT;
 
-  RESULT: {
-    my $cmd_result = try {
-      $cmdeng->prepare_cmd(
-        subject => $parsed->subject,
-        verb    => $parsed->verb,
-        params  => $parsed->params,
-        recipe  => $recipe,
-      )->execute
-    } catch {
-      $outfh->say( format_error(">> Cmd err: $_") );
-      undef
-    } or next PROMPT;
+  my $cmd_result = try {
+    $cmdeng->prepare_cmd(
+      subject => $parsed->subject,
+      verb    => $parsed->verb,
+      params  => $parsed->params,
+      recipe  => $recipe,
+    )->execute
+  } catch {
+    $outfh->say( format_error(">> Cmd err: $_") );
+    undef
+  } or next PROMPT;
 
+  RESULT: {
     if (is_RecipeObject $cmd_result) {
       $recipe = $cmd_result
     } elsif (is_RecipeResultSet $cmd_result) {
@@ -165,6 +165,15 @@ PROMPT: while (1) {
         or $cmd_result->[0] eq 'quit';
       next PROMPT 
         if $cmd_result->[0] eq 'next';
+
+      if ($cmd_result->[0] eq 'recipe') {
+        # [ $recipe, $str_to_display ]
+        confess "Expected 'recipe' to come with a recipe obj and a string"
+          unless is_RecipeObject $cmd_result->[1]
+          and    is_Str          $cmd_result->[2];
+        ($recipe, $cmd_result) = @$cmd_result;
+        redo RESULT
+      }
 
       if ($cmd_result->[0] eq 'prompt') {
         confess "Expected 'prompt' to come with a prompt string"
