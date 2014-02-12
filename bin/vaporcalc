@@ -146,6 +146,10 @@ PROMPT: while (1) {
     )->execute
   } catch {
     $outfh->say( format_error(">> Cmd err: $_") );
+    # FIXME if this is a RoundedResult err,
+    #  the recipe is busted;
+    #  use separate recipe/result templates so we can
+    #  display the broken recipe
     undef
   } or next PROMPT;
 

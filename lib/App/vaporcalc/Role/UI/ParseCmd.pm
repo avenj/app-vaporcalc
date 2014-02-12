@@ -15,6 +15,18 @@ method parse_cmd (Str $str) {
   my ($subj, $verb);
   my $params = array;
 
+  # FIXME
+  #  alternate approach to find first subj in line:
+  #    split line into words and pairs ARRAY
+  #      > notes add Flavor too strong
+  #      # [ 'notes', 'notes add', 'add', 'add Flavor', 'Flavor', .. ]
+  #    walk for first valid subj
+  #      die if none
+  #    remove subj and pairs from ARRAY
+  #      # [ 'add', 'Flavor', .. ]
+  #    remainder is $pieces
+  #    verb is $pieces->shift
+  #   test for same
   SUBJ: for my $maybe (@{ $self->subject_list }) {
     my $idx = index $str, $maybe;
     next SUBJ if $idx == -1;
