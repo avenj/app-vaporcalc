@@ -3,13 +3,13 @@
       "target_pg" : "60",
       "base_nic_per_ml" : "100",
       "base_nic_type" : "PG",
-      "target_quantity" : "30",
+      "target_quantity" : "10",
       "target_nic_per_ml" : "12",
       "target_vg" : "40",
       "notes" : [
-         "TFA HPNO (Hypnotica), adjust from 5-10%"
+         "TFA Tiramisu. Extremely strong, adjust 2-5%"
       ],
       "flavor_type" : "PG",
-      "flavor_percentage" : "10"
+      "flavor_percentage" : "3"
    }
 }
