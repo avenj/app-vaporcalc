@@ -13,8 +13,10 @@ has '+verb' => (
 
 method _action_show { $self->_action_view }
 method _action_view {
-  # Return a RecipeResultSet for frontend to format/display:
-  App::vaporcalc::RecipeResultSet->new(recipe => $self->recipe)
+  my $rset = App::vaporcalc::RecipeResultSet->new(recipe => $self->recipe);
+  # Force a calc now; easier to catch Result exceptions:
+  $rset->result;
+  $rset
 }
 
 method _action_save {
