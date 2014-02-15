@@ -7,7 +7,8 @@
       "target_nic_per_ml" : "12",
       "target_vg" : "40",
       "notes" : [
-         "TFA Tiramisu. Extremely strong, adjust 2-5%"
+         "TFA Tiramisu. Extremely strong, adjust 2-5%",
+         "2% tiramisu, 1% ethyl maltol may be a little more smooth."
       ],
       "flavor_type" : "PG",
       "flavor_percentage" : "3"

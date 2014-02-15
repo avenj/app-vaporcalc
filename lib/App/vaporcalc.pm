@@ -97,14 +97,16 @@ Ideally, let juices steep for at least a day before sampling; shaking and
 warmth can help steep flavors faster.
 
 Don't use flavors containing diacetyl (frequently used to create a buttery
-taste). It's safe to eat, not safe to vape.
+taste). It's safe to eat, not safe to vape; the vapor causes "popcorn lung."
+Acetoin will ferment into diacetyl; avoid that for the same reasons.
 
 Anything containing artifical coloring or triglycerides is possibly not safe
 to vape.
 
 Flavors containing triacetin are reported to cause cracking in various plastic
 tanks. Triacetin is a reasonable flavor carrier and probably OK to vape, but
-may be rough on equipment.
+may be rough on equipment. Same goes for citric acid -- and it may break down
+into lung/throat irritants upon heating.
 
 Buy nicotine from a reputable supplier and test it; there have been instances
 of nicotine solutions marketed as 100mg/ml going as high as 250mg/ml!

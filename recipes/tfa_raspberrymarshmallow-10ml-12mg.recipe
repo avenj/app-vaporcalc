@@ -1,15 +1,15 @@
 {
    "recipe" : {
-      "target_pg" : "60",
+      "target_pg" : "50",
       "base_nic_per_ml" : "100",
       "base_nic_type" : "PG",
       "target_quantity" : "10",
       "target_nic_per_ml" : "12",
-      "target_vg" : "40",
+      "target_vg" : "50",
       "notes" : [
-         "TFA HPNO (Hypnotica), adjust from 5-12%",
-         "This one is current top of my list.",
-         "(Jon)"
+         "Try 1% EM with 5% raspberry and 6% marshmallow.",
+         "0.1ml EM 0.5ml rasp 0.6ml marshmallow in 10ml",
+         "(Tiffany)"
       ],
       "flavor_type" : "PG",
       "flavor_percentage" : "12"
