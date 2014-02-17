@@ -93,8 +93,8 @@ L<App::vaporcalc::RecipeResultSet>
 Less is more with many flavors; you may want to start around 5% or so and work
 your way up.
 
-Ideally, let juices steep for at least a day before sampling; shaking and
-warmth can help steep flavors faster.
+Ideally, let juices steep for at least a day (longer is usually better!)
+before sampling; shaking and warmth can help steep flavors faster.
 
 Don't use flavors containing diacetyl (frequently used to create a buttery
 taste). It's safe to eat, not safe to vape; the vapor causes "popcorn lung."
