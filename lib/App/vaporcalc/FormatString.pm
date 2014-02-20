@@ -23,7 +23,7 @@ sub format_str {
     $orig
   };
 
-  my $re = qr/(%([^\s%]+)%?)/;
+  state $re = qr/(%([^\s%]+)%?)/;
   $string =~ s/$re/$rpl->($1, $2)/ge;
 
   $string
