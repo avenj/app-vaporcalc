@@ -27,7 +27,11 @@ method parse_cmd (Str $str) {
   #    remainder is $pieces
   #    verb is $pieces->shift
   #   test for same
-  SUBJ: for my $maybe (@{ $self->subject_list }) {
+  my @subjs = array(@{ $self->subject_list })
+    ->nsort_by(sub { length })
+    ->reverse
+    ->all;
+  SUBJ: for my $maybe (@subjs) {
     my $idx = index $str, $maybe;
     next SUBJ if $idx == -1;
     no warnings 'substr';
