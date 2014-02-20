@@ -12,7 +12,9 @@ has '+verb' => (
 method _action_show { $self->_action_view }
 method _action_view {
   my $nbase = $self->recipe->base_nic_per_ml;
-  " -> Nic base: $nbase mg/ml"
+  $self->create_result(
+    string => " -> Nic base: $nbase mg/ml"
+  )
 }
 
 method _action_set {
@@ -21,8 +23,11 @@ method _action_set {
     message => 'set requires a parameter'
   ) unless defined $newbase;
 
-  $self->munge_recipe(
+  my $recipe = $self->munge_recipe(
     base_nic_per_ml => $newbase
+  );
+  $self->create_result(
+    recipe => $recipe
   )
 }
 

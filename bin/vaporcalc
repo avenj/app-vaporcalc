@@ -107,10 +107,10 @@ my $cmdeng = App::vaporcalc::CmdEngine->new;
 my $recipe = App::vaporcalc::Recipe->new(
   target_quantity   => 10,
   base_nic_per_ml   => 100,
-  target_nic_per_ml => 16,
-  target_pg         => 65,
-  target_vg         => 35,
-  flavor_percentage => 20,
+  target_nic_per_ml => 12,
+  target_pg         => 50,
+  target_vg         => 50,
+  flavor_percentage => 10,
 );
 
 my $orig_prompt = colorify green => 'vcalc> ';
@@ -153,56 +153,37 @@ PROMPT: while (1) {
     undef
   } or next PROMPT;
 
-  RESULT: {
-    if (is_RecipeObject $cmd_result) {
-      $recipe = $cmd_result;
-      last RESULT
-    }
-    
-    if (is_RecipeResultSet $cmd_result) {
-      print format_resultset($cmd_result);
-      last RESULT
-    }
-    
-    if (is_Str $cmd_result) {
-      $outfh->say( colorify yellow => $cmd_result );
-      last RESULT
-    } 
-    
-    if ( is_ArrayObj($cmd_result) || is_ArrayRef($cmd_result) ) {
-      # Feeding back an ARRAY controls the input loop:
-      last PROMPT 
-        if $cmd_result->[0] eq 'exit' 
-        or $cmd_result->[0] eq 'quit';
-
-      next PROMPT 
-        if $cmd_result->[0] eq 'next';
-
-      if ($cmd_result->[0] eq 'recipe') {
-        # [ $recipe, $str_to_display ]
-        confess "Expected 'recipe' to come with a recipe obj and a string"
-          unless is_RecipeObject $cmd_result->[1]
-          and    is_Str          $cmd_result->[2];
-        ($recipe, $cmd_result) = @$cmd_result;
-        redo RESULT
-      }
-
-      if ($cmd_result->[0] eq 'prompt') {
-        confess "Expected 'prompt' to come with a prompt string"
-          unless is_Str $cmd_result->[1];
-        confess "Expected 'prompt' to come with a callback"
-          unless is_CodeRef $cmd_result->[2];
-
-        my $reply = $term->get_reply(prompt => $prompt);
-        $cmd_result = $cmd_result->[2]->($reply);
-        redo RESULT
-      }
-
+  sswitch ($cmd_result->action) {
+    case 'display': {
+      $outfh->print( format_resultset( $cmd_result->resultset ) );
     }
 
-    confess "BUG; unable to handle cmd retval $cmd_result"
-  } # RESULT
-}
+    case 'print': {
+      $outfh->say( colorify yellow => $cmd_result->string );
+    }
+
+    case 'prompt': {
+      my $reply = $term->get_reply(prompt => $cmd_result->prompt);
+      $cmd_result->run_prompt_callback($reply)
+    }
+
+    case 'recipe': { 
+      $recipe = $cmd_result->recipe;
+      $outfh->say( colorify yellow => $cmd_result->string )
+        if $cmd_result->string;
+    }
+
+    case 'next': { next PROMPT }
+
+    case 'last': { last PROMPT }
+
+    default: {
+      $outfh->say(
+        format_error(">> Unknown Cmd::Result action: ".$cmd_result->action)
+      );
+    }
+  }
+} # PROMPT
 
 
 say "Bye!"; exit 0

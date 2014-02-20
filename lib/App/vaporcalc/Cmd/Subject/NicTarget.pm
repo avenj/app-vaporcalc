@@ -12,7 +12,9 @@ has '+verb' => (
 method _action_show { $self->_action_view }
 method _action_view {
   my $ntarget = $self->recipe->target_nic_per_ml;
-  " -> Target nicotine: $ntarget mg/ml"
+  $self->create_result(
+    string => " -> Target nicotine: $ntarget mg/ml"
+  )
 }
 
 method _action_set {
@@ -21,8 +23,11 @@ method _action_set {
     message => 'set requires a parameter'
   ) unless defined $newnic;
 
-  $self->munge_recipe(
+  my $recipe = $self->munge_recipe(
     target_nic_per_ml => $newnic,
+  );
+  $self->create_result(
+    recipe => $recipe,
   )
 }
 

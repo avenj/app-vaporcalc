@@ -16,7 +16,7 @@ method _action_view {
   my $rset = App::vaporcalc::RecipeResultSet->new(recipe => $self->recipe);
   # Force a calc now; easier to catch Result exceptions:
   $rset->result;
-  $rset
+  $self->create_result(resultset => $rset)
 }
 
 method _action_save {
@@ -27,7 +27,7 @@ method _action_save {
     )
   }
   App::vaporcalc::RecipeResultSet->new(recipe => $self->recipe)->save($dest);
-  "Saved: $dest"
+  $self->create_result(string => "Saved: $dest")
 }
 
 method _action_load {
@@ -37,7 +37,8 @@ method _action_load {
       message => 'load requires a path'
     )
   }
-  App::vaporcalc::RecipeResultSet->load($src)->recipe
+  my $recipe = App::vaporcalc::RecipeResultSet->load($src)->recipe;
+  $self->create_result(recipe => $recipe)
 }
 
 1;

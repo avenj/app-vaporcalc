@@ -22,14 +22,17 @@ ok $cmd->does('App::vaporcalc::Role::UI::Cmd'),
 
 ok $cmd->verb eq 'show', 'default verb ok';
 
-like $cmd->execute, qr/30/, 'default verb execute ok';
+my $res = $cmd->execute;
+ok $res->action eq 'print', 'default verb action ok';
+like $res->string, qr/30/, 'default verb execute ok';
 
 $cmd = App::vaporcalc::Cmd::Subject::TargetAmount->new(
   recipe => $recipe,
   verb   => 'set',
   params => [ 10 ],
 );
-my $new = $cmd->execute;
+$res = $cmd->execute;
+my $new = $res->recipe;
 isa_ok $new, 'App::vaporcalc::Recipe';
 ok $new->target_quantity == 10,
   'set verb execute ok';

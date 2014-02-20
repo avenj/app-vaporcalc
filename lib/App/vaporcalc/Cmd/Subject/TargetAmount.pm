@@ -13,7 +13,7 @@ has '+verb' => (
 method _action_show { $self->_action_view }
 method _action_view {
   my $amt = $self->recipe->target_quantity;
-  " target => $amt ml"
+  $self->create_result(string => " target => $amt ml")
 }
 
 method _action_set {
@@ -22,9 +22,10 @@ method _action_set {
     message => 'set requires a parameter'
   ) unless defined $new_tgt;
 
-  $self->munge_recipe(
+  my $recipe = $self->munge_recipe(
     target_quantity => $new_tgt
-  )
+  );
+  $self->create_result(recipe => $recipe)
 }
 
 1;

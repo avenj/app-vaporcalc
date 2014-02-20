@@ -9,6 +9,6 @@ ok $cmd->does('App::vaporcalc::Role::UI::Cmd'),
 
 ok $cmd->verb eq 'show', 'default verb ok';
 
-ok $cmd->execute, 'default verb execute ok';
+ok $cmd->execute->action eq 'print', 'default verb execute ok';
 
 done_testing

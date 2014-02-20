@@ -14,7 +14,9 @@ has '+verb' => (
 method _action_show { $self->_action_view }
 method _action_view {
   my $pg = $self->recipe->target_pg;
-  " -> PG: $pg %"
+  $self->create_result(
+    string => " -> PG: $pg %"
+  )
 }
 
 method _action_set {
@@ -25,9 +27,12 @@ method _action_set {
 
   my $new_vg = 100 - $new_pg;
 
-  $self->munge_recipe(
+  my $recipe = $self->munge_recipe(
     target_pg => $new_pg,
     target_vg => $new_vg
+  );
+  $self->create_result(
+    recipe => $recipe
   )
 }
 

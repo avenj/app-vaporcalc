@@ -18,13 +18,14 @@ method _action_view {
   } else {
     $str .= 'none'
   }
-  $str
+  $self->create_result(string => $str)
 }
 
 method _action_clear {
-  $self->munge_recipe(
+  my $recipe = $self->munge_recipe(
     notes => array(),
-  )
+  );
+  $self->create_result(recipe => $recipe)
 }
 
 method _action_add {
@@ -37,9 +38,10 @@ method _action_add {
     message => 'new note is zero length'
   ) unless length $newnote;
 
-  $self->munge_recipe(
+  my $recipe = $self->munge_recipe(
     notes => array( $self->recipe->notes->all, $newnote ),
-  )
+  );
+  $self->create_result(recipe => $recipe)
 }
 
 method _action_delete { $self->_action_del }
@@ -52,9 +54,10 @@ method _action_del {
   my $cloned = $self->recipe->notes->copy;
   $cloned->delete($delidx) if $cloned->has_any;
 
-  $self->munge_recipe(
+  my $recipe = $self->munge_recipe(
     notes => $cloned
-  )
+  );
+  $self->create_result(recipe => $recipe)
 }
 
 1;
