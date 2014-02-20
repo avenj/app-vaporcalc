@@ -12,7 +12,9 @@ has '+verb' => (
 method _action_show { $self->_action_view }
 method _action_view {
   my $flv = $self->recipe->flavor_type;
-  " -> Flavor type: $flv"
+  $self->create_result(
+    string => " -> Flavor type: $flv"
+  )
 }
 
 method _action_set {
@@ -21,9 +23,10 @@ method _action_set {
     message => 'set requires a parameter'
   ) unless defined $newflv;
 
-  $self->munge_recipe(
+  my $recipe = $self->munge_recipe(
     flavor_type => $newflv
-  )
+  );
+  $self->create_result(recipe => $recipe)
 }
 
 1;

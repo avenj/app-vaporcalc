@@ -22,14 +22,18 @@ ok $cmd->does('App::vaporcalc::Role::UI::Cmd'),
 
 ok $cmd->verb eq 'show', 'default verb ok';
 
-like $cmd->execute, qr/20/, 'default verb execute ok';
+my $res = $cmd->execute;
+ok $res->action eq 'print', 'default verb cmd action ok';
+like $res->string, qr/20/,  'default verb string';
 
 $cmd = App::vaporcalc::Cmd::Subject::Flavor->new(
   recipe => $recipe,
   verb   => 'set',
   params => [ 10 ],
 );
-my $new = $cmd->execute;
+$res = $cmd->execute;
+ok $res->action eq 'recipe', 'set verb cmd action ok';
+my $new = $res->recipe;
 isa_ok $new, 'App::vaporcalc::Recipe';
 ok $new->flavor_percentage == 10,
   'set verb execute ok';

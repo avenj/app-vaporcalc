@@ -22,14 +22,18 @@ ok $cmd->does('App::vaporcalc::Role::UI::Cmd'),
 
 ok $cmd->verb eq 'show', 'default verb ok';
 
-like $cmd->execute, qr/PG/, 'default verb execute ok';
+my $res = $cmd->execute;
+ok $res->action eq 'print', 'default verb action ok';
+like $res->string, qr/PG/, 'default verb execute ok';
 
 $cmd = App::vaporcalc::Cmd::Subject::NicType->new(
   recipe => $recipe,
   verb   => 'set',
   params => [ 'VG' ],
 );
-my $new = $cmd->execute;
+$res = $cmd->execute;
+ok $res->action eq 'recipe', 'set verb action ok';
+my $new = $res->recipe;
 isa_ok $new, 'App::vaporcalc::Recipe';
 ok $new->base_nic_type eq 'VG',
   'set verb execute ok';

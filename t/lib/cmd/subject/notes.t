@@ -21,7 +21,8 @@ ok $cmd->does('App::vaporcalc::Role::UI::Cmd'),
   'does Role::UI::Cmd';
 
 ok $cmd->verb eq 'show', 'default verb ok';
-ok length $cmd->execute, 'default verb returned str ok';
+my $res = $cmd->execute;
+ok length $res->string, 'default verb returned str ok';
 
 $cmd = App::vaporcalc::Cmd::Subject::Notes->new(
   recipe => $recipe,
@@ -29,7 +30,7 @@ $cmd = App::vaporcalc::Cmd::Subject::Notes->new(
   params => [ 'this', 'is', 'a', 'str' ],
 );
 
-my $new = $cmd->execute;
+my $new = $cmd->execute->recipe;
 isa_ok $new, 'App::vaporcalc::Recipe';
 is_deeply
   [ $new->notes->all ],
@@ -41,7 +42,7 @@ $cmd = App::vaporcalc::Cmd::Subject::Notes->new(
   verb   => 'del',
   params => [ 0 ],
 );
-$new = $cmd->execute;
+$new = $cmd->execute->recipe;
 ok $new->notes->is_empty, 'del verb execute ok';
 
 $cmd = App::vaporcalc::Cmd::Subject::Notes->new(
@@ -49,12 +50,12 @@ $cmd = App::vaporcalc::Cmd::Subject::Notes->new(
   verb   => 'add',
   params => [ 'this', 'is', 'a', 'str' ],
 );
-$new = $cmd->execute;
+$new = $cmd->execute->recipe;
 $cmd = App::vaporcalc::Cmd::Subject::Notes->new(
   recipe => $new,
   verb   => 'clear',
 );
-$new = $cmd->execute;
+$new = $cmd->execute->recipe;
 ok $new->notes->is_empty, 'clear verb execute ok';
 
 
