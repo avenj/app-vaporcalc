@@ -18,13 +18,13 @@ ok !$res->run_prompt_callback,
   'run_prompt_callback without prompt_callback ok';
 
 $res = App::vaporcalc::Cmd::Result->new(
-  action => next,
+  action => 'next',
 );
 cmp_ok $res->action, 'eq', 'next',
   'action eq next ok';
 
 $res = App::vaporcalc::Cmd::Result->new(
-  action => last,
+  action => 'last',
 );
 cmp_ok $res->action, 'eq', 'last',
   'action eq last ok';

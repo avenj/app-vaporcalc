@@ -10,6 +10,16 @@ should_pass 'VG',  VaporLiquid;
 should_fail 'foo', VaporLiquid;
 should_fail 1,     VaporLiquid;
 
+# CommandAction
+should_pass 'display', CommandAction;
+should_pass 'print',   CommandAction;
+should_pass 'prompt',  CommandAction;
+should_pass 'next',    CommandAction;
+should_pass 'last',    CommandAction;
+should_pass 'recipe',  CommandAction;
+should_fail 'foo',     CommandAction;
+should_fail [],        CommandAction;
+
 # Percentage
 should_pass 100, Percentage;
 should_pass 0,   Percentage;

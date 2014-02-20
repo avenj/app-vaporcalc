@@ -2,6 +2,8 @@ package App::vaporcalc::Types;
 
 use strict; use warnings FATAL => 'all';
 
+use match::simple;
+
 use Type::Library   -base;
 use Types::Standard -types;
 use Type::Utils     -all;
@@ -70,6 +72,22 @@ coerce VaporLiquid =>
   from Str(),
   via { uc $_ };
 
+
+declare CommandAction =>
+  as Str(),
+  where {
+    $_ |M| [qw/
+      display
+
+      print
+      prompt
+
+      next
+      last
+
+      recipe
+    /]
+  };
 
 1;
 
