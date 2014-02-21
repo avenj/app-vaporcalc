@@ -16,7 +16,7 @@ has cmd_class_prefix => (
 
 method prepare_cmd (
   Str           :$subject,
-  (Str | Undef) :$verb = undef,
+  (Str | Undef) :$verb   = undef,
   ArrayObj      :$params = array(),
   RecipeObject  :$recipe,
 ) {
