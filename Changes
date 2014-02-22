@@ -1,5 +1,9 @@
 Revision history for Perl module App-vaporcalc
 
+0.002001 2014-02-21
+
+  - Support for multiple flavors
+
 0.001004 2014-02-10
 
   - vaporcalc interface improvements;

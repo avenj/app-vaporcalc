@@ -49,7 +49,8 @@ If you'd like to manage recipes from perl, see ["vcalc"](#vcalc), below (or use
 
       # target flavor(s) name, percentage, base type:
       flavor_array => [
-        +{ tag => 'Raspberry', percentage => 15, type => 'PG' }
+        +{ tag => 'Raspberry', percentage => 15, type => 'PG' },
+        # ...
       ],
     );
 
