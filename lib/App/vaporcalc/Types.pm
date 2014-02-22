@@ -59,6 +59,17 @@ coerce ResultObject =>
   };
 
 
+declare FlavorObject =>
+  as InstanceOf['App::vaporcalc::Flavor'];
+
+coerce FlavorObject =>
+  from HashRef(),
+  via {
+    require App::vaporcalc::Flavor;
+    App::vaporcalc::Flavor->new(%$_)
+  };
+
+
 declare RecipeResultSet =>
   as InstanceOf['App::vaporcalc::RecipeResultSet'];
 
@@ -124,6 +135,12 @@ Can be coerced from a C<StrictNum>.
 An L<App::vaporcalc::Exception> instance.
 
 Can be coerced from a C<Str>.
+
+=head3 FlavorObject
+
+An L<App::vaporcalc::Flavor> instance.
+
+Can be coerced from a C<HashRef>.
 
 =head3 RecipeObject
 
