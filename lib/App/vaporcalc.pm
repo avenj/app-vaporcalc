@@ -70,7 +70,8 @@ L<App::vaporcalc::Recipe> directly).
 
     # target flavor(s) name, percentage, base type:
     flavor_array => [
-      +{ tag => 'Raspberry', percentage => 15, type => 'PG' }
+      +{ tag => 'Raspberry', percentage => 15, type => 'PG' },
+      # ...
     ],
   );
 
@@ -89,6 +90,8 @@ L<App::vaporcalc::Recipe>
 L<App::vaporcalc::Result>
 
 L<App::vaporcalc::RecipeResultSet>
+
+L<App::vaporcalc::Flavor>
 
 =head1 TIPS
 

@@ -78,3 +78,64 @@ has resultset => (
 
 
 1;
+
+
+=pod
+
+=for Pod::Coverage has_\w+
+
+=head1 NAME
+
+App::vaporcalc::Cmd::Result
+
+=head1 SYNOPSIS
+
+  # Usually received from a App::vaporcalc:Role::UI::Cmd consumer
+
+=head1 DESCRIPTION
+
+An object representing the result of an L<App::vaporcalc::Role::UI::Cmd>
+consumer's execution.
+
+=head2 ATTRIBUTES
+
+=head3 action
+
+The action the controller should take; must be a
+L<App::vaporcalc::Types/"CommandAction">.
+
+=head3 prompt
+
+The prompt to display for L</action> eq 'prompt'
+
+=head3 prompt_callback
+
+An optional callback that should be run with the answer given to L</prompt> (or
+L</prompt_default_ans> if no answer is given).
+
+See L</run_prompt_callback>.
+
+=head3 prompt_default_ans
+
+A default answer for use by L</run_prompt_callback> if none is given.
+
+=head3 recipe
+
+The L<App::vaporcalc::Recipe> to attach for L</action> eq 'recipe'
+
+=head3 resultset
+
+The L<App::vaporcalc::RecipeResultSet> to attach for L</action> eq 'display'
+
+=head2 METHODS
+
+=head3 run_prompt_callback
+
+Runs L</prompt_callback> with C<$_> and C<$_[0]> set to either the given
+argument or L</prompt_default_ans> if none given.
+
+=head1 AUTHOR
+
+Jon Portnoy <avenj@cobaltirc.org>
+
+=cut

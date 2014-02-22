@@ -166,6 +166,12 @@ A valid base liquid type (B<PG> or B<VG>).
 
 Can be coerced from a lowercase string.
 
+=head3 CommandAction
+
+A valid C<vaporcalc> loop control action, one of:
+
+  display print prompt next last recipe
+
 =head1 AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org>

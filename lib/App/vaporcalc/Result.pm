@@ -50,7 +50,7 @@ method TO_JSON {
     map {; 
       my ($attr, $val) = ($_, $self->$_);
       my $raw = blessed $val && $val->can('TO_JSON') ? $val->TO_JSON : $val;
-      $attr => $val
+      $attr => $raw
     } qw/
       vg
       pg

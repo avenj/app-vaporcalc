@@ -98,7 +98,7 @@ method TO_JSON {
     map {; 
       my ($attr, $val) = ($_, $self->$_);
       my $raw = blessed $val && $val->can('TO_JSON') ? $val->TO_JSON : $val;
-      $attr => $val
+      $attr => $raw
     } qw/
       target_quantity
       base_nic_per_ml
@@ -119,7 +119,7 @@ with 'App::vaporcalc::Role::Calc',
 
 =pod
 
-=for Pod::Coverage BUILD TO_JSON
+=for Pod::Coverage BUILD BUILDARGS TO_JSON
 
 =head1 NAME
 

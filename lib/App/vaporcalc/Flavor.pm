@@ -35,3 +35,44 @@ method TO_JSON {
 with 'App::vaporcalc::Role::Store';
 
 1;
+
+=pod
+
+=for Pod::Coverage TO_JSON
+
+=head1 NAME
+
+App::vaporcalc::Flavor
+
+=head1 SYNOPSIS
+
+  # Usually used via App::vaporcalc::Recipe
+
+=head1 DESCRIPTION
+
+An object representing a flavor extract for use in a
+L<App::vaporcalc::Recipe>.
+
+=head2 ATTRIBUTES
+
+=head3 percentage
+
+The total target percentage of this flavor.
+
+=head3 tag
+
+The flavor's identifying tag.
+
+=head3 type
+
+The flavor base (VG/PG).
+
+=head2 CONSUMES
+
+L<App::vaporcalc::Role::Store>
+
+=head1 AUTHOR
+
+Jon Portnoy <avenj@cobaltirc.org>
+
+=cut
