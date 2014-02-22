@@ -34,7 +34,7 @@ cmp_ok $res->subject, 'eq', 'nic base', '2 word subj with trailing verb ok';
 cmp_ok $res->verb, 'eq', 'view', 'trailing verb ok (2 word subj)';
 ok $res->params->is_empty, 'params empty ok (2 word subj with trailing verb)';
 
-$res = $cmdeng->parse_cmd('nic base set 100 foo');
+$res = $cmdeng->parse_cmd('nic base set 100 "foo"');
 cmp_ok $res->subject, 'eq', 'nic base', 
   '2 word subj with trailing verb and params ok';
 cmp_ok $res->verb, 'eq', 'set',

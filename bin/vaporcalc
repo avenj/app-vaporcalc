@@ -50,6 +50,31 @@ fun format_error ($err) {
   join "\n", @lines
 }
 
+fun flavor_strings (RecipeResultSet $rset) {
+  my $recipe = $rset->recipe;
+  my $result = $rset->result;
+
+  my $flav_recipe_str = '';
+  for my $flav ($recipe->flavor_array->all) {
+    my $pcnt = colorify 'bold red' => $flav->percentage;
+    my $tag  = $flav->tag;
+    my $type = $flav->type;
+    $flav_recipe_str .= "   $tag -> $pcnt %  ($type)\n";
+  }
+
+  my $flav_result_str = '';
+  for my $flav ($result->flavors->kv->all) {
+    my ($tag, $ml) = @$flav;
+    $ml = colorify 'bold yellow' => $ml;
+    $flav_result_str .= "   $tag => [$ml ml]\n";
+  }
+
+  hash(
+    recipe_flavor_string => $flav_recipe_str,
+    result_flavor_string => $flav_result_str
+  )->inflate
+}
+
 fun format_resultset (RecipeResultSet $rset) {
   state $tmpl = <<'EOT';
  --> target amount: %target_quantity ml
@@ -69,20 +94,8 @@ EOT
   my $recipe = $rset->recipe;
   my $result = $rset->result;
 
-  my $flav_recipe_str = '';
-  for my $flav ($recipe->flavor_array->all) {
-    my $pcnt = colorify 'bold red' => $flav->percentage;
-    my $tag  = $flav->tag;
-    my $type = $flav->type;
-    $flav_recipe_str .= "   $tag -> $pcnt %  ($type)\n";
-  }
-
-  my $flav_result_str = '';
-  for my $flav ($result->flavors->kv->all) {
-    my ($tag, $ml) = @$flav;
-    $ml = colorify 'bold yellow' => $ml;
-    $flav_result_str .= "   $tag => $ml ml\n";
-  }
+  my $flav_recipe_str = flavor_strings($rset)->recipe_flavor_string;
+  my $flav_result_str = flavor_strings($rset)->result_flavor_string;
 
   format_str( $tmpl =>
     notes => sub {
