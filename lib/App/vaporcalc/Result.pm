@@ -27,24 +27,35 @@ has nic => (
   coerce   => 1,
 );
 
-has flavor => (
+has flavors => (
   required => 1,
   is       => 'ro',
-  isa      => RoundedResult,
+  isa      => TypedHash[RoundedResult],
   coerce   => 1,
 );
 
+method flavor_total {
+  return 0 unless $self->flavors->keys->has_any;
+  my $flavor_ml = 0;
+  $flavor_ml += $self->flavors->values->reduce(sub { $_[0] + $_[1] });
+  $flavor_ml
+}
+
 method total {
-  $self->vg + $self->pg + $self->nic + $self->flavor
+  $self->vg + $self->pg + $self->nic + $self->flavor_total;
 }
 
 method TO_JSON {
   +{
-    map {; $_ => $self->$_ } qw/
+    map {; 
+      my ($attr, $val) = ($_, $self->$_);
+      my $raw = blessed $val && $val->can('TO_JSON') ? $val->TO_JSON : $val;
+      $attr => $val
+    } qw/
       vg
       pg
       nic
-      flavor
+      flavors
     /,
   }
 }
@@ -94,15 +105,22 @@ The required amount of PG filler.
 
 The required amount of nicotine base solution.
 
-=head3 flavor
+=head3 flavors
 
-The required amount of flavor extract.
+A typed L<List::Objects::WithUtils::Array> containing a list of tuples in the
+form of:
+
+  name => quantity_in_ml
 
 =head2 METHODS
 
 =head3 total
 
 The calculated total.
+
+=head3 flavor_total
+
+The calculated total flavor.
 
 =head2 CONSUMES
 

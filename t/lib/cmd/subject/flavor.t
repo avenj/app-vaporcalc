@@ -10,7 +10,9 @@ my $recipe = App::vaporcalc::Recipe->new(
   target_nic_per_ml => 12,
   target_pg         => 65,
   target_vg         => 35,
-  flavor_percentage => 20,
+  flavor_array => [
+    +{ tag => 'foo', percentage => 20 },
+  ],
 );
 
 my $cmd = App::vaporcalc::Cmd::Subject::Flavor->new(
@@ -24,18 +26,41 @@ ok $cmd->verb eq 'show', 'default verb ok';
 
 my $res = $cmd->execute;
 ok $res->action eq 'print', 'default verb cmd action ok';
-like $res->string, qr/20/,  'default verb string';
+like $res->string, qr/Flavors.+foo.+20/ms,  'default verb string';
 
 $cmd = App::vaporcalc::Cmd::Subject::Flavor->new(
   recipe => $recipe,
   verb   => 'set',
-  params => [ 10 ],
+  params => [ foo => 10 ],
 );
 $res = $cmd->execute;
 ok $res->action eq 'recipe', 'set verb cmd action ok';
 my $new = $res->recipe;
 isa_ok $new, 'App::vaporcalc::Recipe';
-ok $new->flavor_percentage == 10,
+ok $new->flavor_array->get(0)->percentage == 10,
   'set verb execute ok';
+
+
+$cmd = App::vaporcalc::Cmd::Subject::Flavor->new(
+  recipe => $recipe,
+  verb => 'add',
+  params => [ bar => 5 ],
+);
+$res = $cmd->execute;
+ok $res->action eq 'recipe', 'add verb cmd action ok';
+$new = $res->recipe;
+ok $new->flavor_array->count == 2,
+  'add verb execute ok';
+
+$cmd = App::vaporcalc::Cmd::Subject::Flavor->new(
+  recipe => $new,
+  verb   => 'del',
+  params => [ 'foo' ],
+);
+$res = $cmd->execute;
+ok $res->action eq 'recipe', 'del verb cmd action ok';
+$new = $res->recipe;
+ok $new->flavor_array->count == 1,
+  'del verb execute ok';
 
 done_testing

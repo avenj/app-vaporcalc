@@ -44,18 +44,18 @@ has target_vg         => (
   isa      => Percentage,
 );
 
-has flavor_percentage => (
-  required => 1,
-  is       => 'ro',
-  isa      => Percentage,
+has flavor_array      => (
+  is      => 'ro',
+  isa     => TypedArray[FlavorObject],
+  coerce  => 1,
+  builder => sub { array_of FlavorObject },
 );
 
-has flavor_type       => (
-  is      => 'ro',
-  isa     => VaporLiquid,
-  coerce  => 1,
-  builder => sub { 'PG' },
-);
+method flavor_percentage {
+  my $total = 0;
+  $total += $_->percentage for $self->flavor_array->all;
+  Percentage->assert_return($total)
+}
 
 has notes             => (
   lazy    => 1,
@@ -73,25 +73,47 @@ method BUILD {
   }
 }
 
+method BUILDARGS {
+  my %params = @_ == 1 ? %{$_[0]} : @_ ? @_ : ();
+
+  # backcompat
+  if (my $fpcnt = delete $params{flavor_percentage}) {
+    my $fltype = delete $params{flavor_type};
+    unless (exists $params{flavor_array}) {
+      $params{flavor_array} = [
+        +{ 
+                tag        => 'Unnamed', 
+                percentage => $fpcnt, 
+          maybe type       => $fltype
+        }
+      ];
+    }
+  }
+
+  \%params
+}
+
 method TO_JSON {
   +{
-    map {; $_ => $self->$_ } qw/
+    map {; 
+      my ($attr, $val) = ($_, $self->$_);
+      my $raw = blessed $val && $val->can('TO_JSON') ? $val->TO_JSON : $val;
+      $attr => $val
+    } qw/
       target_quantity
       base_nic_per_ml
       base_nic_type
       target_nic_per_ml
       target_pg
       target_vg
-      flavor_percentage
-      flavor_type
+      flavor_array
       notes
     /
   }
 }
 
 with 'App::vaporcalc::Role::Calc',
-     'App::vaporcalc::Role::Store',
-;
+     'App::vaporcalc::Role::Store' ;
 
 1;
 
@@ -117,13 +139,16 @@ App::vaporcalc::Recipe - An e-liquid recipe
     target_pg         => 65,   # target PG percentage
     target_vg         => 35,   # target VG percentage
 
-    flavor_percentage => 15,   # target flavor percentage
-    flavor_type       => 'PG', # flavor base type (VG/PG, default PG)
+    flavor_array => [
+      +{ tag => 'Raspberry', percentage => 10, type => 'PG' },
+      +{ tag => 'EM', percentage => 1, type => 'PG' },
+      # ...
+    ],
 
     notes   => [
       'My recipe',
-      '13% flavor',
-      '2% ethyl maltol'
+      '10% flavor',
+      '1% ethyl maltol'
     ],
   );
 
@@ -165,15 +190,9 @@ The total percentage of PG.
 
 The total percentage of VG.
 
-=head3 flavor_percentage
+=head3 flavor_array
 
-The total percentage of flavor extract.
-
-=head3 flavor_type
-
-The base liquid type of the flavor extract ('VG' or 'PG').
-
-Defaults to 'PG'.
+A (coercible, see SYNOPSIS) array of L<App::vaporcalc::Flavor> objects.
 
 =head3 notes
 
@@ -181,6 +200,12 @@ A L<List::Objects::WithUtils::Array> containing an arbitrary number of notes
 attached to the recipe.
 
 Can be coerced from a plain C<ARRAY>.
+
+=head2 METHODS
+
+=head3 flavor_percentage
+
+Calculates the total flavor percentage; see L</flavor_array>.
 
 =head2 CONSUMES
 

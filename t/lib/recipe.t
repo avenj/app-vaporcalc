@@ -11,12 +11,15 @@ my %defaults = (
   target_nic_per_ml => 12,
   target_pg         => 65,
   target_vg         => 35,
-  flavor_percentage => 20,
+  flavor_array      => [
+    +{ tag => 'hpno', percentage => 20 }
+  ],
 );
 
 my $recipe = App::vaporcalc::Recipe->new(%defaults);
 
-ok $recipe->flavor_type eq 'PG', 'flavor_type default ok';
+ok $recipe->flavor_array->has_any(sub { $_->isa('App::vaporcalc::Flavor') }),
+  'flavor_array autovivication ok';
 ok $recipe->notes->count == 0,   'notes default ok';
 
 ## TO_JSON
@@ -30,11 +33,13 @@ is_deeply
     target_nic_per_ml => 12,
     target_pg         => 65,
     target_vg         => 35,
-    flavor_percentage => 20,
-    flavor_type       => 'PG',
     notes             => [],
+    flavor_array      => [
+      +{ tag => 'hpno', percentage => 20, type => 'PG' },
+    ],
   },
-  'TO_JSON ok';
+  'TO_JSON ok'
+    or diag explain $hash;
 
 ## Role::Store
 subtest 'storage' => sub {
@@ -49,6 +54,7 @@ subtest 'storage' => sub {
   my $loaded = App::vaporcalc::Recipe->load($fname);
   isa_ok $loaded, 'App::vaporcalc::Recipe';
   for my $key (keys %defaults) {
+    next if $key eq 'flavor_array';
     ok $loaded->$key eq $defaults{$key}, "$key loaded ok"
   }
 };
@@ -56,8 +62,11 @@ subtest 'storage' => sub {
 ## Role::Calc
 # calc
 my $result = $recipe->calc;
+ok $result->flavor_total == 6,  '6ml flavor_total'
+  or diag explain $result;
 ok $result->total  == 30, '30ml total';
-ok $result->flavor == 6,  '6ml flavor';
+
+ok $result->flavors->keys->count == 1, '1 flavor listed';
 ok $result->pg  == 3.5,   '3.5ml pg';
 ok $result->vg  == 10.5,  '10.5ml vg';
 ok $result->nic == 10,    '10ml nic';
@@ -68,6 +77,5 @@ my %badratio = %defaults;
 $badratio{target_pg} = 30; $badratio{target_vg} = 40;
 eval {; App::vaporcalc::Recipe->new(%badratio) };
 like $@, qr/target_vg/, 'bad PG-VG ratio dies';
-
 
 done_testing

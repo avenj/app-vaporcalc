@@ -1,21 +1,4 @@
 ## Multi-flavor support
-  # Recipe
-  flavor_array attrib (immarray)
-    flavor tags => percentage
-  get_flavor_percentage
-  flavor_percentage 
-    should be _flavor_array total if present
-    else should be required
+  Need to be able to handle multiword tags (quoted)
+  Quoted would be nice to have in general anyway
 
-  # Role::Calc
-  if flavor_array is present, calculate each
-  else calc flavor_percentage
-  sanity check against flavor_percentage
-
-  # frontend ->
-  Flavor cmd subject should be expanded to allow
-    'set total <%>' 
-    'set tag <tag> <%>'
-    'add flavor <tag> <%>'
-    'del flavor <tag> <%>'
-  Template needs appropriate adjustment

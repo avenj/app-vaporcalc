@@ -31,7 +31,10 @@ method load ( (Str | Path) $path ) {
   unless ($data) {
     confess "Could not decode JSON: ".$jseng->error
   }
+  $self->_load_create_obj($data)
+}
 
+method _load_create_obj ($data) {
   (blessed $self || $self)->new(%$data)
 }
 

@@ -10,7 +10,9 @@ my $rset = App::vaporcalc::RecipeResultSet->new(
     target_nic_per_ml => 16,
     target_pg         => 65,
     target_vg         => 35,
-    flavor_percentage => 20,
+    flavor_array      => [
+      +{ tag => 'hpno', percentage => 20 },
+    ],
   },
 );
 
@@ -19,10 +21,11 @@ isa_ok $rset->result, 'App::vaporcalc::Result';
 
 my $result = $rset->result;
 ok $result->total  == 10,  '10ml total';
-ok $result->flavor == 2,   '2ml flavor';
+ok $result->flavor_total == 2,   '2ml flavor_total';
 ok $result->pg     == 2.9, '2.9ml PG';
 ok $result->vg     == 3.5, '3.5ml VG';
 ok $result->nic    == 1.6, '1.6ml nic';
+ok $result->flavors->keys->count == 1, '1 flavor listed';
 
 use File::Temp ();
 subtest 'storage' => sub {

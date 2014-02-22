@@ -37,43 +37,6 @@ GetOptions( $Opts,
 
 fun getopts { state $argv = hash(%$Opts)->inflate }
 
-
-fun format_resultset (RecipeResultSet $rset) {
-  state $tmpl = <<'EOT';
- --> target amount: %target_quantity ml
-  pg: %target_pg %  vg: %target_vg %
-  nic base: %base_nic_per_ml mg/ml  nic type: %base_nic_type%
-  nic target: %target_nic_per_ml mg/ml
-  flavor: %flavor_percentage %  flavor type: %flavor_type
-  notes: %notes
- =>
-  vg: [%vg ml]  pg: [%pg ml]  nic base: [%nic ml]  flavor: [%flavor ml]
-  total: %total ml
-EOT
-
-  my $recipe = $rset->recipe;
-  my $result = $rset->result;
-
-  format_str( $tmpl =>
-    notes => sub {
-      $recipe->notes->has_any ?
-        "\n" . $recipe->notes->map(sub { ' - '.$_ })->join("\n")
-        : 'none'
-    },
-
-    (map {; $_ => colorify('bold red', $recipe->$_) } qw/
-      target_quantity target_nic_per_ml
-      base_nic_per_ml base_nic_type
-      target_pg target_vg
-      flavor_percentage flavor_type
-    /),
-
-    (map {; $_ => colorify('bold yellow', $result->$_) } qw/
-      vg pg nic flavor total
-    /),
-  )
-}
-
 use Term::ANSIColor ();
 fun colorify (Str $color, Str $text) {
   getopts->nocolor ? $text : Term::ANSIColor::colored($text, $color)
@@ -85,6 +48,62 @@ fun format_error ($err) {
   my @lines = split "\n", "$err";
   $lines[0] = colorify red => $lines[0];
   join "\n", @lines
+}
+
+fun format_resultset (RecipeResultSet $rset) {
+  state $tmpl = <<'EOT';
+ --> target amount: %target_quantity ml
+  pg: %target_pg %  vg: %target_vg %
+  nic base: %base_nic_per_ml mg/ml  nic type: %base_nic_type%
+  nic target: %target_nic_per_ml mg/ml
+  flavor targets:
+%flavor_recipe
+  notes: %notes
+ =>
+  vg: [%vg ml]  pg: [%pg ml]  nic base: [%nic ml]
+  flavors:
+%flavor_result
+  total: %total ml
+EOT
+
+  my $recipe = $rset->recipe;
+  my $result = $rset->result;
+
+  my $flav_recipe_str = '';
+  for my $flav ($recipe->flavor_array->all) {
+    my $pcnt = colorify 'bold red' => $flav->percentage;
+    my $tag  = $flav->tag;
+    my $type = $flav->type;
+    $flav_recipe_str .= "   $tag -> $pcnt %  ($type)\n";
+  }
+
+  my $flav_result_str = '';
+  for my $flav ($result->flavors->kv->all) {
+    my ($tag, $ml) = @$flav;
+    $ml = colorify 'bold yellow' => $ml;
+    $flav_result_str .= "   $tag => $ml ml\n";
+  }
+
+  format_str( $tmpl =>
+    notes => sub {
+      $recipe->notes->has_any ?
+        "\n" . $recipe->notes->map(sub { ' - '.$_ })->join("\n")
+        : 'none'
+    },
+
+    flavor_recipe => $flav_recipe_str,
+    flavor_result => $flav_result_str,
+
+    (map {; $_ => colorify('bold red', $recipe->$_) } qw/
+      target_quantity target_nic_per_ml
+      base_nic_per_ml base_nic_type
+      target_pg target_vg
+    /),
+
+    (map {; $_ => colorify('bold yellow', $result->$_) } qw/
+      vg pg nic total
+    /),
+  )
 }
 
 
