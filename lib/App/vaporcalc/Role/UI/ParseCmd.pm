@@ -4,6 +4,8 @@ use Defaults::Modern;
 
 use App::vaporcalc::Exception;
 
+use Text::ParseWords;
+
 use Role::Tiny;
 requires 'subject_list';
 
@@ -47,7 +49,9 @@ method parse_cmd (Str $str) {
     substr $str, $idx, length($maybe), ' ';
     my $pieces = array( split ' ', $str );
     $verb = $pieces->shift;
-    $params = $pieces;
+    $params = array( 
+      Text::ParseWords::parse_line('\s+', 0, $pieces->join(' '))
+    );
     last SUBJ
   }
 
