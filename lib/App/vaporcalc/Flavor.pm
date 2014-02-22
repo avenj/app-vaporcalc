@@ -4,11 +4,6 @@ use Defaults::Modern
   -with_types => [ 'App::vaporcalc::Types' ];
 
 use Moo; use MooX::late;
-use overload
-  '""' => sub { shift->tag },
-  '0+' => sub { shift->percentage },
-  bool => sub { 1 },
-  fallback => 1;
 
 has percentage => (
   required  => 1,
