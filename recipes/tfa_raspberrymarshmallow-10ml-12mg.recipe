@@ -1,5 +1,22 @@
 {
    "recipe" : {
+      "flavor_array" : [
+         {
+            "type" : "PG",
+            "tag" : "EM",
+            "percentage" : "1"
+         },
+         {
+            "type" : "PG",
+            "tag" : "Raspberry (sweet)",
+            "percentage" : "5"
+         },
+         {
+            "type" : "PG",
+            "tag" : "Marshmallow",
+            "percentage" : "6"
+         }
+      ],
       "target_pg" : "50",
       "base_nic_per_ml" : "100",
       "base_nic_type" : "PG",
@@ -12,8 +29,6 @@
          "Might need just a hair more flavor.",
          "Long steep for best results.",
          "(Tiffany)"
-      ],
-      "flavor_type" : "PG",
-      "flavor_percentage" : "12"
+      ]
    }
 }

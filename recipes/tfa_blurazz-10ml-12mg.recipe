@@ -1,5 +1,17 @@
 {
    "recipe" : {
+      "flavor_array" : [
+         {
+            "type" : "PG",
+            "tag" : "Blueberry",
+            "percentage" : "4"
+         },
+         {
+            "type" : "PG",
+            "tag" : "Raspberry (sweet)",
+            "percentage" : "8"
+         }
+      ],
       "target_pg" : "50",
       "base_nic_per_ml" : "100",
       "base_nic_type" : "PG",
@@ -12,8 +24,6 @@
          "Maybe just a little higher on the rasp.",
          " ..maybe a little EM to add some pop.",
          "(Jon)"
-      ],
-      "flavor_type" : "PG",
-      "flavor_percentage" : "10"
+      ]
    }
 }
