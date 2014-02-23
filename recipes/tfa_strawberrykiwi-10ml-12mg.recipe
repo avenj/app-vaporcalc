@@ -4,17 +4,12 @@
          {
             "type" : "PG",
             "tag" : "TFA Strawberry",
-            "percentage" : "6"
-         },
-         {
-            "type" : "PG",
-            "tag" : "TFA Sweet Cream",
-            "percentage" : "2"
-         },
-         {
-            "type" : "PG",
-            "tag" : "TFA Banana Cream",
             "percentage" : "8"
+         },
+         {
+            "type" : "PG",
+            "tag" : "TFA Double Kiwi",
+            "percentage" : "6"
          }
       ],
       "target_pg" : "50",
