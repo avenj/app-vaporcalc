@@ -23,6 +23,7 @@ should_fail [],        CommandAction;
 # Percentage
 should_pass 100, Percentage;
 should_pass 0,   Percentage;
+should_pass 0.5, Percentage;
 should_pass 50,  Percentage;
 should_fail 101, Percentage;
 should_fail -1,  Percentage;

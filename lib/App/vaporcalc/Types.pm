@@ -12,7 +12,7 @@ use Type::Utils     -all;
 # Numbers
 
 declare Percentage =>
-  as Int(),
+  as StrictNum(),
   where { $_ > -1 && $_ <= 100 };
 
 
