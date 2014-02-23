@@ -16,7 +16,6 @@ my @subject_consistency_chk = (
   'recipe',
   'target amount',
   'flavor',
-  'flavor type',
   'nic base',
   'nic target',
   'nic type',
