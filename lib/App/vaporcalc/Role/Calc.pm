@@ -53,18 +53,16 @@ method _calc_per_flavor_qty_obj {
 }
 
 method calc {
-  my $vg_ml     = $self->_calc_total_vg_qty;
-  my $pg_ml     = $self->_calc_total_pg_qty;
-
+  my $vg_ml = $self->_calc_total_vg_qty;
+  my $pg_ml = $self->_calc_total_pg_qty;
   my $flavor_data = $self->_calc_per_flavor_qty_obj;
-
   my $nic_base_ml = $self->_calc_base_nic_qty;
 
   # Subtract our nic base total from the appropriate PG or VG total:
   sswitch ($self->base_nic_type) {
     case 'PG': { $pg_ml -= $nic_base_ml if $pg_ml }
     case 'VG': { $vg_ml -= $nic_base_ml if $vg_ml }
-    default: { confess "Unknown base_nic_type", $self->base_nic_type }
+    default: { confess "Unknown base_nic_type ", $self->base_nic_type }
   }
 
   # Same for flavors:

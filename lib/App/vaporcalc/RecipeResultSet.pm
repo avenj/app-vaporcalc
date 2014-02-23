@@ -20,7 +20,7 @@ has result => (
   isa      => ResultObject,
   coerce   => 1,
   writer   => '_set_result',
-  builder  => sub { $_[0]->recipe->calc },
+  builder  => sub { shift->recipe->calc },
 );
 
 method TO_JSON {
