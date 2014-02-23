@@ -95,4 +95,9 @@ method _action_del {
   $self->create_result(recipe => $recipe)
 }
 
+method _action_clear {
+  my $recipe = $self->munge_recipe(flavor_array => array);
+  $self->create_result(recipe => $recipe)
+}
+
 1;

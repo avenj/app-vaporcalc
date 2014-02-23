@@ -68,7 +68,8 @@ L<App::vaporcalc::Recipe> directly).
     target_pg         => 65,   # target PG percentage
     target_vg         => 35,   # target VG percentage
 
-    # target flavor(s) name, percentage, base type:
+    # target flavor(s) name, percentage, base type
+    # (or App::vaporcalc::Flavor objects)
     flavor_array => [
       +{ tag => 'Raspberry', percentage => 15, type => 'PG' },
       # ...

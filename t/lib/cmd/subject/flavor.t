@@ -63,4 +63,14 @@ $new = $res->recipe;
 ok $new->flavor_array->count == 1,
   'del verb execute ok';
 
+$cmd = App::vaporcalc::Cmd::Subject::Flavor->new(
+    recipe => $new,
+    verb   => 'clear',
+);
+$res = $cmd->execute;
+ok $res->action eq 'recipe', 'clear verb cmd action ok';
+$new = $res->recipe;
+ok $new->flavor_array->count == 0,
+  'clear verb execute ok';
+
 done_testing

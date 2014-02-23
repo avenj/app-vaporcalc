@@ -42,7 +42,7 @@ cmp_ok $res->verb, 'eq', 'set',
 is_deeply
   [ $res->params->all ],
   [ 100, 'foo' ],
-  'params ok (2 word subj with trailing verb)';
+  'quoted params ok (2 word subj with trailing verb)';
 
 $res = $cmdeng->parse_cmd('set flavor 100');
 cmp_ok $res->subject, 'eq', 'flavor', 

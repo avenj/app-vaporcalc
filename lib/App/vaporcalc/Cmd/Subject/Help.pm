@@ -25,7 +25,7 @@ method _action_show {
       "(Without a verb, most subjects will call 'show')",
       " recipe <view/save [PATH]/load [PATH]>",
       " target amount <view/set [ml]>",
-      " flavor <view/set [tag] [% of total] [PG/VG]/del [tag]>",
+      " flavor <view/set [tag] [% of total] [PG/VG]/del [tag]/clear>",
       " nic base <view/set [mg/ml]>",
       " nic target <view/set [mg/ml]>", 
       " nic type <view/set [PG/VG]>",
