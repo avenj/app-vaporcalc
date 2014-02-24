@@ -3,13 +3,18 @@
       "flavor_array" : [
          {
             "type" : "PG",
-            "tag" : "TFA Banana Cream",
-            "percentage" : "10"
+            "tag" : "TFA Strawberry",
+            "percentage" : "6"
          },
          {
             "type" : "PG",
-            "tag" : "TFA Strawberry",
-            "percentage" : "6"
+            "tag" : "TFA Sweet Cream",
+            "percentage" : "2"
+         },
+         {
+            "type" : "PG",
+            "tag" : "TFA Banana Cream",
+            "percentage" : "8"
          }
       ],
       "target_pg" : "50",
