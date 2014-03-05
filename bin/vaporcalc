@@ -131,7 +131,6 @@ my $term  = $termpkg->new('vcalc');
 my $outfh = $term->OUT || \*STDOUT;
 $outfh->autoflush(1);
 
-
 $outfh->say('Welcome to App::vaporcalc!');
 $outfh->say("Try '@{[ colorify yellow => 'help' ]}' for usage details.");
 

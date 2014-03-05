@@ -3,13 +3,13 @@
       "flavor_array" : [
          {
             "type" : "PG",
-            "tag" : "TFA Strawberry",
-            "percentage" : "8"
+            "tag" : "TFA Double Kiwi",
+            "percentage" : "5"
          },
          {
             "type" : "PG",
-            "tag" : "TFA Double Kiwi",
-            "percentage" : "6"
+            "tag" : "TFA Strawberry",
+            "percentage" : "7"
          }
       ],
       "target_pg" : "50",
