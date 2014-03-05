@@ -39,7 +39,8 @@ method _calc_total_pg_qty {
 method _calc_per_flavor_qty_obj {
   my $res = hash_of Object;
 
-  for my $flav ($self->flavor_array->all) {
+  for my $flav (@{ $self->flavor_array }) {
+    $flav = FlavorObject->assert_coerce($flav) unless is_FlavorObject $flav;
     my $pcnt = $flav->percentage || next;
     my $ml = $self->target_quantity * ($pcnt / 100);
     $res->set(

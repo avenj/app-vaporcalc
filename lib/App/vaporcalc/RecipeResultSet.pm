@@ -67,6 +67,8 @@ Automatically created from the current L</recipe> object.
 
 =head2 CONSUMES
 
+L<App::vaporcalc::Role::Store>
+
 =head1 AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org>
