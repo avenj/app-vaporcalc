@@ -1,5 +1,11 @@
 Revision history for Perl module App-vaporcalc
 
+0.002002 2014-03-05
+
+  - Support 'flavor clear'
+
+  - Fix Percentage type to be a subtype of StrictNum
+
 0.002001 2014-02-21
 
   - Support for multiple flavors
