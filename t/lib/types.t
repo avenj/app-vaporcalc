@@ -1,4 +1,4 @@
-use Test::More;
+use Test::Modern;
 use Test::TypeTiny;
 use strict; use warnings FATAL => 'all';
 

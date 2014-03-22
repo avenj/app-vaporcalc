@@ -1,4 +1,4 @@
-use Test::More;
+use Test::Modern;
 use strict; use warnings FATAL => 'all';
 
 { package

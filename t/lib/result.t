@@ -1,5 +1,4 @@
-use Test::More;
-use strict; use warnings FATAL => 'all';
+use Test::Modern;
 
 use App::vaporcalc::Result;
 
