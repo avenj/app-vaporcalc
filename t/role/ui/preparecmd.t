@@ -1,5 +1,5 @@
 use Test::Modern;
-use strict; use warnings FATAL => 'all';
+
 
 use List::Objects::WithUtils 'array';
 use App::vaporcalc::Recipe;

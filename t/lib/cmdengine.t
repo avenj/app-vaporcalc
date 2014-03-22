@@ -24,6 +24,8 @@ my @subject_consistency_chk = (
   'notes',
 );
 
+
+
 ok $cmdeng->subject_list->count == @subject_consistency_chk,
   'subject_list has expected element count';
 

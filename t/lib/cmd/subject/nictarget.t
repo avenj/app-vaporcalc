@@ -1,5 +1,5 @@
 use Test::Modern;
-use strict; use warnings FATAL => 'all';
+
 
 use App::vaporcalc::Cmd::Subject::NicTarget;
 use App::vaporcalc::Recipe;
