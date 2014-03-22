@@ -1,4 +1,4 @@
-use Test::More;
+use Test::Modern;
 use strict; use warnings FATAL => 'all';
 
 use App::vaporcalc::CmdEngine;
@@ -23,6 +23,8 @@ my @subject_consistency_chk = (
   'vg',
   'notes',
 );
+
+
 
 ok $cmdeng->subject_list->count == @subject_consistency_chk,
   'subject_list has expected element count';
