@@ -139,8 +139,8 @@ my $recipe = App::vaporcalc::Recipe->new(
   target_quantity   => 10,
   base_nic_per_ml   => 100,
   target_nic_per_ml => 12,
-  target_pg         => 50,
-  target_vg         => 50,
+  target_pg         => 45,
+  target_vg         => 55,
   flavor_percentage => 10,
 );
 
