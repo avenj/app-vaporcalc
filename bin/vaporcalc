@@ -13,7 +13,9 @@ my $Opts = +{
   help => sub {
     say $_ for (
       "vaporcalc - App::vaporcalc\n",
-      "  --nocolor     Disable ANSI colors\n",
+      "  --recipe=PATH    Load specified recipe",
+      "  --nocolor        Disable ANSI colors",
+      "",
       "  --help",
       "  --version",
     );
@@ -27,12 +29,14 @@ my $Opts = +{
   },
 
   nocolor => 0,
+  recipe  => '',
 };
 
 GetOptions( $Opts,
   'help',
   'version',
   'nocolor',
+  'recipe=s',
 );
 
 fun getopts { state $argv = hash(%$Opts)->inflate }
@@ -143,16 +147,18 @@ my $recipe = App::vaporcalc::Recipe->new(
   target_vg         => 55,
   flavor_percentage => 10,
 );
+my $initial_input = getopts->recipe ? 'recipe load '.getopts->recipe : undef;
 
 my $orig_prompt = colorify green => 'vcalc> ';
 my $prompt;
 PROMPT: while (1) {
   $prompt //= $orig_prompt;
 
-  my $input = $term->get_reply(
+  my $input = $initial_input // $term->get_reply(
     prompt  => $prompt,
     default => 'calc'
   );
+  undef $initial_input;
 
   next PROMPT unless $input;
 
