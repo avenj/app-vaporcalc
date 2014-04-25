@@ -3,23 +3,23 @@
       "flavor_array" : [
          {
             "type" : "PG",
-            "tag" : "TFA Strawberry (Ripe)",
-            "percentage" : "7"
+            "tag" : "E.M.",
+            "percentage" : "2"
          },
          {
             "type" : "PG",
             "tag" : "TFA Sweet Cream",
-            "percentage" : "5"
-         },
-         {
-            "type" : "PG",
-            "tag" : "TFA Blueberry Candy",
             "percentage" : "3"
          },
          {
             "type" : "PG",
-            "tag" : "E.M.",
-            "percentage" : "2"
+            "tag" : "TFA Blueberry Candy",
+            "percentage" : "4"
+         },
+         {
+            "type" : "PG",
+            "tag" : "TFA Strawberry (Ripe)",
+            "percentage" : "8"
          }
       ],
       "target_pg" : 45,
@@ -28,6 +28,8 @@
       "target_quantity" : 10,
       "target_nic_per_ml" : 12,
       "target_vg" : "55",
-      "notes" : []
+      "notes" : [
+         "Second try, with less cream and more berry."
+      ]
    }
 }
