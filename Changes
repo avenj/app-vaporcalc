@@ -1,5 +1,16 @@
 Revision history for Perl module App-vaporcalc
 
+0.003001 2014-04-25
+
+  - 'vaporcalc --recipe=PATH' syntax
+
+  - More recipes/
+
+  - use Test::Modern;
+
+  - FDA proposed regs (that would shut down small-time e-liquid makers)
+    published today. Hurrah?
+
 0.002002 2014-03-05
 
   - Support 'flavor clear'
