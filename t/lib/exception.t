@@ -1,10 +1,8 @@
 use Test::Modern;
 
-
 use App::vaporcalc::Exception;
 
-eval {; App::vaporcalc::Exception->throw('foo bar!') };
-my $err = $@;
+my $err = exception {; App::vaporcalc::Exception->throw('foo bar!') };
 isa_ok $err, 'App::vaporcalc::Exception';
 ok $err->message eq 'foo bar!', 'message ok';
 like "$err", qr/foo bar!/, 'stringification ok';

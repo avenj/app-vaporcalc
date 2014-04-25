@@ -1,6 +1,5 @@
 use Test::Modern;
 
-
 { package
     MyParser;
   use List::Objects::WithUtils 'array';
@@ -74,13 +73,16 @@ cmp_ok $res->subject, 'eq', 'nic base',
 ok ! defined $res->verb, 'no verb defined ok';
 ok $res->params->is_empty, 'params empty ok (no verb)';
 
-eval {; $cmdeng->parse_cmd('bar') };
-like $@, qr/No subject/, 'no subject dies ok';
+like exception {; $cmdeng->parse_cmd('bar') },
+  qr/No subject/, 
+  'no subject dies ok';
 
-eval {; $cmdeng->parse_cmd('.nic base ') };
-like $@, qr/No subject/, 'leading garbage dies ok';
+like exception {; $cmdeng->parse_cmd('.nic base ') },
+  qr/No subject/, 
+  'leading garbage dies ok';
 
-eval {; $cmdeng->parse_cmd('nic base.') };
-like $@, qr/No subject/, 'trailing garbage dies ok';
+like exception {; $cmdeng->parse_cmd('nic base.') },
+  qr/No subject/, 
+  'trailing garbage dies ok';
 
 done_testing;

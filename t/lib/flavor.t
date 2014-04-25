@@ -20,19 +20,19 @@ $flav = App::vaporcalc::Flavor->new(
 
 ok $flav->type eq 'VG', 'type ok';
 
-eval {;
-  App::vaporcalc::Flavor->new(percentage => 10)
-};
-ok $@, 'missing required attrib "tag" dies ok';
+ok exception {;
+    App::vaporcalc::Flavor->new(percentage => 10)
+  },
+  'missing required attrib "tag" dies ok';
 
-eval {;
-  App::vaporcalc::Flavor->new(percentage => 101)
-};
-ok $@, 'invalid attrib "percentage" dies ok';
+ok exception {;
+    App::vaporcalc::Flavor->new(percentage => 101)
+  },
+  'invalid attrib "percentage" dies ok';
 
-eval {;
+ok exception {;
   App::vaporcalc::Flavor->new(tag => 'foo')
-};
-ok $@, 'missing required attrib "percentage" dies ok';
+  },
+  'missing required attrib "percentage" dies ok';
 
 done_testing

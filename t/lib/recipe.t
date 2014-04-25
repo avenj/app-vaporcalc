@@ -75,7 +75,8 @@ ok $result->nic == 10,    '10ml nic';
 # PG + VG != 100%
 my %badratio = %defaults;
 $badratio{target_pg} = 30; $badratio{target_vg} = 40;
-eval {; App::vaporcalc::Recipe->new(%badratio) };
-like $@, qr/target_vg/, 'bad PG-VG ratio dies';
+like exception {; App::vaporcalc::Recipe->new(%badratio) },
+  qr/target_vg/, 
+  'bad PG-VG ratio dies';
 
 done_testing
