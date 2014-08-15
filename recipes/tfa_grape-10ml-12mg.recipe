@@ -3,18 +3,18 @@
       "flavor_array" : [
          {
             "type" : "PG",
-            "tag" : "TFA Blueberry Candy",
-            "percentage" : "8"
-         },
-         {
-            "type" : "PG",
-            "tag" : "TFA Blueberry Extra",
-            "percentage" : "4"
-         },
-         {
-            "type" : "PG",
             "tag" : "E.M.",
-            "percentage" : "1"
+            "percentage" : "0.8"
+         },
+         {
+            "type" : "PG",
+            "tag" : "TFA Grape Candy",
+            "percentage" : "6.15"
+         },
+         {
+            "type" : "PG",
+            "tag" : "TFA Grape Juice",
+            "percentage" : "6.15"
          }
       ],
       "target_pg" : 45,
@@ -23,8 +23,6 @@
       "target_quantity" : "10",
       "target_nic_per_ml" : "12",
       "target_vg" : 55,
-      "notes" : [
-         "Not bad, try a little ethyl maltol next time."
-      ]
+      "notes" : []
    }
 }
