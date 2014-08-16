@@ -14,12 +14,12 @@ App::vaporcalc - Calculate e-liquid recipes for DIY vaping
 
 # WARNING
 
-__Nicotine is dangerous; skin contact can kill you.__
+**Nicotine is dangerous; skin contact can kill you.**
 
-__Don't play with it if you don't respect it!__
+**Don't play with it if you don't respect it!**
 
-__Any nicotine-containing product should be tested to determine nicotine
-concentration before use. Testing kits are available online. Be responsible.__
+**Any nicotine-containing product should be tested to determine nicotine
+concentration before use. Testing kits are available online. Be responsible.**
 
 # DESCRIPTION
 
@@ -27,11 +27,11 @@ This is a set of simple utilities, roles, and objects for managing e-cig
 liquid recipes and calculating `ml` quantities based on a simple recipe
 format.
 
-From a shell, the __vaporcalc__ frontend starts with a base recipe outline and
+From a shell, the **vaporcalc** frontend starts with a base recipe outline and
 provides a command line interface to tweaking, saving, and loading recipes.
 
 If you'd like to manage recipes from perl, see ["vcalc"](#vcalc), below (or use
-[App::vaporcalc::Recipe](http://search.cpan.org/perldoc?App::vaporcalc::Recipe) directly).
+[App::vaporcalc::Recipe](https://metacpan.org/pod/App::vaporcalc::Recipe) directly).
 
 # EXPORTED
 
@@ -40,12 +40,12 @@ If you'd like to manage recipes from perl, see ["vcalc"](#vcalc), below (or use
     my $calculated = vcalc(
       target_quantity   => 30,   # ml
 
-    base_nic_type     => 'PG', # nicotine base type (VG/PG, default PG)
-    base_nic_per_ml   => 100,  # mg/ml (base nicotine concentration)
-    target_nic_per_ml => 12,   # mg/ml (target nicotine concentration)
+      base_nic_type     => 'PG', # nicotine base type (VG/PG, default PG)
+      base_nic_per_ml   => 100,  # mg/ml (base nicotine concentration)
+      target_nic_per_ml => 12,   # mg/ml (target nicotine concentration)
 
-    target_pg         => 65,   # target PG percentage
-    target_vg         => 35,   # target VG percentage
+      target_pg         => 65,   # target PG percentage
+      target_vg         => 35,   # target VG percentage
 
       # target flavor(s) name, percentage, base type
       # (or App::vaporcalc::Flavor objects)
@@ -59,19 +59,19 @@ If you'd like to manage recipes from perl, see ["vcalc"](#vcalc), below (or use
     my $recipe = $calculated->recipe;   # App::vaporcalc::Recipe instance
     my $result = $calculated->result;   # App::vaporcalc::Result instance
 
-A functional interface to [App::vaporcalc::RecipeResultSet](http://search.cpan.org/perldoc?App::vaporcalc::RecipeResultSet) -- takes a recipe
-(as a list of key/value pairs or an [App::vaporcalc::Recipe](http://search.cpan.org/perldoc?App::vaporcalc::Recipe) object) and
-returns a calculated [App::vaporcalc::RecipeResultSet](http://search.cpan.org/perldoc?App::vaporcalc::RecipeResultSet).
+A functional interface to [App::vaporcalc::RecipeResultSet](https://metacpan.org/pod/App::vaporcalc::RecipeResultSet) -- takes a recipe
+(as a list of key/value pairs or an [App::vaporcalc::Recipe](https://metacpan.org/pod/App::vaporcalc::Recipe) object) and
+returns a calculated [App::vaporcalc::RecipeResultSet](https://metacpan.org/pod/App::vaporcalc::RecipeResultSet).
 
 See: 
 
-[App::vaporcalc::Recipe](http://search.cpan.org/perldoc?App::vaporcalc::Recipe)
+[App::vaporcalc::Recipe](https://metacpan.org/pod/App::vaporcalc::Recipe)
 
-[App::vaporcalc::Result](http://search.cpan.org/perldoc?App::vaporcalc::Result)
+[App::vaporcalc::Result](https://metacpan.org/pod/App::vaporcalc::Result)
 
-[App::vaporcalc::RecipeResultSet](http://search.cpan.org/perldoc?App::vaporcalc::RecipeResultSet)
+[App::vaporcalc::RecipeResultSet](https://metacpan.org/pod/App::vaporcalc::RecipeResultSet)
 
-[App::vaporcalc::Flavor](http://search.cpan.org/perldoc?App::vaporcalc::Flavor)
+[App::vaporcalc::Flavor](https://metacpan.org/pod/App::vaporcalc::Flavor)
 
 # TIPS
 

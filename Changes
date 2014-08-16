@@ -1,5 +1,11 @@
 Revision history for Perl module App-vaporcalc
 
+0.003002 2014-08-16
+
+  - Support loading 'relaxed' JSON for friendlier recipe-munging
+
+  - Happy CPAN day!
+
 0.003001 2014-04-25
 
   - 'vaporcalc --recipe=PATH' syntax
