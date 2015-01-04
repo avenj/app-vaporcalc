@@ -3,26 +3,26 @@
       "flavor_array" : [
          {
             "type" : "PG",
-            "tag" : "TFA Sweet Cream",
+            "tag" : "TFA Key Lime",
             "percentage" : "4"
          },
          {
             "type" : "PG",
-            "tag" : "TFA Marshmallow",
-            "percentage" : "4"
-         },
-         {
-            "type" : "PG",
-            "tag" : "TFA Tiramisu",
+            "tag" : "TFA Hpno",
             "percentage" : "2"
+         },
+         {
+            "type" : "PG",
+            "tag" : "TFA Double Kiwi",
+            "percentage" : "6"
          }
       ],
-      "target_pg" : 50,
-      "base_nic_per_ml" : "100",
+      "target_pg" : 45,
+      "base_nic_per_ml" : 100,
       "base_nic_type" : "PG",
       "target_quantity" : "10",
-      "target_nic_per_ml" : "12",
-      "target_vg" : "50",
+      "target_nic_per_ml" : 12,
+      "target_vg" : "55",
       "notes" : []
    }
 }
