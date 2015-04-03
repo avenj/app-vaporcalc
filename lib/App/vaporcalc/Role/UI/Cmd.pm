@@ -50,7 +50,7 @@ method create_result (%params) {
 }
 
 method munge_recipe (%params) {
-  my $data = $$self->recipe->TO_JSON;
+  my $data = $self->recipe->TO_JSON;
   $data->{$_} = $params{$_} for keys %params;
   App::vaporcalc::Recipe->new(%$data)
 }
