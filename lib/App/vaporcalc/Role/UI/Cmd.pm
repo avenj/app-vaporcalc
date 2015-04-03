@@ -34,12 +34,8 @@ method execute {
   App::vaporcalc::Exception->throw(
     message => 'Missing verb; no action to perform!'
   ) unless $self->verb;
-
   my $meth = '_action_'.lc $self->verb; 
-  if ($self->can($meth)) {
-    return $self->$meth
-  }
-
+  return $self->$meth if $self->can($meth);
   App::vaporcalc::Exception->throw(
     message => 'Unknown action: '.$self->verb
   )
@@ -54,10 +50,8 @@ method create_result (%params) {
 }
 
 method munge_recipe (%params) {
-  my $recipe = $self->recipe;
-  my $data = $recipe->TO_JSON;
+  my $data = $$self->recipe->TO_JSON;
   $data->{$_} = $params{$_} for keys %params;
-
   App::vaporcalc::Recipe->new(%$data)
 }
 
