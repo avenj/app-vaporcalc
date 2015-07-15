@@ -41,9 +41,7 @@ method flavor_total {
   $flavor_ml
 }
 
-method total {
-  $self->vg + $self->pg + $self->nic + $self->flavor_total;
-}
+method total { $self->vg + $self->pg + $self->nic + $self->flavor_total }
 
 method TO_JSON {
   +{
