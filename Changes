@@ -1,5 +1,13 @@
 Revision history for Perl module App-vaporcalc
 
+0.003003 2015-08-15
+
+  - Switch to cpanfile packaging
+
+  - More recipes/
+
+  - Minor optimizations
+
 0.003002 2014-08-16
 
   - Support loading 'relaxed' JSON for friendlier recipe-munging
