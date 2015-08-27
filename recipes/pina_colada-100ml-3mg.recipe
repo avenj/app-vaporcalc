@@ -3,18 +3,13 @@
       "flavor_array" : [
          {
             "type" : "PG",
-            "tag" : "TFA Mango",
-            "percentage" : "7"
+            "tag" : "TFA Pina Colada",
+            "percentage" : "6"
          },
          {
             "type" : "PG",
-            "tag" : "TFA Dragonfruit",
-            "percentage" : "5"
-         },
-         {
-            "type" : "PG",
-            "tag" : "TFA Sweet Cream",
-            "percentage" : "1"
+            "tag" : "TFA Strawberry Ripe",
+            "percentage" : "2"
          }
       ],
       "target_pg" : "30",
