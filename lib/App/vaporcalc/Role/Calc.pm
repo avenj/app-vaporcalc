@@ -74,7 +74,7 @@ method calc {
     sswitch ($ftype) {
       case 'PG': { $pg_ml -= $fml if $pg_ml }
       case 'VG': { $vg_ml -= $fml if $vg_ml }
-      default: { confess "Unknown flavor_type ", $self->flavor_type }
+      default: { confess "Unknown flavor_type $ftype" }
     }
   }
 
