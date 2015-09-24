@@ -3,17 +3,12 @@
       "flavor_array" : [
          {
             "type" : "PG",
-            "tag" : "TFA Peppermint",
-            "percentage" : "1"
+            "tag" : "TFA Creme de Menthe",
+            "percentage" : "4"
          },
          {
             "type" : "PG",
-            "tag" : "TFA Double Kiwi",
-            "percentage" : "7"
-         },
-         {
-            "type" : "PG",
-            "tag" : "TFA Dragonfruit",
+            "tag" : "TFA Marshmallow",
             "percentage" : "3"
          }
       ],
