@@ -29,7 +29,8 @@
       "target_nic_per_ml" : "3",
       "target_vg" : 70,
       "notes" : [
-         "Kind of a cherry-lime taste."
+         "Kind of a cherry-lime taste.",
+         "Long steep to mellow out the Energy Drink."
       ]
    }
 }

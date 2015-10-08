@@ -3,13 +3,13 @@
       "flavor_array" : [
          {
             "type" : "PG",
-            "tag" : "TFA Blueberry Candy",
-            "percentage" : "8"
+            "tag" : "CAP Double Watermelon",
+            "percentage" : "7"
          },
          {
             "type" : "PG",
-            "tag" : "TFA Blueberry Extra",
-            "percentage" : "8"
+            "tag" : "Sour",
+            "percentage" : "0.5"
          },
          {
             "type" : "PG",
@@ -17,12 +17,12 @@
             "percentage" : "0.5"
          }
       ],
-      "target_pg" : "30",
+      "target_pg" : "20",
       "base_nic_per_ml" : 100,
       "base_nic_type" : "PG",
-      "target_quantity" : "50",
-      "target_nic_per_ml" : "3",
-      "target_vg" : 70,
+      "target_quantity" : "90",
+      "target_nic_per_ml" : "6",
+      "target_vg" : 80,
       "notes" : []
    }
 }
