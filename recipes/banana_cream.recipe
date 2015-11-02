@@ -15,6 +15,11 @@
             "type" : "PG",
             "tag" : "TFA Bavarian Cream",
             "percentage" : "2"
+         },
+         {
+            "type" : "PG",
+            "tag" : "TFA Marshmallow",
+            "percentage" : "1"
          }
       ],
       "target_pg" : "30",
