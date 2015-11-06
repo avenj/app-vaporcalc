@@ -1,5 +1,9 @@
 Revision history for Perl module App-vaporcalc
 
+0.004001 2015-11-06
+
+  - Always show 'max VG' total
+
 0.003004 2015-09-11
 
   - Fix a bug related to handling unknown flavor base types
