@@ -90,6 +90,7 @@ fun format_resultset (RecipeResultSet $rset) {
   notes: %notes
  =>
   vg: [%vg ml]  pg: [%pg ml]  nic base: [%nic ml]
+    (or max vg total: %max_vg_total ml)
   flavors:
 %flavor_result
   total: %total ml
@@ -120,6 +121,10 @@ EOT
     (map {; $_ => colorify('bold yellow', $result->$_) } qw/
       vg pg nic total
     /),
+
+    max_vg_total => sub {
+      colorify('bold yellow', $result->pg + $result->vg)
+    },
   )
 }
 
