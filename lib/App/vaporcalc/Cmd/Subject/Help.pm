@@ -22,7 +22,7 @@ method _action_show {
       "Commands can be entered as:",
       " [ <VERB> <SUBJECT> <PARAM> ] or [ <SUBJECT> <VERB> <PARAM> ]",
       " e.g.:  set nic base 100",
-      "(Without a verb, most subjects will call 'show')",
+      "(Without a verb, most subjects will call 'view')",
       " recipe <view/save [PATH]/load [PATH]>",
       " target amount <view/set [ml]>",
       " flavor <view/set [tag] [% of total] [PG/VG]/del [tag]/clear>",
