@@ -71,6 +71,11 @@ L<App::vaporcalc::Role::UI::ParseCmd>
 
 L<App::vaporcalc::Role::UI::PrepareCmd>
 
+=head1 SEE ALSO
+
+L<App::vaporcalc::Role::UI::Cmd> contains an example command subject in the
+SYNOPSIS.
+
 =head1 AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org>

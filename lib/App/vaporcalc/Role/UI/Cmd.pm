@@ -65,14 +65,45 @@ App::vaporcalc::Role::UI::Cmd - Helper for vaporcalc command objects
 
 =head1 SYNOPSIS
 
+  # An example command subject;
+  # placed in the App::vaporcalc::Cmd::Subject:: namespace so it can be found
+  # by an App::vaporcalc::CmdEngine instance:
   package App::vaporcalc::Cmd::Subject::Foo;
+
+  use Defaults::Modern;
+
   use Moo;
   with 'App::vaporcalc::Role::UI::Cmd';
+
+  # To be listed in an App::vaporcalc::CmdEngine's 'subject_list';
+  # must be a class method (not an attribute):
+  sub _subject { 'foo' }
+
+  # To provide a default verb:
+  has '+verb' => ( builder => sub { 'show' } );
+
+  # Add verbs that return an App::vaporcalc::Cmd::Result:
+  method _action_view { $self->_action_show }
+  method _action_show {
+    $self->create_result(
+      string => "hello world!"
+    )
+  }
 
 =head1 DESCRIPTION
 
 A L<Moo::Role> providing attributes & behavior common to L<App::vaporcalc>
 command objects.
+
+Command objects define a "subject" that provides "verbs" -- methods prefixed
+with C<_action_> that have access to the current L</recipe> object and command
+L</params>. Executing a verb returns a L<App::vaporcalc::Cmd::Result> (see
+L</create_result>) or throws an exception (see L</throw_exception>) in case of
+failure.
+
+If using an L<App::vaporcalc::CmdEngine>, consumers of this role will likely
+also want to define a C<_subject> class method returning a string to be taken
+as the command subject when building the CmdEngine's C<subject_list>.
 
 =head2 ATTRIBUTES
 
@@ -124,6 +155,16 @@ Builds an L<App::vaporcalc::Cmd::Result> instance.
 Calls C<TO_JSON> on the current L</recipe> object, merges in the
 given key/value pairs, and returns a new L<App::vaporcalc::Recipe> with the
 appropriate values.
+
+=head1 SEE ALSO
+
+L<App::vaporcalc::Cmd::Result>
+
+L<App::vaporcalc::CmdEngine>
+
+L<App::vaporcalc::Role::UI::ParseCmd>
+
+L<App::vaporcalc::Role::UI::PrepareCmd>
 
 =head1 AUTHOR
 
