@@ -1,6 +1,8 @@
 use Test::Modern;
 use strict; use warnings FATAL => 'all';
 
+use Lowu 'array';
+
 use App::vaporcalc::CmdEngine;
 use App::vaporcalc::Recipe;
 
@@ -24,14 +26,19 @@ my @subject_consistency_chk = (
   'notes',
 );
 
-
-
-ok $cmdeng->subject_list->count == @subject_consistency_chk,
-  'subject_list has expected element count';
-
 for my $subj (@subject_consistency_chk) {
   ok $cmdeng->subject_list->has_any(sub { $_ eq $subj }),
     "subject_list has $subj";
+}
+
+my $diff = array(@subject_consistency_chk)->diff($cmdeng->subject_list);
+if ($diff->has_any) {
+  diag
+    "Note; did find unknown-to-us command subjects;\n".
+    " probably not alarming:\n".
+    $diff->map(sub { "'$_'" })->join("\n")
+} else {
+  diag "Did not find any unknown-to-us command subjects"
 }
 
 done_testing

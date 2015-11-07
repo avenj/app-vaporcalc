@@ -3,6 +3,7 @@ use Test::Modern;
 { package
     MyCmd;
   use Moo; with 'App::vaporcalc::Role::UI::Cmd';
+  sub _subject { 'mycmd' }
   has '+verb' => (
     builder => sub { 'view' },
   );
@@ -21,6 +22,7 @@ my $cmd = MyCmd->new(
   },
 );
 
+ok $cmd->_subject eq 'mycmd', '_subject ok';
 ok $cmd->verb eq 'view', 'default verb override ok';
 isa_ok $cmd->recipe, 'App::vaporcalc::Recipe', 'recipe ok';
 is_deeply
