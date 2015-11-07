@@ -6,7 +6,8 @@ use Lowu 'array';
 use App::vaporcalc::CmdEngine;
 use App::vaporcalc::Recipe;
 
-my $cmdeng = App::vaporcalc::CmdEngine->new;
+my $cmdeng;
+diag warnings { $cmdeng = App::vaporcalc::CmdEngine->new };
 
 ok $cmdeng->does('App::vaporcalc::Role::UI::ParseCmd'),
   'does Role::UI::ParseCmd';

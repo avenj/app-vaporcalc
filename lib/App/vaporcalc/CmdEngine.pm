@@ -9,7 +9,7 @@ use Module::Pluggable
   sub_name    => '_subjects',
   search_path => 'App::vaporcalc::Cmd::Subject',
   except      => [
-    # stale (back-compat upon upgrade):
+    # stale version:
     'App::vaporcalc::Cmd::Subject::FlavorType',
   ],
 ;
@@ -23,7 +23,10 @@ has subject_list => (
     [ 
       map {; 
         $_->can('_subject') ? $_->_subject
-          : do { warn "No '_subject' defined for '$_'\n"; () }
+        : do {
+            warn "No '_subject' defined for '$_', skipped in subject_list\n";
+            ()
+          }
       } $self->_subjects 
     ]
   },
