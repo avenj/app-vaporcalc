@@ -35,7 +35,7 @@ App::vaporcalc - Calculate e-liquid recipes for DIY vaping
 
 =head1 WARNING
 
-B<< Nicotine is dangerous; skin contact can kill you. >>
+B<< Nicotine is a deadly poison and can be absorbed through the skin. >>
 
 B<< Don't play with it if you don't respect it! >>
 
@@ -48,8 +48,9 @@ This is a set of simple utilities, roles, and objects for managing e-cig
 liquid recipes and calculating C<ml> quantities based on a simple recipe
 format.
 
-From a shell, the B<vaporcalc> frontend starts with a base recipe outline and
-provides a command line interface to tweaking, saving, and loading recipes.
+From a shell, the L<vaporcalc(1)> frontend starts with a base recipe outline and
+provides a command line interface to tweaking, saving, and loading recipes via
+an extensible command engine (L<App::vaporcalc::CmdEngine>).
 
 If you'd like to manage recipes from perl, see L</vcalc>, below (or use
 L<App::vaporcalc::Recipe> directly).
@@ -116,6 +117,24 @@ into lung/throat irritants upon heating.
 
 Buy nicotine from a reputable supplier and test it; there have been instances
 of nicotine solutions marketed as 100mg/ml going as high as 250mg/ml!
+
+=head1 TODO
+
+=over
+
+=item *
+
+Optionally measuring by weight.
+
+=item *
+
+A pointy-clicky interface (Tkx or so?)
+
+=item *
+
+Integrated cost calculation
+
+=back
 
 =head1 AUTHOR
 
