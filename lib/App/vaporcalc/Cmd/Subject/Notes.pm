@@ -3,6 +3,9 @@ package App::vaporcalc::Cmd::Subject::Notes;
 use Defaults::Modern;
 
 use Moo; use MooX::late;
+
+sub subject { 'notes' }
+
 with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+verb' => (

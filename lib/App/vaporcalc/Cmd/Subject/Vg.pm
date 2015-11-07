@@ -3,8 +3,10 @@ package App::vaporcalc::Cmd::Subject::Vg;
 use Defaults::Modern;
 
 use Moo; use MooX::late;
-with 'App::vaporcalc::Role::UI::Cmd';
 
+sub subject { 'vg' }
+
+with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+verb' => (
   builder => sub { 'show' },

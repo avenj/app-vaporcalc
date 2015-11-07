@@ -4,24 +4,28 @@ use Defaults::Modern
   -with_types => [ 'App::vaporcalc::Types' ];
 
 use Moo; use MooX::late;
+use Module::Pluggable
+  require     => 1,
+  sub_name    => '_subjects',
+  search_path => 'App::vaporcalc::Cmd::Subject',
+  except      => [
+    # stale (back-compat upon upgrade):
+    'App::vaporcalc::Cmd::Subject::FlavorType',
+  ],
+;
 
 has subject_list => (
   is        => 'ro',
   isa       => ArrayObj,
   coerce    => 1,
   builder   => sub {
-    array(
-      'help',
-      'recipe',
-      'target amount',
-      'flavor',
-      'nic base',
-      'nic target',
-      'nic type',
-      'pg',
-      'vg',
-      'notes',
-    )
+    my ($self) = @_;
+    [ 
+      map {; 
+        $_->can('subject') ? $_->subject
+          : do { warn "No 'subject' defined for '$_'\n"; () }
+      } $self->_subjects 
+    ]
   },
 );
 

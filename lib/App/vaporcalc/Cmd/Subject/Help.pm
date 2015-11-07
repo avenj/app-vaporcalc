@@ -3,6 +3,9 @@ package App::vaporcalc::Cmd::Subject::Help;
 use Defaults::Modern;
 
 use Moo; use MooX::late;
+
+sub subject { 'help' }
+
 with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+recipe' => (

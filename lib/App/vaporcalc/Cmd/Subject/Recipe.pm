@@ -5,6 +5,9 @@ use Defaults::Modern;
 use App::vaporcalc::RecipeResultSet;
 
 use Moo; use MooX::late;
+
+sub subject { 'recipe' }
+
 with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+verb' => (
