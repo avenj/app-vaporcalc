@@ -7,6 +7,8 @@ use App::vaporcalc::CmdEngine;
 use App::vaporcalc::Recipe;
 
 my $cmdeng;
+# if we have 'missing _subject' or suchlike warnings for stale command
+# modules, they should show up during construction:
 diag warnings { $cmdeng = App::vaporcalc::CmdEngine->new };
 
 ok $cmdeng->does('App::vaporcalc::Role::UI::ParseCmd'),
@@ -41,5 +43,12 @@ if ($diff->has_any) {
 } else {
   diag "Did not find any unknown-to-us command subjects"
 }
+
+diag warnings { $cmdeng->rebuild_subject_list };
+for my $subj (@subject_consistency_chk) {
+  ok $cmdeng->subject_list->has_any(sub { $_ eq $subj }),
+    "subject_list has $subj after rebuild";
+}
+
 
 done_testing

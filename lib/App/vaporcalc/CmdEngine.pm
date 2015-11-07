@@ -17,6 +17,8 @@ use Module::Pluggable
 has subject_list => (
   # don't make me lazy; tests expect possible warnings during instantiation
   is        => 'ro',
+  # .. but re-gen is a reasonable thing to do
+  writer    => '_set_subject_list',
   isa       => ArrayObj,
   coerce    => 1,
   builder   => sub {
@@ -52,6 +54,10 @@ has subject_list => (
   },
 );
 
+method rebuild_subject_list {
+  $self->_set_subject_list( $self->_build_subject_list )
+}
+
 with 'App::vaporcalc::Role::UI::ParseCmd',
      'App::vaporcalc::Role::UI::PrepareCmd';
 
@@ -66,22 +72,23 @@ App::vaporcalc::CmdEngine
 =head1 SYNOPSIS
 
   use App::vaporcalc::CmdEngine;
-  my $help = App::vaporcalc::CmdEngine->prepare_cmd(
-    subject => 'help',
-  );
+  my $eng = App::vaporcalc::CmdEngine->new;
+  my $help = $eng->prepare_cmd( subject => 'help' );
   # See App::vaporcalc::Role::UI::ParseCmd,
-  #     App::vaporcalc::Role::UI::PrepareCmd
+  #     App::vaporcalc::Role::UI::PrepareCmd,
+  #     App::vaporcalc::Role::UI::Cmd,
+  #     App::vaporcalc::Cmd::Result
 
 =head1 DESCRIPTION
 
 A class containing a valid L</subject_list> for use with
-B<vaporcalc> command handler roles; see L</CONSUMES>.
+L<vaporcalc(1)> command handler roles; see L</CONSUMES>.
 
 =head2 ATTRIBUTES
 
 =head3 subject_list
 
-The list of valid B<vaporcalc> subjects (as an
+The list of valid L<vaporcalc(1)> subjects (as an
 L<List::Objects::WithUtils::Array>).
 
 Built by scanning classes in the C<App::vaporcalc::Cmd::Subject::> namespace
@@ -93,11 +100,38 @@ L<App::vaporcalc::Role::UI::Cmd>.
 Command classes without a subject will produce a warning and be omitted from
 the C<subject_list>.
 
+=head2 METHODS
+
+=head3 rebuild_subject_list
+
+Rebuilds the L</subject_list> by re-scanning the
+C<App::vaporcalc::Cmd::Subject::> namespace.
+
+=head3 search_path
+
+  # Current command module search path:
+  $eng->search_path;
+
+  # Replace the current search path(s):
+  $eng->search_path( new => 'My::vaporcalc::Cmds' );
+
+  # Add another search path & rebuild our subject_list:
+  $eng->search_path( add => 'My::vaporcalc::Toys' );
+  $eng->rebuild_subject_list;
+
+Modify the pluggable command module search path.
+Imported from L<Module::Pluggable>; see there for details.
+
+After search paths have been modified, L</rebuild_subject_list> must be called
+to load the newly-found modules and regenerate the L</subject_list> attribute.
+
 =head2 CONSUMES
 
 L<App::vaporcalc::Role::UI::ParseCmd>
 
 L<App::vaporcalc::Role::UI::PrepareCmd>
+
+L<Module::Pluggable/search_path>
 
 =head1 SEE ALSO
 
