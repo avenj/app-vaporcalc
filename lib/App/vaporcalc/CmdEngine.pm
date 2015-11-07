@@ -15,20 +15,40 @@ use Module::Pluggable
 ;
 
 has subject_list => (
+  # don't make me lazy; tests expect possible warnings during instantiation
   is        => 'ro',
   isa       => ArrayObj,
   coerce    => 1,
   builder   => sub {
     my ($self) = @_;
-    [ 
-      map {; 
-        $_->can('_subject') ? $_->_subject
-        : do {
-            warn "No '_subject' defined for '$_', skipped in subject_list\n";
-            ()
-          }
-      } $self->_subjects 
-    ]
+
+    my %subj;
+    SUBJ: for my $this_class ($self->_subjects) {
+      unless ($this_class->can('_subject')) {
+        warn 
+          "No '_subject' defined for '$this_class' - ",
+          "not added to subject_list";
+        next SUBJ
+      }
+
+      my $this_subj = $this_class->_subject;
+
+      if (my $prev = $subj{$this_subj}) {
+        die "BUG -- subject conflict:\n",
+            "Subject '$this_subj' defined by:\n '$prev'\n '$this_class'\n",
+            "Cannot build subject_list!"
+      }
+
+      $subj{$this_subj} = $this_class;
+    }  # SUBJ
+
+    if (my @sorted = sort keys %subj) {
+      return \@sorted
+    }
+    warn
+      "No command subjects found in module search path; ",
+      "namespace: 'App::vaporcalc::Cmd::Subject'";
+    []
   },
 );
 
