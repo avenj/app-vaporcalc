@@ -1,5 +1,13 @@
 Revision history for Perl module App-vaporcalc
 
+0.005001 2015-11-07
+
+  - Fix CmdEngine to be more easily pluggable; subject_list is now dynamically
+    generated via Module::Pluggable and tests are now friendlier towards
+    external Cmd::Subject modules
+
+  - Documentation improvements
+
 0.004001 2015-11-06
 
   - Always show 'max VG' total

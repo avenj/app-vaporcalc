@@ -14,7 +14,7 @@ App::vaporcalc - Calculate e-liquid recipes for DIY vaping
 
 # WARNING
 
-**Nicotine is dangerous; skin contact can kill you.**
+**Nicotine is a deadly poison and can be absorbed through the skin.**
 
 **Don't play with it if you don't respect it!**
 
@@ -27,8 +27,9 @@ This is a set of simple utilities, roles, and objects for managing e-cig
 liquid recipes and calculating `ml` quantities based on a simple recipe
 format.
 
-From a shell, the **vaporcalc** frontend starts with a base recipe outline and
-provides a command line interface to tweaking, saving, and loading recipes.
+From a shell, the [vaporcalc(1)](http://man.he.net/man1/vaporcalc) frontend starts with a base recipe outline and
+provides a command line interface to tweaking, saving, and loading recipes via
+an extensible command engine ([App::vaporcalc::CmdEngine](https://metacpan.org/pod/App::vaporcalc::CmdEngine)).
 
 If you'd like to manage recipes from perl, see ["vcalc"](#vcalc), below (or use
 [App::vaporcalc::Recipe](https://metacpan.org/pod/App::vaporcalc::Recipe) directly).
@@ -95,6 +96,12 @@ into lung/throat irritants upon heating.
 
 Buy nicotine from a reputable supplier and test it; there have been instances
 of nicotine solutions marketed as 100mg/ml going as high as 250mg/ml!
+
+# TODO
+
+- Optionally measuring by weight.
+- A pointy-clicky interface (Tkx or so?)
+- Integrated cost calculation
 
 # AUTHOR
 
