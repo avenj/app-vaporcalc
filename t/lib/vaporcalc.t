@@ -9,7 +9,9 @@ my $ret = vcalc(
   target_nic_per_ml => 16,
   target_pg         => 65,
   target_vg         => 35,
-  flavor_percentage => 20,
+  flavor_array      => [
+    +{ tag => 'Banana', percentage => 3, type => 'PG' },
+  ],
 );
 
 my $result = $ret->result;
