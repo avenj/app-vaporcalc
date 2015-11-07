@@ -100,7 +100,8 @@ App::vaporcalc::Role::UI::ParseCmd
 
 =head1 DESCRIPTION
 
-A L<Moo::Role> for parsing command strings based on a list of valid subjects.
+A L<Moo::Role> for parsing command strings based on a list of valid subjects
+(command targets).
 
 =head2 REQUIRES
 

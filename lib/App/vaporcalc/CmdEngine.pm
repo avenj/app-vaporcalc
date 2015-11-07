@@ -62,7 +62,8 @@ The list of valid B<vaporcalc> subjects (as an
 L<List::Objects::WithUtils::Array>).
 
 Built by scanning classes in the C<App::vaporcalc::Cmd::Subject::> namespace
-via L<Module::Pluggable>.
+via L<Module::Pluggable> and collecting the results of calling their
+respective C<_subject> methods.
 
 =head2 CONSUMES
 
