@@ -4,7 +4,7 @@ use Defaults::Modern;
 
 use Moo; use MooX::late;
 
-sub subject { 'nic target' }
+sub _subject { 'nic target' }
 
 with 'App::vaporcalc::Role::UI::Cmd';
 

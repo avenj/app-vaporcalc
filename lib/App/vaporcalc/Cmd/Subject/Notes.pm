@@ -4,7 +4,7 @@ use Defaults::Modern;
 
 use Moo; use MooX::late;
 
-sub subject { 'notes' }
+sub _subject { 'notes' }
 
 with 'App::vaporcalc::Role::UI::Cmd';
 

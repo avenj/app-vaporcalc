@@ -6,7 +6,7 @@ use App::vaporcalc::Flavor;
 
 use Moo; use MooX::late;
 
-sub subject { 'flavor' }
+sub _subject { 'flavor' }
 
 with 'App::vaporcalc::Role::UI::Cmd';
 

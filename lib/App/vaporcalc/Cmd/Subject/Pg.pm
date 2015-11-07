@@ -4,7 +4,7 @@ use Defaults::Modern;
 
 use Moo; use MooX::late;
 
-sub subject { 'pg' }
+sub _subject { 'pg' }
 
 with 'App::vaporcalc::Role::UI::Cmd';
 

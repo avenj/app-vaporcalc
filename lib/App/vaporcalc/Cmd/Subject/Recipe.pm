@@ -6,7 +6,7 @@ use App::vaporcalc::RecipeResultSet;
 
 use Moo; use MooX::late;
 
-sub subject { 'recipe' }
+sub _subject { 'recipe' }
 
 with 'App::vaporcalc::Role::UI::Cmd';
 

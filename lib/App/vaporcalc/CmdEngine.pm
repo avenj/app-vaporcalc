@@ -22,8 +22,8 @@ has subject_list => (
     my ($self) = @_;
     [ 
       map {; 
-        $_->can('subject') ? $_->subject
-          : do { warn "No 'subject' defined for '$_'\n"; () }
+        $_->can('_subject') ? $_->_subject
+          : do { warn "No '_subject' defined for '$_'\n"; () }
       } $self->_subjects 
     ]
   },
@@ -60,6 +60,9 @@ B<vaporcalc> command handler roles; see L</CONSUMES>.
 
 The list of valid B<vaporcalc> subjects (as an
 L<List::Objects::WithUtils::Array>).
+
+Built by scanning classes in the C<App::vaporcalc::Cmd::Subject::> namespace
+via L<Module::Pluggable>.
 
 =head2 CONSUMES
 
