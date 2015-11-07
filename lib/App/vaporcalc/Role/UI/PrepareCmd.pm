@@ -68,7 +68,8 @@ A L<Moo::Role> for producing B<vaporcalc> command objects.
 
 =head3 cmd_class_prefix
 
-The prefix to use when constructing command object class names.
+The prefix to use when constructing command object class names from a given
+subject.
 
 Defaults to C<App::vaporcalc::Cmd::Subject::>
 

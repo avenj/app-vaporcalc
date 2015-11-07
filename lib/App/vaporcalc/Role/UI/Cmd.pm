@@ -105,6 +105,12 @@ If using an L<App::vaporcalc::CmdEngine>, consumers of this role will likely
 also want to define a C<_subject> class method returning a string to be taken
 as the command subject when building the CmdEngine's C<subject_list>.
 
+The given C<_subject> string must translate to the relevant class name by
+trimming spaces and CamelCasing; for example:
+
+  sub _subject { 'flavor' }    # -> ::Cmd::Subject::Flavor
+  sub _subject { 'nic base' }  # -> ::Cmd::Subject::NicBase
+
 =head2 ATTRIBUTES
 
 =head3 verb

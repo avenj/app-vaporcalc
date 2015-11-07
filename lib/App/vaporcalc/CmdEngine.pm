@@ -86,7 +86,12 @@ L<List::Objects::WithUtils::Array>).
 
 Built by scanning classes in the C<App::vaporcalc::Cmd::Subject::> namespace
 via L<Module::Pluggable> and collecting the results of calling their
-respective C<_subject> methods.
+respective C<_subject> methods, which must return unique strings that can be
+transformed into the appropriate class name; see
+L<App::vaporcalc::Role::UI::Cmd>.
+
+Command classes without a subject will produce a warning and be omitted from
+the C<subject_list>.
 
 =head2 CONSUMES
 
