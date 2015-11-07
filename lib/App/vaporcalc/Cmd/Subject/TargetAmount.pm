@@ -3,6 +3,9 @@ package App::vaporcalc::Cmd::Subject::TargetAmount;
 use Defaults::Modern;
 
 use Moo; use MooX::late;
+
+sub _subject { 'target amount' }
+
 with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+verb' => (

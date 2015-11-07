@@ -3,6 +3,9 @@ package App::vaporcalc::Cmd::Subject::NicTarget;
 use Defaults::Modern;
 
 use Moo; use MooX::late;
+
+sub _subject { 'nic target' }
+
 with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+verb' => (

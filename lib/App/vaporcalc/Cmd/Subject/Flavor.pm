@@ -5,11 +5,15 @@ use Defaults::Modern;
 use App::vaporcalc::Flavor;
 
 use Moo; use MooX::late;
+
+sub _subject { 'flavor' }
+
 with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+verb' => (
   builder => sub { 'show' },
 );
+
 
 method _action_show { $self->_action_view }
 method _action_view {

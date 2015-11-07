@@ -4,24 +4,28 @@ use Defaults::Modern
   -with_types => [ 'App::vaporcalc::Types' ];
 
 use Moo; use MooX::late;
+use Module::Pluggable
+  require     => 1,
+  sub_name    => '_subjects',
+  search_path => 'App::vaporcalc::Cmd::Subject',
+  except      => [
+    # stale (back-compat upon upgrade):
+    'App::vaporcalc::Cmd::Subject::FlavorType',
+  ],
+;
 
 has subject_list => (
   is        => 'ro',
   isa       => ArrayObj,
   coerce    => 1,
   builder   => sub {
-    array(
-      'help',
-      'recipe',
-      'target amount',
-      'flavor',
-      'nic base',
-      'nic target',
-      'nic type',
-      'pg',
-      'vg',
-      'notes',
-    )
+    my ($self) = @_;
+    [ 
+      map {; 
+        $_->can('_subject') ? $_->_subject
+          : do { warn "No '_subject' defined for '$_'\n"; () }
+      } $self->_subjects 
+    ]
   },
 );
 
@@ -56,6 +60,10 @@ B<vaporcalc> command handler roles; see L</CONSUMES>.
 
 The list of valid B<vaporcalc> subjects (as an
 L<List::Objects::WithUtils::Array>).
+
+Built by scanning classes in the C<App::vaporcalc::Cmd::Subject::> namespace
+via L<Module::Pluggable> and collecting the results of calling their
+respective C<_subject> methods.
 
 =head2 CONSUMES
 

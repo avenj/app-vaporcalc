@@ -3,6 +3,9 @@ package App::vaporcalc::Cmd::Subject::NicType;
 use Defaults::Modern;
 
 use Moo; use MooX::late;
+
+sub _subject { 'nic type' }
+
 with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+verb' => (
