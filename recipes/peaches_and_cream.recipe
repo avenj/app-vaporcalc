@@ -8,21 +8,26 @@
          },
          {
             "type" : "PG",
+            "tag" : "TFA Dragonfruit",
+            "percentage" : "2"
+         },
+         {
+            "type" : "PG",
             "tag" : "TFA Bavarian Cream",
-            "percentage" : "3"
+            "percentage" : "2"
          },
          {
             "type" : "PG",
             "tag" : "TFA Marshmallow",
-            "percentage" : "1"
+            "percentage" : "2"
          }
       ],
-      "target_pg" : 45,
+      "target_pg" : "30",
       "base_nic_per_ml" : 100,
       "base_nic_type" : "PG",
-      "target_quantity" : "90",
+      "target_quantity" : "120",
       "target_nic_per_ml" : "3",
-      "target_vg" : 55,
+      "target_vg" : 70,
       "notes" : []
    }
 }
