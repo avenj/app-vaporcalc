@@ -105,7 +105,9 @@ EOT
   format_str( $tmpl =>
     notes => sub {
       $recipe->notes->has_any ?
-        "\n" . $recipe->notes->map(sub { ' - '.$_ })->join("\n")
+        "\n" . $recipe->notes
+                ->map(sub { colorify('bold yellow', ' - '.$_) })
+                ->join("\n")
         : 'none'
     },
 
