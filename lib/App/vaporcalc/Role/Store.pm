@@ -16,10 +16,8 @@ method save ( (Str | Path) $path ) {
     convert_blessed => 1,
   );
 
-  my $json  = $jseng->encode($self);
-  unless ($json) {
-    confess "Could not encode JSON: ".$jseng->error
-  }
+  my $json  = $jseng->encode($self)
+    || confess "Could not encode JSON: ".$jseng->error;
 
   path($path)->spew_utf8($json)
 }
@@ -31,10 +29,9 @@ method load ( (Str | Path) $path ) {
     relaxed   => 1,
   );
 
-  my $data  = $jseng->decode($json);
-  unless ($data) {
-    confess "Could not decode JSON: ".$jseng->error
-  }
+  my $data  = $jseng->decode($json)
+    || confess "Could not decode JSON: ".$jseng->error;
+
   $self->_load_create_obj($data)
 }
 
