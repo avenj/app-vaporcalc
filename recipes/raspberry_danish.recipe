@@ -13,8 +13,13 @@
          },
          {
             "type" : "PG",
-            "tag" : "TFA Marshmallow",
+            "tag" : "TFA Toasted Marshmallow",
             "percentage" : "1"
+         },
+         {
+            "type" : "PG",
+            "tag" : "TFA Cheesecake Graham Crust",
+            "percentage" : "0.4"
          }
       ],
       "target_pg" : "30",
@@ -23,9 +28,6 @@
       "target_quantity" : "120",
       "target_nic_per_ml" : "3",
       "target_vg" : 70,
-      "notes" : [
-         "First trial batch, added 0.5ml TFA Cheesecake Graham Crust",
-         "Also subbed Toasted Marshmallow for Marshmallow"
-      ]
+      "notes" : []
    }
 }

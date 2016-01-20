@@ -17,7 +17,7 @@ use Module::Pluggable
 has subject_list => (
   # don't make me lazy; tests expect possible warnings during instantiation
   is        => 'ro',
-  # .. but re-gen is a reasonable thing to do
+  # .. but re-gen is a reasonable thing to do (rebuild_subject_list)
   writer    => '_set_subject_list',
   isa       => ArrayObj,
   coerce    => 1,
