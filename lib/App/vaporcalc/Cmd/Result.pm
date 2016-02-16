@@ -106,7 +106,7 @@ L<App::vaporcalc::Types/"CommandAction">.
 
 =head3 prompt
 
-The prompt to display for L</action> eq 'prompt'
+The prompt to display when L</action> eq 'prompt'
 
 =head3 prompt_callback
 
