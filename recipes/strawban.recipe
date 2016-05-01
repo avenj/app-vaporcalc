@@ -3,36 +3,41 @@
       "base_nic_per_ml" : 100,
       "base_nic_type" : "PG",
       "target_quantity" : "220",
+      "target_pg" : "40",
       "flavor_array" : [
          {
-            "tag" : "INW Banana",
+            "percentage" : "1",
             "type" : "PG",
-            "percentage" : "1"
+            "tag" : "TFA Banana Cream"
          },
          {
-            "percentage" : "0.6",
-            "type" : "PG",
-            "tag" : "INW Strawberry"
-         },
-         {
-            "type" : "PG",
-            "percentage" : "5",
-            "tag" : "TFA Strawberry Ripe"
-         },
-         {
-            "tag" : "TFA Banana Cream",
+            "tag" : "TFA Marshmallow",
             "percentage" : "1",
             "type" : "PG"
          },
          {
+            "tag" : "INW Banana",
+            "percentage" : "0.5",
+            "type" : "PG"
+         },
+         {
+            "tag" : "INW Strawberry",
+            "percentage" : "0.8",
+            "type" : "PG"
+         },
+         {
             "type" : "PG",
-            "percentage" : "1",
-            "tag" : "TFA Marshmallow"
+            "percentage" : "6",
+            "tag" : "TFA Strawberry Ripe"
+         },
+         {
+            "tag" : "TFA Vanilla Swirl",
+            "type" : "PG",
+            "percentage" : "2"
          }
       ],
-      "target_pg" : "40",
       "notes" : [],
-      "target_vg" : 60,
-      "target_nic_per_ml" : "3"
+      "target_nic_per_ml" : "3",
+      "target_vg" : 60
    }
 }

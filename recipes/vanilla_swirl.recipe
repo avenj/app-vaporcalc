@@ -1,0 +1,28 @@
+{
+   "recipe" : {
+      "target_quantity" : 120,
+      "target_pg" : 30,
+      "notes" : [],
+      "target_vg" : 70,
+      "base_nic_per_ml" : 100,
+      "target_nic_per_ml" : 3,
+      "base_nic_type" : "PG",
+      "flavor_array" : [
+         {
+            "type" : "PG",
+            "percentage" : "3",
+            "tag" : "TFA VBIC"
+         },
+         {
+            "type" : "PG",
+            "tag" : "TFA Vanilla Swirl",
+            "percentage" : "3"
+         },
+         {
+            "type" : "PG",
+            "tag" : "Vanillin (10%)",
+            "percentage" : "2"
+         }
+      ]
+   }
+}
