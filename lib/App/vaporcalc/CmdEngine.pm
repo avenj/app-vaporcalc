@@ -9,7 +9,7 @@ use Module::Pluggable
   sub_name    => '_subjects',
   search_path => 'App::vaporcalc::Cmd::Subject',
   except      => [
-    # stale version:
+    # stale subject plugins; add to this list when deprecating subjects
     'App::vaporcalc::Cmd::Subject::FlavorType',
   ],
 ;
