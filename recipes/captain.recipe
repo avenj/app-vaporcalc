@@ -1,6 +1,17 @@
 {
    "recipe" : {
+      "base_nic_type" : "PG",
       "flavor_array" : [
+         {
+            "type" : "PG",
+            "percentage" : "2",
+            "tag" : "TFA Bavarian Cream"
+         },
+         {
+            "percentage" : "2",
+            "tag" : "TFA Strawberry Ripe",
+            "type" : "PG"
+         },
          {
             "type" : "PG",
             "tag" : "TFA Berry Crunch",
@@ -8,16 +19,20 @@
          },
          {
             "type" : "PG",
-            "tag" : "TFA Bavarian Cream",
-            "percentage" : "2"
+            "percentage" : "2",
+            "tag" : "TFA Blueberry Wild"
+         },
+         {
+            "type" : "PG",
+            "percentage" : "0.5",
+            "tag" : "TFA Sweet Cream"
          }
       ],
-      "target_pg" : "30",
+      "target_nic_per_ml" : 3,
+      "notes" : [],
       "base_nic_per_ml" : 100,
-      "base_nic_type" : "PG",
-      "target_quantity" : "90",
-      "target_nic_per_ml" : "3",
       "target_vg" : 70,
-      "notes" : []
+      "target_quantity" : 120,
+      "target_pg" : 30
    }
 }
