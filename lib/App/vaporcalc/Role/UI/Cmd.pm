@@ -1,7 +1,7 @@
 package App::vaporcalc::Role::UI::Cmd;
 
-use Defaults::Modern
-  -with_types => [ 'App::vaporcalc::Types' ];
+use Defaults::Modern;
+use App::vaporcalc::Types -types;
 
 use App::vaporcalc::Exception;
 use App::vaporcalc::Recipe;

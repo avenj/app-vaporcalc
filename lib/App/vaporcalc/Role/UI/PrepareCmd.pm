@@ -1,7 +1,7 @@
 package App::vaporcalc::Role::UI::PrepareCmd;
 
-use Defaults::Modern
-  -with_types => [ 'App::vaporcalc::Types' ];
+use Defaults::Modern;
+use App::vaporcalc::Types -types;
 
 use Module::Runtime 'use_package_optimistically';
 

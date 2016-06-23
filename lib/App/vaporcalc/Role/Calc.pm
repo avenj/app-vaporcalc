@@ -1,7 +1,7 @@
 package App::vaporcalc::Role::Calc;
 
-use Defaults::Modern
-  -with_types => [ 'App::vaporcalc::Types' ];
+use Defaults::Modern;
+use App::vaporcalc::Types -all;
 
 use App::vaporcalc::Result;
 

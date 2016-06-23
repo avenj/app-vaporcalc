@@ -1,7 +1,7 @@
 package App::vaporcalc::RecipeResultSet;
 
-use Defaults::Modern
-  -with_types => [ 'App::vaporcalc::Types' ];
+use Defaults::Modern;
+use App::vaporcalc::Types -types;
 
 
 use Moo; use MooX::late;
