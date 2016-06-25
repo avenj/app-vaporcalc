@@ -1,5 +1,13 @@
 Revision history for Perl module App-vaporcalc
 
+0.005002 2016-06-24
+
+  - Depend on newer Defaults::Modern & drop (now unneeded) MooX::late
+
+  - Syntactical cleanups
+
+  - More recipes/
+
 0.005001 2015-11-07
 
   - Fix CmdEngine to be more easily pluggable; subject_list is now dynamically

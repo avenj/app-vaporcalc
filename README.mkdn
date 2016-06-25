@@ -105,4 +105,4 @@ of nicotine solutions marketed as 100mg/ml going as high as 250mg/ml!
 
 # AUTHOR
 
-Jon Portnoy <avenj@cobaltirc.org>
+Jon Portnoy &lt;avenj@cobaltirc.org>
