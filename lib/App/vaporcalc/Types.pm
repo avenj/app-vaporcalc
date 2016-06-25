@@ -1,6 +1,6 @@
 package App::vaporcalc::Types;
 
-use strict; use warnings FATAL => 'all';
+use strictures 2;
 
 use match::simple;
 
