@@ -41,3 +41,8 @@ method _action_load {
 }
 
 1;
+
+=for Pod::Coverage .*
+
+=cut
+

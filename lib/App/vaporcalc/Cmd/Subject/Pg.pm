@@ -35,3 +35,8 @@ method _action_set {
 
 
 1;
+
+=for Pod::Coverage .*
+
+=cut
+

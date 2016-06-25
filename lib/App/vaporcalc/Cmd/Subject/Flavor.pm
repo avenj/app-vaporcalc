@@ -100,3 +100,8 @@ method _action_clear {
 }
 
 1;
+
+=for Pod::Coverage .*
+
+=cut
+

@@ -39,3 +39,8 @@ method _action_show {
 }
 
 1;
+
+=for Pod::Coverage .*
+
+=cut
+

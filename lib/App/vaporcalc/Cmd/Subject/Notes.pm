@@ -60,3 +60,8 @@ method _action_del {
 }
 
 1;
+
+=for Pod::Coverage .*
+
+=cut
+
