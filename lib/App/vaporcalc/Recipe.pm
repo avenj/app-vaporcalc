@@ -3,7 +3,7 @@ package App::vaporcalc::Recipe;
 use Defaults::Modern;
 use App::vaporcalc::Types -types;
 
-use Moo; use MooX::late;
+use Moo;
 
 has target_quantity   => (
   required => 1,

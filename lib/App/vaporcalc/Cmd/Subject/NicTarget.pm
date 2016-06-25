@@ -2,7 +2,7 @@ package App::vaporcalc::Cmd::Subject::NicTarget;
 
 use Defaults::Modern;
 
-use Moo; use MooX::late;
+use Moo;
 
 method _subject { 'nic target' }
 

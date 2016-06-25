@@ -2,7 +2,7 @@ package App::vaporcalc::Exception;
 
 use Defaults::Modern;
 
-use Moo; use MooX::late;
+use Moo;
 extends 'Throwable::Error';
 
 1;

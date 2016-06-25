@@ -3,7 +3,7 @@ package App::vaporcalc::Cmd::Result;
 use Defaults::Modern;
 use App::vaporcalc::Types -types;
 
-use Moo; use MooX::late;
+use Moo;
 
 has action => (
   lazy      => 1,

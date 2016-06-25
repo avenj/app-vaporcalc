@@ -7,7 +7,7 @@ use App::vaporcalc::Exception;
 use App::vaporcalc::Recipe;
 use App::vaporcalc::Cmd::Result;
 
-use Moo::Role; use MooX::late;
+use Moo::Role;
 
 has verb => (
   is       => 'ro',

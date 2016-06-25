@@ -3,7 +3,7 @@ package App::vaporcalc::CmdEngine;
 use Defaults::Modern;
 use App::vaporcalc::Types -types;
 
-use Moo; use MooX::late;
+use Moo;
 use Module::Pluggable
   require     => 1,
   sub_name    => '_subjects',

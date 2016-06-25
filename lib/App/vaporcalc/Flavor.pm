@@ -3,7 +3,7 @@ package App::vaporcalc::Flavor;
 use Defaults::Modern;
 use App::vaporcalc::Types -types;
 
-use Moo; use MooX::late;
+use Moo;
 
 has percentage => (
   required  => 1,

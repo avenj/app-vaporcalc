@@ -4,7 +4,7 @@ use Defaults::Modern;
 
 use App::vaporcalc::Flavor;
 
-use Moo; use MooX::late;
+use Moo;
 
 method _subject { 'flavor' }
 

@@ -2,7 +2,7 @@ package App::vaporcalc::Cmd::Subject::Pg;
 
 use Defaults::Modern;
 
-use Moo; use MooX::late;
+use Moo;
 
 method _subject { 'pg' }
 
