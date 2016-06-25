@@ -4,13 +4,13 @@ use Defaults::Modern;
 
 use Moo; use MooX::late;
 
-sub _subject { 'nic type' }
+method _subject { 'nic type' }
+
 
 with 'App::vaporcalc::Role::UI::Cmd';
 
-has '+verb' => (
-  builder => sub { 'show' },
-);
+method _build_verb { 'show' }
+
 
 method _action_show { $self->_action_view }
 method _action_view {

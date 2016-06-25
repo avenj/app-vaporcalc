@@ -4,13 +4,12 @@ use Defaults::Modern;
 
 use Moo; use MooX::late;
 
-sub _subject { 'pg' }
+method _subject { 'pg' }
+
 
 with 'App::vaporcalc::Role::UI::Cmd';
 
-has '+verb' => (
-  builder => sub { 'show' },
-);
+method _build_verb { 'show' }
 
 
 method _action_show { $self->_action_view }

@@ -2,15 +2,14 @@ package App::vaporcalc::Cmd::Subject::TargetAmount;
 
 use Defaults::Modern;
 
-use Moo; use MooX::late;
+use Moo;
 
-sub _subject { 'target amount' }
+
+method _subject { 'target amount' }
 
 with 'App::vaporcalc::Role::UI::Cmd';
 
-has '+verb' => (
-  builder => sub { 'show' },
-);
+method _build_verb { 'show' }
 
 
 method _action_show { $self->_action_view }

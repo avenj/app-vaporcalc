@@ -6,13 +6,12 @@ use App::vaporcalc::Flavor;
 
 use Moo; use MooX::late;
 
-sub _subject { 'flavor' }
+method _subject { 'flavor' }
+
 
 with 'App::vaporcalc::Role::UI::Cmd';
 
-has '+verb' => (
-  builder => sub { 'show' },
-);
+method _build_verb { 'show' }
 
 
 method _action_show { $self->_action_view }

@@ -4,15 +4,15 @@ use Defaults::Modern;
 
 use App::vaporcalc::RecipeResultSet;
 
-use Moo; use MooX::late;
+use Moo;
 
-sub _subject { 'recipe' }
+
+method _subject { 'recipe' }
 
 with 'App::vaporcalc::Role::UI::Cmd';
 
-has '+verb' => (
-  builder => sub { 'show' },
-);
+method _build_verb { 'show' }
+
 
 method _action_show { $self->_action_view }
 method _action_view {

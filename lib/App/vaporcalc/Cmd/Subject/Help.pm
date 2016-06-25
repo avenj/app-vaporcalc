@@ -4,7 +4,8 @@ use Defaults::Modern;
 
 use Moo; use MooX::late;
 
-sub _subject { 'help' }
+method _subject { 'help' }
+
 
 with 'App::vaporcalc::Role::UI::Cmd';
 
@@ -12,9 +13,8 @@ has '+recipe' => (
   isa     => Any,
 );
 
-has '+verb' => (
-  builder => sub { 'show' },
-);
+method _build_verb { 'show' }
+
 
 method _action_view { $self->_action_show }
 method _action_show {
