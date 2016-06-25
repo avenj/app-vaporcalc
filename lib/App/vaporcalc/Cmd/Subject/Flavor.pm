@@ -1,17 +1,13 @@
 package App::vaporcalc::Cmd::Subject::Flavor;
 
-use Defaults::Modern;
-
 use App::vaporcalc::Flavor;
 
+use Defaults::Modern;
 use Moo;
 
 method _subject { 'flavor' }
-
-
-with 'App::vaporcalc::Role::UI::Cmd';
-
 method _build_verb { 'show' }
+with 'App::vaporcalc::Role::UI::Cmd';
 
 
 method _action_show { $self->_action_view }

@@ -1,19 +1,15 @@
 package App::vaporcalc::Cmd::Subject::Help;
 
 use Defaults::Modern;
-
 use Moo;
 
 method _subject { 'help' }
-
-
+method _build_verb { 'show' }
 with 'App::vaporcalc::Role::UI::Cmd';
 
 has '+recipe' => (
   isa     => Any,
 );
-
-method _build_verb { 'show' }
 
 
 method _action_view { $self->_action_show }

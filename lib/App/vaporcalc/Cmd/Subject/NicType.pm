@@ -1,15 +1,11 @@
 package App::vaporcalc::Cmd::Subject::NicType;
 
 use Defaults::Modern;
-
 use Moo;
 
 method _subject { 'nic type' }
-
-
-with 'App::vaporcalc::Role::UI::Cmd';
-
 method _build_verb { 'show' }
+with 'App::vaporcalc::Role::UI::Cmd';
 
 
 method _action_show { $self->_action_view }

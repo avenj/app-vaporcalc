@@ -1,17 +1,13 @@
 package App::vaporcalc::Cmd::Subject::Recipe;
 
-use Defaults::Modern;
-
 use App::vaporcalc::RecipeResultSet;
 
+use Defaults::Modern;
 use Moo;
 
-
 method _subject { 'recipe' }
-
-with 'App::vaporcalc::Role::UI::Cmd';
-
 method _build_verb { 'show' }
+with 'App::vaporcalc::Role::UI::Cmd';
 
 
 method _action_show { $self->_action_view }

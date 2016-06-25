@@ -1,15 +1,11 @@
 package App::vaporcalc::Cmd::Subject::NicTarget;
 
 use Defaults::Modern;
-
 use Moo;
 
 method _subject { 'nic target' }
-
-
-with 'App::vaporcalc::Role::UI::Cmd';
-
 method _build_verb { 'show' }
+with 'App::vaporcalc::Role::UI::Cmd';
 
 
 method _action_show { $self->_action_view }
