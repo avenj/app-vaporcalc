@@ -1,12 +1,12 @@
 #!perl
 
-use Defaults::Modern
-  -with_types => [ 'App::vaporcalc::Types' ];
+use Defaults::Modern;
 
 use App::vaporcalc::CmdEngine;
 use App::vaporcalc::FormatString;
 use App::vaporcalc::Recipe;
 use App::vaporcalc::RecipeResultSet;
+use App::vaporcalc::Types;
 
 use Getopt::Long;
 my $Opts = +{
