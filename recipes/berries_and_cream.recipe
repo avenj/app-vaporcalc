@@ -1,33 +1,38 @@
 {
    "recipe" : {
+      "target_quantity" : 120.0,
+      "target_nic_per_ml" : 3.0,
+      "target_vg" : 70,
+      "target_pg" : 30,
+      "base_nic_type" : "PG",
+      "base_nic_per_ml" : 100,
+      "notes" : [],
       "flavor_array" : [
          {
-            "type" : "PG",
-            "tag" : "TFA Bavarian Cream",
-            "percentage" : "3"
-         },
-         {
-            "type" : "PG",
             "tag" : "TFA Marshmallow",
-            "percentage" : "1"
+            "percentage" : "1",
+            "type" : "PG"
          },
          {
-            "type" : "PG",
+            "percentage" : "4",
             "tag" : "TFA Blueberry Wild",
-            "percentage" : "4"
+            "type" : "PG"
+         },
+         {
+            "tag" : "INW Strawberry",
+            "percentage" : "0.6",
+            "type" : "PG"
+         },
+         {
+            "percentage" : "4",
+            "tag" : "TFA Bavarian Cream",
+            "type" : "PG"
          },
          {
             "type" : "PG",
-            "tag" : "INW Strawberry",
-            "percentage" : "0.6"
+            "tag" : "TFA Strawberry Ripe",
+            "percentage" : "1"
          }
-      ],
-      "target_pg" : "30",
-      "base_nic_per_ml" : 100,
-      "base_nic_type" : "PG",
-      "target_quantity" : "120",
-      "target_nic_per_ml" : "3",
-      "target_vg" : 70,
-      "notes" : []
+      ]
    }
 }
