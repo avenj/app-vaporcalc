@@ -1,5 +1,9 @@
 Revision history for Perl module App-vaporcalc
 
+0.005003 2016-07-05
+
+  - Fix deprecated '-with_types' import in bin/vaporcalc
+
 0.005002 2016-06-24
 
   - Depend on newer Defaults::Modern & drop (now unneeded) MooX::late
