@@ -6,7 +6,7 @@ use App::vaporcalc::CmdEngine;
 use App::vaporcalc::FormatString;
 use App::vaporcalc::Recipe;
 use App::vaporcalc::RecipeResultSet;
-use App::vaporcalc::Types;
+use App::vaporcalc::Types -all;
 
 use Getopt::Long;
 my $Opts = +{
